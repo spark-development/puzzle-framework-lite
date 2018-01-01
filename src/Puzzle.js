@@ -41,7 +41,7 @@ class Puzzle extends Runtime {
    * @return {log}
    */
   initLog(logLevel) {
-    const { engine } = this.engine;
+    const { engine } = this;
     const { log: logConfig } = engine.config.engine;
 
     if (this.isValid(logConfig.file) && logConfig.file !== "") {

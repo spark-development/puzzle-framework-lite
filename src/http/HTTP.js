@@ -53,7 +53,7 @@ class HTTP extends Runtime {
   run() {
     const { engine } = this;
 
-    const { app, config, server } = engine.app;
+    const { app, config, server } = engine;
     const version = engine.appVersion || engine.version;
 
     server.listen(config.http.port, config.http.listen);
