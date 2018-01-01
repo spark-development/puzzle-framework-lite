@@ -28,6 +28,7 @@ This Contributing guide is inspired by the [Atom contributing guide](https://git
     
 1. [Style guide](#style-guide)
 
+    1. [Git Commit Messages](#git-commit-messages)
     1. [Code guidelines](#code-guidelines)
     
 ## Important Resources
@@ -105,7 +106,7 @@ add some extra information to the already existing problem,
 
 - Check if the issue isn't triggered by a puzzle (the packages used by the framework).
 
-Now, that you've performed the steps above, please fill the template available here []().
+Now, that you've performed the steps above, please fill the template available [here](https://github.com/spark-development/puzzle-framework/blob/master/sample/ISSUE_TEMPLATE.md).
 
 When you will the template, try to explain the problem as clear as possible and as descriptive as
 possible. You can follow the guidelines below to help you in creating a good bug report:
@@ -144,7 +145,7 @@ done by another part of the framework or a puzzle (the packages used by the fram
 - Check the issues list, maybe the enhancement was already requested/suggested by someone else - in this way you can
 add some extra information to the already existing suggestion.
 
-Now, that you've performed the steps above, please fill the template available here []().
+Now, that you've performed the steps above, please fill the template available [here](https://github.com/spark-development/puzzle-framework/blob/master/sample/ISSUE_TEMPLATE.md).
 
 When you will the template, try to explain the enhancement as clear as possible and as descriptive as
 possible. You can follow the guidelines below to help you in creating a good enhancement request:
@@ -165,7 +166,7 @@ part of the Puzzle Framework which the suggestion is related to.
 ### Submitting code
 
 Unlike the bug reporting and enhancement request parts, the code submitting guide part is a little bit
-more restrictive. Same as above, we have a template that has to be filled (it can be found here []()).
+more restrictive. Same as above, we have a template that has to be filled (it can be found [here](https://github.com/spark-development/puzzle-framework/blob/master/sample/PULL_REQUEST_TEMPLATE.md)).
 
 The code has to be submitted through a pull request. For a pull request to be accepted it has to:
 
