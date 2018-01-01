@@ -1,0 +1,21 @@
+{
+  "extends": "airbnb/base",
+  "rules": {
+    "max-len": ["error", 120, 2, {"ignoreComments": true}],
+    "quote-props": ["error", "consistent-as-needed"],
+    "no-cond-assign": ["warn", "except-parens"],
+    "no-else-return": 0,
+    "no-param-reassign": 0,
+    "quotes": ["error", "double", { "allowTemplateLiterals": true, "avoidEscape": true }],
+    "global-require": 0,
+    "no-underscore-dangle": 0,
+    "class-methods-use-this": 0,
+    "import/no-dynamic-require": 0,
+    "strict": [0, "global"]
+  },
+  "env": {
+    "node": true,
+    "mocha": true,
+    "es6": true
+  }
+}
