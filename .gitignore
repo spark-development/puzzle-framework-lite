@@ -192,3 +192,6 @@ eslint.json
 .env*
 
 mocha.json
+
+gen-docs/
+!gen-docs/.gitkeep
