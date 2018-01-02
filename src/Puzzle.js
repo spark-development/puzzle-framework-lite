@@ -111,7 +111,7 @@ class Puzzle extends Runtime {
       this.log.error(e);
     }
 
-    let { close: closeFunction } = this;
+    let closeFunction = this.close;
     if (!this.isValid(engine.cli) || engine.cli === false) {
       this.log.info("Application started");
       this.log.info("-".repeat(30));

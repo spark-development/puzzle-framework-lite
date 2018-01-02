@@ -57,9 +57,9 @@ module.exports = {
      */
     test: {
       driver: "mysql",
-      user: "puzzle_test",
-      password: "puzzle_test",
-      host: "testdb.lan.spark-dev.ro",
+      user: "root",
+      password: "",
+      host: "localhost",
       port: 3306,
       database: "puzzle_test"
     },
@@ -215,6 +215,13 @@ module.exports = {
      * @type {string}
      */
     cookie: "puzzle.i18n",
+
+    /**
+     * The default locale to be used by the application.
+     *
+     * @var {string}
+     */
+    defaultLocale: "en",
 
     /**
      * Folder where the internationalisation files will be created.
