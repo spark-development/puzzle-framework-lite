@@ -1,10 +1,10 @@
 {
   "name": "puzzle-framework",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A modular framework for micro applications/services.",
   "main": "src/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha tests/**/*.test.js",
+    "test": "./node_modules/.bin/mocha --exit tests/**/*.test.js",
     "lint": "./node_modules/.bin/eslint ./src",
     "lint-fix": "./node_modules/.bin/eslint --fix ./src",
     "bamboo-lint": "./node_modules/.bin/eslint ./src -f node_modules/eslint-bamboo-formatter/reporter.js",
