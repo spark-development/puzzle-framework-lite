@@ -58,14 +58,11 @@ module.exports = (engine) => {
      */
     res.throw = function throws(error) {
       const { name: errorType } = error.constructor;
-      let { message: errorMessage } = error;
+      const { message: errorMessage } = error;
       const code = error.httpCode || 500;
 
-      if (_.isEmpty(errorType) || errorType === "Error") {
-        engine.log.error(errorMessage);
-        engine.log.error(error.stack);
-        errorMessage = "An error occured, please consult the log!";
-      }
+      engine.log.error(errorMessage);
+      engine.log.error(error.stack);
 
       return res.error(errorType, errorMessage, code);
     };
