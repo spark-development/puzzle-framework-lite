@@ -1,5 +1,9 @@
 "use strict";
 
+const Joi = require("joi-i18n");
+const fs = require("fs");
+const path = require("path");
+
 const Runtime = require("../base/Runtime");
 
 const InMemory = require("./InMemoryStorage");
@@ -47,6 +51,25 @@ class ModelsRuntime extends Runtime {
      * @type {models.ModelsRuntime}
      */
     this.engine.models = this;
+
+    /**
+     * Holds the Joi validator instance.
+     *
+     * @alias engine.Joi
+     * @memberOf engine
+     * @type {Joi}
+     */
+    this.engine.Joi = Joi;
+
+    const localesPath = path.resolve(`${process.cwd()}/${this.engine.config.i18n.locales}`);
+    this.engine
+      .config
+      .i18n
+      .languages
+      .forEach((language) => {
+        const filePath = path.join(localesPath, `${language}.joi.js`);
+        Joi.addLocaleData(language, fs.existsSync(filePath) ? require(filePath) : {});
+      });
   }
 
   /**
@@ -106,10 +129,12 @@ class ModelsRuntime extends Runtime {
    *
    * @param {string} entity The model name to be fetched.
    *
-   * @return {model.Model}
+   * @return {model.Model | null}
    */
   get(entity) {
-    return this._models[entity].model;
+    return this._models[entity] ?
+      this._models[entity].model :
+      null;
   }
 }
 
