@@ -40,6 +40,7 @@ class DBMain extends ToggleRuntime {
     engine.db = this.sequelize();
 
     engine.commands("db:migrate", require("./commands/Migrations"));
+    engine.commands("db:seeds", require("./commands/Seeds"));
     engine.models.storage = require("./DBStorage");
   }
 
