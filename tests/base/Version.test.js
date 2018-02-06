@@ -4,10 +4,10 @@ const expect = require("chai").expect;
 const Version = require("../../src/base/Version");
 
 describe("Version class check", () => {
-  it("should be 1.2.0", () => {
+  it("should be 1.2.1", () => {
     const v = new Version();
     expect(v.version).to.be.a("string");
-    expect(v.version).to.equal("1.2.0");
+    expect(v.version).to.equal("1.2.1");
   });
   it("should be given parameter value", () => {
     const v = new Version("1.0.0");
