@@ -31,7 +31,9 @@ class Route extends PObject {
      *
      * @member {Router}
      */
-    this.router = express.Router();
+    this.router = express.Router({
+      mergeParams: true
+    });
 
     /**
      * The path served by this route.
