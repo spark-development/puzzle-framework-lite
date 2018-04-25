@@ -3,7 +3,6 @@
 const cli = require("cli");
 
 const Middleware = require("../middleware/Middleware");
-const ModelsLoader = require("../models");
 const ModuleLoader = require("../ModuleLoader");
 const Puzzles = require("../puzzles");
 const RoutesLoader = require("../http/RoutesLoader");
@@ -47,7 +46,6 @@ module.exports = (packageJson) => {
   /** Load the default Modules */
   puzzleInstance.pushRuntime(HTTPDummy);
   puzzleInstance.pushRuntime(Middleware);
-  puzzleInstance.pushRuntime(ModelsLoader);
   puzzleInstance.pushRuntime(RoutesLoader);
   require("./i18n")(engine);
 

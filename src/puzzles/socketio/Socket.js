@@ -2,7 +2,6 @@
 
 const PObject = require("../../base/PObject");
 const RouteAccessException = require("../../exceptions/RouteAccessException");
-const AuthenticatedUser = require("../../utils/AuthenticatedUser");
 
 /**
  * WebSocket base class.
@@ -106,9 +105,20 @@ class Socket extends PObject {
   allowed(page, permission) {
     const { user } = this.socket.request;
 
-    if (!AuthenticatedUser(user) || (!user.isAdmin && !user.allowed(permission))) {
+    if (!this.authenticatedUser(user)) {
       throw new RouteAccessException(page);
     }
+  }
+
+  /**
+   * Checks if the current user is valid or not.
+   *
+   * @param {Object} user The user object
+   *
+   * @return {boolean}
+   */
+  authenticatedUser(user) {
+    return this.isValid(user);
   }
 }
 

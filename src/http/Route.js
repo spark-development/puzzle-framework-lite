@@ -3,7 +3,6 @@
 const _ = require("lodash");
 const express = require("express");
 
-const AuthenticatedUser = require("../utils/AuthenticatedUser");
 const PObject = require("../base/PObject");
 const RouteAccessException = require("../exceptions/RouteAccessException");
 
@@ -343,7 +342,7 @@ class Route extends PObject {
    * @param {Object} res The response object.
    */
   redirectUnauthenticated(user, res) {
-    if (!AuthenticatedUser(user)) {
+    if (!this.authenticatedUser(user)) {
       res.redirect(this.unauthenticatedRedirectTo);
     }
   }
@@ -357,9 +356,20 @@ class Route extends PObject {
    * @throws RouteAccessException
    */
   allowed(user, page, permission) {
-    if (!AuthenticatedUser(user) || (!user.isAdmin() && !user.allowed(permission))) {
+    if (!this.authenticatedUser(user)) {
       throw new RouteAccessException(page);
     }
+  }
+
+  /**
+   * Checks if the current user is valid or not.
+   *
+   * @param {Object} user The user object
+   *
+   * @return {boolean}
+   */
+  authenticatedUser(user) {
+    return this.isValid(user);
   }
 }
 
