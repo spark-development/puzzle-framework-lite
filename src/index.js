@@ -19,8 +19,10 @@ const RoutesLoader = require("./http/RoutesLoader");
  * @typedef {Object} engine
  */
 const engine = {};
+global.engine = engine;
+global.pUtils = require("./utils/bootstrap");
 
-const puzzleInstance = new Puzzle(engine);
+const puzzleInstance = new Puzzle();
 
 /**
  * Entry point for the framework.

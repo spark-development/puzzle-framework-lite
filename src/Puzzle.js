@@ -18,11 +18,9 @@ const ToggleRuntime = require("./base/ToggleRuntime");
 class Puzzle extends Runtime {
   /**
    * Puzzle core constructor.
-   *
-   * @param {engine} engine A reference to the engine core.
    */
-  constructor(engine) {
-    super(engine);
+  constructor() {
+    super();
 
     /**
      * A list with all the modules that have to be loaded into the application.
@@ -41,7 +39,6 @@ class Puzzle extends Runtime {
    * @return {log}
    */
   initLog(logLevel) {
-    const { engine } = this;
     const { log: logConfig } = engine.config.engine;
 
     if (this.isValid(logConfig.file) && logConfig.file !== "") {
@@ -67,8 +64,6 @@ class Puzzle extends Runtime {
    * Initializes the engine of the framework.
    */
   init() {
-    const { engine } = this;
-
     /**
      * Holds the version of the engine.
      *
@@ -143,8 +138,6 @@ class Puzzle extends Runtime {
    * @param {Object} packageJson The parsed package.json of the application to run.
    */
   set app(packageJson) {
-    const { engine } = this;
-
     /**
      * Holds all the important information about the current running application (name, version, modules, core).
      *

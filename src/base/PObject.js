@@ -11,10 +11,8 @@ const PBase = require("./PBase");
 class PObject extends PBase {
   /**
    * Constructor of the PObject class.
-   *
-   * @param {engine} engine A reference to the engine core.
    */
-  constructor(engine) {
+  constructor() {
     super();
     /**
      * Reference to the engine core.
