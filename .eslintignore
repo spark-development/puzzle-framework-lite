@@ -2,3 +2,4 @@ docs
 gen-docs
 tests
 sample
+.nyc_output

@@ -195,3 +195,4 @@ mocha.json
 
 gen-docs/
 !gen-docs/.gitkeep
+.nyc_output

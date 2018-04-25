@@ -2,7 +2,6 @@
 
 const ModuleLoader = require("./ModuleLoader");
 const Puzzle = require("./Puzzle");
-const ModelsLoader = require("./models");
 const Puzzles = require("./puzzles");
 const Middleware = require("./middleware/Middleware");
 const HTTPModule = require("./http/HTTP");
@@ -40,7 +39,6 @@ module.exports = (packageJson) => {
   puzzleInstance.pushRuntime(Middleware);
   httpModule.middlewares();
   puzzleInstance.pushRuntime(RoutesLoader);
-  puzzleInstance.pushRuntime(ModelsLoader);
 
   Puzzles(puzzleInstance);
   puzzleInstance.pushRuntime(ModuleLoader);
