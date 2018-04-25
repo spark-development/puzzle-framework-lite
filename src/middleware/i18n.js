@@ -17,7 +17,9 @@ module.exports = (engine) => {
     locales: config.i18n.languages,
     cookie: config.i18n.cookie,
     defaultLocale: config.i18n.defaultLocale,
-    directory: `${process.cwd()}/${config.i18n.locales}`
+    directory: `${process.cwd()}/${config.i18n.locales}`,
+    autoReload: engine.config.i18n.autoReload,
+    updateFiles: engine.config.i18n.updateFiles
   });
 
   app.use(i18n.init);

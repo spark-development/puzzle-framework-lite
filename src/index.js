@@ -44,7 +44,6 @@ module.exports = (packageJson) => {
 
   Puzzles(puzzleInstance);
   puzzleInstance.pushRuntime(ModuleLoader);
-
   puzzleInstance.pushRuntime(httpModule);
 
   return puzzleInstance;

@@ -17,9 +17,9 @@ describe("version check", () => {
   after(() => {
     pullDown(puzzle);
   });
-  it("should be 1.2.0", (done) => {
+  it("should be 1.2.2", (done) => {
     expect(engine.version.version).to.be.a("string");
-    expect(engine.version.version).to.equal("1.2.0");
+    expect(engine.version.version).to.equal("1.2.2");
     done();
   });
 });
