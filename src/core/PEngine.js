@@ -44,7 +44,7 @@ class PEngine extends PObject {
    */
   set(moduleName, moduleInstance) {
     this._modules[moduleName] = moduleInstance;
-    Object.defineProperty(this, moduleName, {get: () => this._modules[moduleName]});
+    Object.defineProperty(this, moduleName, { get: () => this._modules[moduleName] });
   }
 
   /**

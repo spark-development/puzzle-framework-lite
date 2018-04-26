@@ -11,13 +11,13 @@ const Runtime = require("./base/Runtime");
 const ToggleRuntime = require("./base/ToggleRuntime");
 
 /**
- * Base class of the Puzzle Framework.
+ * Base class of the PuzzleOld Framework.
  *
  * @extends base.Runtime
  */
-class Puzzle extends Runtime {
+class PuzzleOld extends Runtime {
   /**
-   * Puzzle core constructor.
+   * PuzzleOld core constructor.
    */
   constructor() {
     super();
@@ -263,4 +263,4 @@ class Puzzle extends Runtime {
   }
 }
 
-module.exports = Puzzle;
+module.exports = PuzzleOld;

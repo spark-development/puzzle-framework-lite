@@ -1,6 +1,6 @@
 "use strict";
 
-const Puzzle = require("../Puzzle");
+const Puzzle = require("../PuzzleOld");
 
 /**
  * The entry point for CLI framework.

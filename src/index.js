@@ -1,7 +1,7 @@
 "use strict";
 
 const ModuleLoader = require("./ModuleLoader");
-const Puzzle = require("./Puzzle");
+const Puzzle = require("./PuzzleOld");
 const Puzzles = require("./puzzles");
 const Middleware = require("./middleware/Middleware");
 const HTTPModule = require("./http/HTTP");
