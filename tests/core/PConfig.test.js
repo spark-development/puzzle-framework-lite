@@ -43,6 +43,18 @@ describe("PConfig class check", () => {
       pconfig.delete("test");
       expect(pconfig.get("test")).to.be.undefined;
     });
+    it("shouldn't delete something that doesn't exists", () => {
+      expect(pconfig.load).to.not.be.undefined;
+      pconfig.delete("load");
+      expect(pconfig.load).to.not.be.undefined;
+    });
+    it("shouldn't allow overwriting base methods", () => {
+      expect(pconfig.load).to.not.be.undefined;
+      const configLoad = pconfig.load;
+      pconfig.set("load", 123);
+      expect(pconfig.load).to.not.be.undefined;
+      expect(pconfig.load).to.be.equal(configLoad);
+    });
   });
   describe("empty init, config loaded", () => {
     const pconfig = new PConfig();

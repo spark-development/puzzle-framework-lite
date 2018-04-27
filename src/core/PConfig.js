@@ -25,6 +25,26 @@ class PConfig extends PObject {
      * @protected
      */
     this._config = {};
+
+    /**
+     * Which elements cannot be overwritten.
+     *
+     * @property {array}
+     * @protected
+     */
+    this._unallowed = [
+      "_config",
+      "isEmpty",
+      "isValid",
+      "className",
+      "init",
+      "load",
+      "readEnv",
+      "clear",
+      "get",
+      "delete",
+      "_reloadProperties"
+    ];
   }
 
   /**
@@ -81,6 +101,9 @@ class PConfig extends PObject {
    * @param {*} value The value to be set.
    */
   set(key, value) {
+    if (this._unallowed.includes(key)) {
+      return;
+    }
     this._config[key] = value;
     Object.defineProperty(this, key, {
       get: () => this.get(key),
