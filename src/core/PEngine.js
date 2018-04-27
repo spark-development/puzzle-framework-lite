@@ -24,6 +24,56 @@ class PEngine extends PObject {
   }
 
   /**
+   * Getter for engine version.
+   *
+   * @return {core.PVersion}
+   */
+  get version() {
+    return this._version;
+  }
+
+  /**
+   * Getter for application information.
+   *
+   * @return {object}
+   */
+  get app() {
+    return this._app;
+  }
+
+  /**
+   * Setter for app property. It also initializes the application version.
+   *
+   * @param {object} packageJson Package.json content.
+   */
+  set app(packageJson) {
+    this._app = {
+      name: packageJson.name,
+      version: packageJson.version
+    };
+
+    this._appVersion = new PVersion(packageJson.version);
+  }
+
+  /**
+   * Getter for application version.
+   *
+   * @return {core.PVersion}
+   */
+  get appVersion() {
+    return this._appVersion;
+  }
+
+  /**
+   * Getter for application environment.
+   *
+   * @return {string}
+   */
+  get env() {
+    return this.isValid(process.env.NODE_ENV) ? process.env.NODE_ENV : "local";
+  }
+
+  /**
    * Module getter method.
    *
    * @param {string} module The name of the module.
@@ -44,7 +94,9 @@ class PEngine extends PObject {
    */
   set(moduleName, moduleInstance) {
     this._modules[moduleName] = moduleInstance;
-    Object.defineProperty(this, moduleName, { get: () => this._modules[moduleName] });
+    Object.defineProperty(this, moduleName, {
+      get: () => this._modules[moduleName]
+    });
   }
 
   /**
@@ -58,56 +110,6 @@ class PEngine extends PObject {
       name: "Puzzle Framework | Lite",
       version: this._version.version
     };
-  }
-
-  /**
-   * Getter for engine version.
-   *
-   * @return {core.PVersion}
-   */
-  get version() {
-    return this._version;
-  }
-
-  /**
-   * Setter for app property. It also initializes the application version.
-   *
-   * @param {object} packageJson Package.json content.
-   */
-  set app(packageJson) {
-    this._app = {
-      name: packageJson.name,
-      version: packageJson.version
-    };
-
-    this._appVersion = new PVersion(packageJson.version);
-  }
-
-  /**
-   * Getter for application information.
-   *
-   * @return {object}
-   */
-  get app() {
-    return this._app;
-  }
-
-  /**
-   * Getter for application version.
-   *
-   * @return {core.PVersion}
-   */
-  get appVersion() {
-    return this._appVersion;
-  }
-
-  /**
-   * Getter for application environment.
-   *
-   * @return {string}
-   */
-  get env() {
-    return this.isValid(process.env.NODE_ENV) ? process.env.NODE_ENV : "local";
   }
 
   /**

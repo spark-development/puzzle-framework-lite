@@ -9,6 +9,9 @@ const PRuntime = require("./PRuntime");
  * @extends core.PRuntime
  */
 class PState extends PRuntime {
+  /**
+   * Constructor of the PState class.
+   */
   constructor() {
     super();
 
@@ -50,7 +53,6 @@ class PState extends PRuntime {
   boot() {
     this._state = PState.STATES.BOOT;
   }
-
 
   /**
    * The code that executes when the Server Online status is achieved.

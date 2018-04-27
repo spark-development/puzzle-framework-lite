@@ -1,6 +1,6 @@
 "use strict";
 
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const PVersion = require("../../src/core/PVersion");
 
 describe("PVersion class check", () => {

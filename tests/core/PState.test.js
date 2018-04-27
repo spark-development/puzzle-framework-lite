@@ -1,8 +1,7 @@
 "use strict";
 
-const expect = require("chai").expect;
+const { expect } = require("chai");
 
-const packageJson = require("../../package.json");
 const PState = require("../../src/core/PState");
 
 describe("PState class check", () => {

@@ -1,6 +1,6 @@
 "use strict";
 
-const expect = require("chai").expect;
+const { expect } = require("chai");
 
 const packageJson = require("../../package.json");
 const PEngine = require("../../src/core/PEngine");

@@ -1,6 +1,6 @@
 "use strict";
 
-const expect = require("chai").expect;
+const { expect } = require("chai");
 const PObject = require("../../src/core/PObject");
 
 describe("PObject class check", () => {

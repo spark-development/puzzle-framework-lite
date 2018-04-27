@@ -1,6 +1,6 @@
 "use strict";
 
-const expect = require("chai").expect;
+const { expect } = require("chai");
 
 const pullUp = require("../_toolkit/pullUp");
 const pullDown = require("../_toolkit/pullDown");
