@@ -18,12 +18,13 @@ describe("StaticConfig class check", () => {
   it("initially the datastore should have some default data", () => {
     const pconfig = new StaticConfig();
     expect(pconfig.isEmpty).to.be.false;
+    expect(pconfig.engine.debug).to.be.false;
   });
   it("init should load data", () => {
     const pconfig = new StaticConfig();
     expect(pconfig.isEmpty).to.be.false;
-    expect(pconfig.engine.debug).to.be.false;
     expect(process.cwd()).to.equal(path.resolve(`${__dirname}/../_toolkit/starter`));
+    expect(pconfig.engine.debug).to.be.false;
     pconfig.init();
     expect(pconfig.engine.debug).to.be.true;
     expect(pconfig.keys.length).to.equal(6);
