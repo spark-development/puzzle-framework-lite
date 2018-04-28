@@ -18,7 +18,6 @@ describe("StaticConfig class check", () => {
   it("initially the datastore should have some default data", () => {
     const pconfig = new StaticConfig();
     expect(pconfig.isEmpty).to.be.false;
-    console.log(pconfig.engine);
     expect(pconfig.engine.debug).to.be.false;
   });
   it("init should load data", () => {
