@@ -26,7 +26,7 @@ class PEngine extends PObject {
   /**
    * Getter for engine version.
    *
-   * @return {core.PVersion}
+   * @return {PVersion}
    */
   get version() {
     return this._version;
@@ -49,7 +49,8 @@ class PEngine extends PObject {
   set app(packageJson) {
     this._app = {
       name: packageJson.name,
-      version: packageJson.version
+      version: packageJson.version,
+      modules: packageJson.puzzles || packageJson.modules || []
     };
 
     this._appVersion = new PVersion(packageJson.version);
@@ -58,7 +59,7 @@ class PEngine extends PObject {
   /**
    * Getter for application version.
    *
-   * @return {core.PVersion}
+   * @return {PVersion}
    */
   get appVersion() {
     return this._appVersion;
@@ -108,7 +109,8 @@ class PEngine extends PObject {
     this._version = new PVersion();
     this.app = {
       name: "Puzzle Framework | Lite",
-      version: this._version.version
+      version: this._version.version,
+      modules: []
     };
   }
 

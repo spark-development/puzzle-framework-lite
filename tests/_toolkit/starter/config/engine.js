@@ -11,7 +11,7 @@ module.exports = {
    *
    * @type {boolean}
    */
-  debug: false,
+  debug: true,
 
   /**
    * Log configuration

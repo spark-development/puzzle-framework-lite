@@ -1,6 +1,6 @@
 "use strict";
 
-const { expect } = require("chai");
+const {expect} = require("chai");
 
 const packageJson = require("../../package.json");
 const PEngine = require("../../src/core/PEngine");
@@ -44,6 +44,7 @@ describe("PEngine class check", () => {
 
     expect(pobj.app.name).to.equal("Puzzle Framework | Lite");
     expect(pobj.app.version).to.equal(packageJson.version);
+    expect(pobj.app.modules).to.deep.equal([]);
     expect(pobj.appVersion.version).to.equal(packageJson.version);
     expect(pobj.appVersion.className).to.equal("PVersion");
     expect(() => (pobj.appVersion = "test")).to.throw();
@@ -54,13 +55,19 @@ describe("PEngine class check", () => {
 
     pobj.app = {
       name: "Test Test",
-      version: "1.0.0"
+      version: "1.0.0",
+      puzzles: [
+        "test",
+        "test.teste"
+      ]
     };
     expect(pobj.app.name).to.not.equal("Puzzle Framework | Lite");
     expect(pobj.app.version).to.not.equal(packageJson.version);
     expect(pobj.appVersion.version).to.not.equal(packageJson.version);
+    expect(pobj.app.modules).to.not.deep.equal([]);
     expect(pobj.app.name).to.equal("Test Test");
     expect(pobj.app.version).to.equal("1.0.0");
+    expect(pobj.app.modules).to.deep.equal(["test", "test.teste"]);
     expect(pobj.appVersion.version).to.equal("1.0.0");
     expect(pobj.appVersion.className).to.equal("PVersion");
     expect(() => (pobj.appVersion = "test")).to.throw();

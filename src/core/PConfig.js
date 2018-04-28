@@ -57,6 +57,15 @@ class PConfig extends PObject {
   }
 
   /**
+   * Returns the keys of the configuration elements stored in the the datastore.
+   *
+   * @return {array}
+   */
+  get keys() {
+    return Object.keys(this._config);
+  }
+
+  /**
    * Initializes the configuration.
    */
   init() {

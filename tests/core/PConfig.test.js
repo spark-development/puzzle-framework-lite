@@ -55,6 +55,17 @@ describe("PConfig class check", () => {
       expect(pconfig.load).to.not.be.undefined;
       expect(pconfig.load).to.be.equal(configLoad);
     });
+    it("keys should return all elements the object has", () => {
+      expect(pconfig.keys.length).to.equal(0);
+      expect(pconfig.keys).to.deep.equal([]);
+    });
+    it("clear should clear the datastore", () => {
+      expect(pconfig.isEmpty).to.be.true;
+      pconfig.clear();
+      expect(pconfig.isEmpty).to.be.true;
+      expect(pconfig.keys.length).to.equal(0);
+      expect(pconfig.keys).to.deep.equal([]);
+    });
   });
   describe("empty init, config loaded", () => {
     const pconfig = new PConfig();
@@ -106,12 +117,19 @@ describe("PConfig class check", () => {
       expect(pconfig.get("test3")).to.have.property("test");
       expect(pconfig.get("test3").test).to.equal("in object");
     });
+    it("keys should return all elements the object has", () => {
+      expect(pconfig.keys.length).to.not.equal(0);
+      expect(pconfig.keys.length).to.equal(3);
+      expect(pconfig.keys).to.deep.equal(["test2", "test3", "test4"]);
+    });
     it("clear should clear the datastore", () => {
       expect(pconfig.isEmpty).to.be.false;
       pconfig.clear();
       expect(pconfig.isEmpty).to.be.true;
       expect(pconfig.get("test")).to.be.undefined;
       expect(pconfig.test).to.be.undefined;
+      expect(pconfig.keys.length).to.equal(0);
+      expect(pconfig.keys).to.deep.equal([]);
     });
   });
   describe("empty init, config loaded from env", () => {
@@ -147,9 +165,7 @@ describe("PConfig class check", () => {
       expect(pconfig.get("testObj").home).to.equal("sweet home");
       expect(pconfig.get("testArray")).to.equal(pconfig.testArray);
       expect(pconfig.get("testArray").length).to.equal(3);
-      expect(pconfig.get("testArray")[0]).to.equal(1);
-      expect(pconfig.get("testArray")[1]).to.equal(2);
-      expect(pconfig.get("testArray")[2]).to.equal(3);
+      expect(pconfig.get("testArray")).to.deep.equal([1, 2, 3]);
     });
     it("should support adding elements", () => {
       pconfig.set("test4", {
@@ -179,9 +195,7 @@ describe("PConfig class check", () => {
       expect(pconfig.get("testObj").home).to.equal("sweet home");
       expect(pconfig.get("testArray")).to.equal(pconfig.testArray);
       expect(pconfig.get("testArray").length).to.equal(3);
-      expect(pconfig.get("testArray")[0]).to.equal(1);
-      expect(pconfig.get("testArray")[1]).to.equal(2);
-      expect(pconfig.get("testArray")[2]).to.equal(3);
+      expect(pconfig.get("testArray")).to.deep.equal([1, 2, 3]);
     });
     it("clear should clear the datastore", () => {
       expect(pconfig.isEmpty).to.be.false;

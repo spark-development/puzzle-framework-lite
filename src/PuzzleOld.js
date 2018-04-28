@@ -6,9 +6,10 @@ const log = require("log");
 const path = require("path");
 const { rotator: rotate } = require("logrotator");
 
-const Version = require("./base/Version");
+const Version = require("./core/PVersion");
 const Runtime = require("./base/Runtime");
 const ToggleRuntime = require("./base/ToggleRuntime");
+const StaticConfig = require("./puzzle/StaticConfig");
 
 /**
  * Base class of the PuzzleOld Framework.
@@ -68,7 +69,7 @@ class PuzzleOld extends Runtime {
      * Holds the version of the engine.
      *
      * @memberOf engine
-     * @type {Version}
+     * @type {PVersion}
      */
     engine.version = new Version();
     /**
@@ -79,7 +80,7 @@ class PuzzleOld extends Runtime {
      */
     engine.env = process.env.NODE_ENV || "local";
 
-    engine.config = require("./Config");
+    engine.config = new StaticConfig();
     engine.config.init();
 
     engine.commands = (command, obj) => {
