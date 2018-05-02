@@ -112,6 +112,7 @@ describe("PEngine class check", () => {
       const pobj = new PEngine();
 
       expect(pobj.log).to.be.null;
+      expect(pobj.logLevel).to.equal("");
     });
     it("logger should be updateable", () => {
       const pobj = new PEngine();
@@ -129,9 +130,11 @@ describe("PEngine class check", () => {
       };
 
       expect(pobj.log).to.be.null;
+      expect(pobj.logLevel).to.equal("");
       pobj.log = logger;
       expect(pobj.log).to.not.be.null;
       expect(pobj.log).to.deep.equal(logger);
+      expect(pobj.logLevel).to.equal("");
       pobj.log.debug("test 1");
       pobj.log.info("test 2");
       pobj.log.info("test 3");
@@ -143,8 +146,11 @@ describe("PEngine class check", () => {
     it("logger should accept a logger class", () => {
       const pobj = new PEngine();
       expect(pobj.log).to.be.null;
+      expect(pobj.logLevel).to.equal("");
       pobj.log = new InMemoryLog();
       expect(pobj.log).to.not.be.null;
+      expect(pobj.logLevel).to.not.equal("");
+      expect(pobj.logLevel).to.equal("test");
       pobj.log.debug("test 1");
       pobj.log.info("test 2");
       pobj.log.info("test 3");

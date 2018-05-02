@@ -1,7 +1,6 @@
 "use strict";
 
-const PObject = require("../../base/PObject");
-const RouteAccessException = require("../../exceptions/RouteAccessException");
+const PObject = require("../core/PObject");
 
 /**
  * WebSocket base class.
@@ -10,19 +9,18 @@ const RouteAccessException = require("../../exceptions/RouteAccessException");
  * abstract class that offers some base functionality.
  *
  * @abstract
- * @extends base.PObject
+ * @extends core.PObject
  * @memberOf socketio
  */
 class Socket extends PObject {
   /**
    * Constructor of the Websocket class.
    *
-   * @param {Object} engine Reference to the engine core.
    * @param {Object} socket The socket object.
    * @param {Object} broadcast The broadcast object.
    */
-  constructor(engine, socket, broadcast) {
-    super(engine);
+  constructor(socket, broadcast) {
+    super();
 
     this.socket = socket;
     this.broadcast = broadcast;
@@ -93,32 +91,6 @@ class Socket extends PObject {
    */
   emit(action) {
     return `${this.path}.return:${action}`;
-  }
-
-  /**
-   * Check if the user is allowed to perform the desired action.
-   *
-   * @param {string} page The name of the action.
-   * @param {string} permission The permission name.
-   * @throws RouteAccessException
-   */
-  allowed(page, permission) {
-    const { user } = this.socket.request;
-
-    if (!this.authenticatedUser(user)) {
-      throw new RouteAccessException(page);
-    }
-  }
-
-  /**
-   * Checks if the current user is valid or not.
-   *
-   * @param {Object} user The user object
-   *
-   * @return {boolean}
-   */
-  authenticatedUser(user) {
-    return this.isValid(user);
   }
 }
 

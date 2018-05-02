@@ -5,8 +5,8 @@ const handlebars = require("handlebars");
 const hbs = require("express-hbs");
 const path = require("path");
 
-const ToggleRuntime = require("../../base/ToggleRuntime");
-const URLBuilder = require("../../http/URLBuilder");
+const PRuntime = require("../core/PRuntime");
+const URLBuilder = require("../http/URLBuilder");
 
 /**
  * UI/View engine module.
@@ -20,21 +20,23 @@ const URLBuilder = require("../../http/URLBuilder");
  * This functionality is disabled by default. To enable it, you must set the
  * puzzle.core.ui attribute in package.json to true.
  *
- * @extends base.ToggleRuntime
+ * @extends core.PRuntime
  * @memberOf UI
  */
-class UIMain extends ToggleRuntime {
-  constructor(engine) {
-    super(engine, "ui");
-    this._enabled = false;
+class UIMain extends PRuntime {
+  use(engine) {
+    if (puzzle.config.views.enabled) {
+      this.init(engine);
+    }
   }
 
   /**
    * Initializes the UI system.
+   *
+   * @param {PEngine} engine The engine reference.
    */
-  init() {
-    const config = this.engine.config.views;
-
+  init(engine) {
+    const config = engine.config.views;
     /**
      * Various path lists that are used by the view engine.
      *
@@ -53,11 +55,10 @@ class UIMain extends ToggleRuntime {
     /**
      * Reference to handlebars instance.
      *
-     * @alias engine.handlebars;
-     * @memberOf engine
+     * @alias puzzle.handlebars;
      * @type {handlebars}
      */
-    this.engine.handlebars = handlebars;
+    engine.set("handlebars", handlebars);
 
     /**
      * View configuration object.
@@ -65,41 +66,43 @@ class UIMain extends ToggleRuntime {
      * Using this object you can add paths to view/partials array.
      *
      * @alias engine.viewConfig;
-     * @memberOf engine
      * @type {Object}
      */
-    this.engine.viewConfig = {
+    puzzle.set("viewConfig", {
       view: (viewPath) => {
         this._paths.views.push(this._pathResolve(viewPath));
       },
       partials: (partialPath) => {
         this._paths.partials.push(this._pathResolve(partialPath));
       }
-    };
+    });
   }
 
   /**
    * Performs some actions.
    */
-  run() {
-    const { app, config } = this.engine;
+  online() {
+    if (!puzzle.config.views.enabled) {
+      return;
+    }
+    const { http, config } = puzzle;
 
-    app.locals.engine = this.engine;
-    app.locals.version = this.engine.version.version;
-    app.locals.config = this.engine.config;
+    http.locals.engine = puzzle;
+    http.locals.version = puzzle.version.version;
+    http.locals.config = puzzle.config;
 
-    app.engine("hbs", hbs.express4({
+    http.engine("hbs", hbs.express4({
       partialsDir: this._paths.partials,
       defaultLayout: this._pathResolve(config.views.defaultLayout),
       extname: ".hbs",
       handlebars,
-      i18n: this.engine.i18n,
+      // i18n: puzzle.i18n,
       layoutsDir: this._pathResolve(config.views.layouts),
       beautify: true,
     }));
-    app.set("view engine", "hbs");
-    app.set("views", this._paths.views);
-    app.use(URLBuilder(this.engine, "/"), express.static(this._pathResolve(config.views.publicContent)));
+    http.set("view engine", "hbs");
+    http.set("views", this._paths.views);
+    http.use(URLBuilder(puzzle, "/"), express.static(this._pathResolve(config.views.publicContent)));
   }
 
   /**

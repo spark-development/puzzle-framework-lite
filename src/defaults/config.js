@@ -212,6 +212,12 @@ module.exports = {
    */
   views: {
     /**
+     * Enables or disables the socket.io functionality.
+     *
+     * @type {boolean}
+     */
+    enabled: false,
+    /**
      * Folder where all views are stored.
      *
      * @type {string}

@@ -1,9 +1,6 @@
 "use strict";
 
-const ModuleLoader = require("./ModuleLoader");
-const Puzzle = require("./PuzzleOld");
 const Puzzles = require("./puzzles");
-const Middleware = require("./middleware/Middleware");
 const HTTPModule = require("./http/HTTP");
 const RoutesLoader = require("./http/RoutesLoader");
 
@@ -20,7 +17,6 @@ const RoutesLoader = require("./http/RoutesLoader");
  */
 const engine = {};
 global.engine = engine;
-global.pUtils = require("./utils/bootstrap");
 
 const puzzleInstance = new Puzzle();
 

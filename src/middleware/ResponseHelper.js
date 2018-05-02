@@ -5,11 +5,9 @@
  *
  * @alias ResponseHelper
  * @memberOf middleware
- *
- * @param {engine} engine Reference to engine core.
  */
-module.exports = (engine) => {
-  engine.app.use((req, res, next) => {
+module.exports = () => {
+  puzzle.http.use((req, res, next) => {
     /**
      * Returns an OK message to the API.
      *

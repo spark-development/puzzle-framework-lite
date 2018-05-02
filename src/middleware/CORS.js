@@ -10,10 +10,10 @@ const cors = require("cors");
  *
  * @param {engine} engine Reference to engine core.
  */
-module.exports = (engine) => {
-  const { app, config } = engine;
+module.exports = () => {
+  const { http, config } = puzzle;
 
-  app.use(cors({
+  http.use(cors({
     credentials: true,
     origin: config.http.cors
   }));

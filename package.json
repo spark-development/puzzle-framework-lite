@@ -2,12 +2,12 @@
   "name": "puzzle-framework-lite",
   "version": "1.0.0",
   "description": "A lite modular framework for micro applications/services.",
-  "main": "src/puzzle.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/mocha --exit tests/**/*.test.js",
-    "lint": "./node_modules/.bin/eslint ./src ./tests",
-    "lint-fix": "./node_modules/.bin/eslint --fix ./src ./tests",
-    "bamboo-lint": "./node_modules/.bin/eslint ./src ./tests -f node_modules/eslint-bamboo-formatter/reporter.js",
+    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/mocha --exit test/**/*.test.js",
+    "lint": "./node_modules/.bin/eslint ./src ./test",
+    "lint-fix": "./node_modules/.bin/eslint --fix ./src ./test",
+    "bamboo-lint": "./node_modules/.bin/eslint ./src ./test -f node_modules/eslint-bamboo-formatter/reporter.js",
     "jsdoc": "./node_modules/.bin/jsdoc -p -c ./jsdoc.json ./src",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
   },
@@ -69,7 +69,7 @@
   "directories": {
     "doc": "docs",
     "example": "sample",
-    "test": "tests"
+    "test": "test"
   },
   "husky": {
     "hooks": {

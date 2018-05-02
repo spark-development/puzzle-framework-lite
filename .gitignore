@@ -196,4 +196,4 @@ mocha.json
 gen-docs/
 !gen-docs/.gitkeep
 .nyc_output
-!tests/_toolkit/.env
+!test/_toolkit/.env

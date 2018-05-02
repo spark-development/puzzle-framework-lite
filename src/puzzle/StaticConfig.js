@@ -9,6 +9,7 @@ const PConfig = require("../core/PConfig");
  *
  * @memberOf puzzle
  * @extends core.PConfig
+ * @alias puzzle.config
  */
 class StaticConfig extends PConfig {
   /**

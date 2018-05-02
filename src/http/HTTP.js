@@ -3,64 +3,67 @@
 const express = require("express");
 const http = require("http");
 
-const Runtime = require("../base/Runtime");
+const PRuntime = require("../core/PRuntime");
+const BodyParser = require("../middleware/BodyParser");
+const CookieParser = require("../middleware/CookieParser");
+const CORS = require("../middleware/CORS");
+const ResponseHelper = require("../middleware/ResponseHelper");
+const Session = require("../middleware/Session");
+// TODO: Rethink i18n
+// const i18n = require("../middleware/i18n");
 
 /**
  * Runtime that loads the HTTP server.
  *
- * @extends base.Runtime
+ * @extends core.PRuntime
  * @memberOf http
  */
-class HTTP extends Runtime {
+class HTTP extends PRuntime {
   /**
    * Creates and initializes the HTTP server.
+   *
+   * @param {PEngine} engine The engine runtime.
    */
-  init() {
-    const { engine } = this;
-
+  use(engine) {
     /**
      * Express instance.
      *
-     * @memberOf engine
      * @type {express}
+     * @alias engine.http
      */
-    engine.app = express();
+    engine.set("http", express());
     /**
      * HTTP Server.
      *
-     * @memberOf engine
      * @type {http.Server}
+     * @alias engine.server
      */
-    engine.server = http.Server(engine.app);
+    engine.set("server", http.Server(engine.http));
   }
 
-  /**
-   * Loads some base middlewares into the application engine.
-   */
-  middlewares() {
-    const { engine } = this;
-    engine.middlewares(require("../middleware/BodyParser"));
-    engine.middlewares(require("../middleware/CookieParser"));
-    engine.middlewares(require("../middleware/CORS"));
-    engine.middlewares(require("../middleware/i18n"));
-    engine.middlewares(require("../middleware/ResponseHelper"));
-    engine.middlewares(require("../middleware/Session"));
+  boot() {
+    super.boot();
+
+    BodyParser();
+    CookieParser();
+    CORS();
+    ResponseHelper();
+    Session();
   }
 
   /**
    * HTTP server starting.
    */
-  run() {
-    const { engine } = this;
-
-    const { app, config, server } = engine;
-    const version = engine.appVersion || engine.version;
+  online() {
+    super.online();
+    const { http: app, config, server } = puzzle;
+    const version = puzzle.appVersion || puzzle.version;
 
     server.listen(config.http.port, config.http.listen);
-    this.log.info("%s [v%s]", config.engine.name || "Spark Puzzle Framework", version.version);
-    this.log.info("-".repeat(30));
-    this.log.info("Listening on: %s:%d", config.http.listen, config.http.port);
-    this.log.info("-".repeat(30));
+    puzzle.log.info("%s [v%s]", config.engine.name || "Spark Puzzle Framework Lite", version.version);
+    puzzle.log.info("-".repeat(30));
+    puzzle.log.info("Listening on: %s:%d", config.http.listen, config.http.port);
+    puzzle.log.info("-".repeat(30));
 
     app.use("*", (req, res, next) => {
       const err = new Error("Not Found");
@@ -69,8 +72,8 @@ class HTTP extends Runtime {
     });
 
     app.use((err, req, res, next) => {
-      this.log.error(req.path);
-      this.log.error(err.stack);
+      puzzle.log.error(req.path);
+      puzzle.log.error(err.stack);
 
       let statusCode = err.status || 500;
       switch (err.name) {
@@ -86,7 +89,7 @@ class HTTP extends Runtime {
       });
     });
 
-    this.log.info("HTTP Module is UP and Running!");
+    puzzle.log.info("HTTP Module is UP and Running!");
   }
 }
 

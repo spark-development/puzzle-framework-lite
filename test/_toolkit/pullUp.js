@@ -1,12 +1,14 @@
 "use strict";
 
+const _ = require("lodash");
+
 /**
- * Hook that brings the CLI up.
+ * Hook that brings the server up.
  *
- * @alias test.hooks.pullUpCLI
+ * @alias test.hooks.pullUp
  */
-module.exports = () => {
-  if (!process.cwd().endsWith("/tests/_toolkit/starter")) {
+module.exports = (configChange) => {
+  if (!process.cwd().endsWith("/test/_toolkit/starter")) {
     process.chdir(`${process.cwd()}/tests/_toolkit/starter`);
   }
 
@@ -21,8 +23,12 @@ module.exports = () => {
   delete require.cache[require.resolve('../../src/index')];
   delete require.cache[require.resolve('./starter/test.json')];
 
-  const Puzzle = require("../../src/cli");
-  const puzzleInstance = Puzzle(require("./starter/test.json"));
+  const Puzzle = require("../../src/index");
+  const PuzzleConfig = require("./starter/test.json");
+  if(configChange !== undefined && configChange !== null) {
+    _.merge(PuzzleConfig.puzzle, configChange);
+  }
+  const puzzleInstance = Puzzle(PuzzleConfig);
   puzzleInstance.run();
 
   return puzzleInstance;

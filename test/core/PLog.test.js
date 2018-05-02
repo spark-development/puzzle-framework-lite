@@ -20,10 +20,10 @@ describe("PLog class check", () => {
     const pobj = new InMemoryLog();
     expect(pobj._logger).to.not.be.null;
     pobj.debug("test 1");
-    pobj.info("test 2");
+    pobj.error("test 2");
     pobj._logger.info("test 3");
     expect(pobj.size).to.equal(3);
-    expect(pobj.text).to.deep.equal(["[DEBUG] test 1", "[INFO] test 2", "[INFO] test 3"]);
+    expect(pobj.text).to.deep.equal(["[DEBUG] test 1", "[ERROR] test 2", "[INFO] test 3"]);
   });
   it("use should append log to engine", () => {
     const pobj = new InMemoryLog();
@@ -34,8 +34,8 @@ describe("PLog class check", () => {
     expect(engine.log).to.deep.equal(pobj);
     pobj.debug("test 1");
     engine.log.info("test 2");
-    pobj._logger.info("test 3");
+    pobj._logger.error("test 3");
     expect(engine.log.size).to.equal(3);
-    expect(engine.log.text).to.deep.equal(["[DEBUG] test 1", "[INFO] test 2", "[INFO] test 3"]);
+    expect(engine.log.text).to.deep.equal(["[DEBUG] test 1", "[INFO] test 2", "[ERROR] test 3"]);
   });
 });

@@ -8,15 +8,13 @@ const session = require("express-session");
  *
  * @alias Session
  * @memberOf middleware
- *
- * @param {engine} engine Reference to engine core.
  */
-module.exports = (engine) => {
-  const { app, config } = engine;
+module.exports = () => {
+  const { http, config } = puzzle;
 
   switch (config.session.store) {
     case "memory":
-      app.use(session({
+      http.use(session({
         cookieParser: cookieParser(),
         key: config.session.key,
         secret: config.session.secret,

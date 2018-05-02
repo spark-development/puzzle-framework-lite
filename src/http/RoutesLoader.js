@@ -4,28 +4,30 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 
-const Runtime = require("../base/Runtime");
+const PUse = require("../core/PUse");
 
 /**
  * Routes loader class.
  *
  * Loads routes defined by a module into the application.
  *
- * @extends base.Runtime
+ * @extends core.PUse
  * @memberOf http
  */
-class RoutesLoader extends Runtime {
+class RoutesLoader extends PUse {
   /**
    * Initializes the Routes loader runtime.
+   *
+   * @param {PEngine} engine The engine reference.
    */
-  init() {
+  use(engine) {
     /**
      * Holds a reference to the RoutesLoader object.
      *
      * @memberOf engine
      * @type RoutesLoader
      */
-    this.engine.routes = this;
+    engine.set("routes", this);
   }
 
   /**

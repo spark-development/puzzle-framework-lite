@@ -89,6 +89,17 @@ class PEngine extends PObject {
   }
 
   /**
+   * Returns the log level used by the logger.
+   *
+   * @return {string}
+   */
+  get logLevel() {
+    return this.isValid(this._logger) ?
+      this._logger.logLevel || "" :
+      "";
+  }
+
+  /**
    * Sets the logger instance.
    *
    * @param {object} logger The logger object.
