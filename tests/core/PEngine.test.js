@@ -5,6 +5,7 @@ const {expect} = require("chai");
 const packageJson = require("../../package.json");
 const PEngine = require("../../src/core/PEngine");
 const PUse = require("../../src/core/PUse");
+const InMemoryLog = require("./InMemoryLog");
 
 describe("PEngine class check", () => {
   it("className should be PEngine", () => {
@@ -77,31 +78,79 @@ describe("PEngine class check", () => {
     expect(() => (pobj.appVersion = "test")).to.throw();
   });
 
-  it("env should be equal to NODE_ENV or local", () => {
-    const pobj = new PEngine();
-
-    expect(pobj.env).to.equal(process.env.NODE_ENV || "local");
-  });
-
-  it("env should be equal to local when NODE_ENV is null or undefined", () => {
-    const pobj = new PEngine();
-
-    const beforeTest = process.env.NODE_ENV;
-    delete process.env.NODE_ENV;
-    expect(pobj.env).to.equal("local");
-    process.env.NODE_ENV = beforeTest;
-  });
-
-  it("env shouldn't be updateable", () => {
-    const pobj = new PEngine();
-
-    expect(() => (pobj.env = "new")).to.throw();
-  });
-
   it("import should fetch the same module as require(PEngine)", () => {
     const pobj = new PEngine();
 
     expect(pobj.import("core/PEngine")).to.equal(PEngine);
+  });
+
+  describe("env checks", () => {
+    it("env should be equal to NODE_ENV or local", () => {
+      const pobj = new PEngine();
+
+      expect(pobj.env).to.equal(process.env.NODE_ENV || "local");
+    });
+
+    it("env should be equal to local when NODE_ENV is null or undefined", () => {
+      const pobj = new PEngine();
+
+      const beforeTest = process.env.NODE_ENV;
+      delete process.env.NODE_ENV;
+      expect(pobj.env).to.equal("local");
+      process.env.NODE_ENV = beforeTest;
+    });
+
+    it("env shouldn't be updateable", () => {
+      const pobj = new PEngine();
+
+      expect(() => (pobj.env = "new")).to.throw();
+    });
+  });
+
+  describe("logger checks", () => {
+    it("logger should be null by default", () => {
+      const pobj = new PEngine();
+
+      expect(pobj.log).to.be.null;
+    });
+    it("logger should be updateable", () => {
+      const pobj = new PEngine();
+      const messages = {
+        debug: [],
+        info: []
+      };
+      const logger = {
+        debug(msg) {
+          messages.debug.push(msg);
+        },
+        info(msg) {
+          messages.info.push(msg);
+        }
+      };
+
+      expect(pobj.log).to.be.null;
+      pobj.log = logger;
+      expect(pobj.log).to.not.be.null;
+      expect(pobj.log).to.deep.equal(logger);
+      pobj.log.debug("test 1");
+      pobj.log.info("test 2");
+      pobj.log.info("test 3");
+      expect(messages.debug.length).to.equal(1);
+      expect(messages.info.length).to.equal(2);
+      expect(messages.debug).to.deep.equal(["test 1"]);
+      expect(messages.info).to.deep.equal(["test 2", "test 3"]);
+    });
+    it("logger should accept a logger class", () => {
+      const pobj = new PEngine();
+      expect(pobj.log).to.be.null;
+      pobj.log = new InMemoryLog();
+      expect(pobj.log).to.not.be.null;
+      pobj.log.debug("test 1");
+      pobj.log.info("test 2");
+      pobj.log.info("test 3");
+      expect(pobj.log.size).to.equal(3);
+      expect(pobj.log.text).to.deep.equal(["[DEBUG] test 1", "[INFO] test 2", "[INFO] test 3"]);
+    });
   });
 
   describe("use should add extra functionality to engine", () => {

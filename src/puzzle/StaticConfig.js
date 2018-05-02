@@ -40,6 +40,8 @@ class StaticConfig extends PConfig {
 
   /**
    * Initializes the configuration module on engine.
+   *
+   * @param {PEngine} engine The reference to engine class
    */
   use(engine) {
     engine.set("config", this);

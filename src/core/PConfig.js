@@ -136,7 +136,7 @@ class PConfig extends PObject {
   /**
    * Reads the environment and loads the data into the system.
    *
-   * @param {string} suffix If the environment file has a suffix.
+   * @param [{string}] suffix If the environment file has a suffix.
    */
   readEnv(suffix) {
     if (!this.isValid(suffix)) {

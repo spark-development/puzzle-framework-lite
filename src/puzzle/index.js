@@ -7,8 +7,8 @@
  * @namespace puzzle
  */
 
-const Puzzle = require("./Puzzle");
-const puzzleInstance = new Puzzle();
+const PEngine = require("../core/PEngine");
+const puzzleInstance = new PEngine();
 
 if (global.puzzle === null || global.puzzle === undefined) {
   /**

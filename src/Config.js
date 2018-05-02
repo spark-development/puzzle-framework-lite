@@ -38,7 +38,7 @@ config.init = () => {
  * Reads the configuration for the given environment.
  *
  * @memberOf engine.config
- * @param {string} env The environment name.
+ * @param [{string}] [env] The environment name.
  */
 config.readEnv = (env) => {
   const envConfigFile = path.resolve(process.cwd(), `.env.${env}`);

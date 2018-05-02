@@ -78,6 +78,26 @@ class PEngine extends PObject {
   }
 
   /**
+   * Returns the logger instance.
+   *
+   * @return {object|null}
+   */
+  get log() {
+    return this.isValid(this._logger) ?
+      this._logger.logger || this._logger :
+      null;
+  }
+
+  /**
+   * Sets the logger instance.
+   *
+   * @param {object} logger The logger object.
+   */
+  set log(logger) {
+    this._logger = logger;
+  }
+
+  /**
    * Module getter method.
    *
    * @param {string} module The name of the module.
@@ -128,6 +148,7 @@ class PEngine extends PObject {
       version: this._version.version,
       modules: []
     };
+    this._logger = null;
   }
 
   /**

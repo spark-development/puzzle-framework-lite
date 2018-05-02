@@ -8,9 +8,11 @@ const PObject = require("./PObject");
  * @memberOf core
  * @extends core.PObject
  */
-class PUse extends PObject{
+class PUse extends PObject {
   /**
    * Called by engine when .use method is used.
+   *
+   * @param {PEngine} engine The reference to engine class.
    */
   use(engine) {
 
