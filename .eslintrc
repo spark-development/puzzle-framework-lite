@@ -25,7 +25,8 @@
   },
   "globals": {
     "engine": true,
-    "pUtils": true
+    "pUtils": true,
+    "puzzle": true
   },
   "env": {
     "node": true,

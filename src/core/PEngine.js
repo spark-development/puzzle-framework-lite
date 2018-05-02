@@ -1,6 +1,9 @@
 "use strict";
 
+const _ = require("lodash");
+
 const PObject = require("./PObject");
+const PUse = require("./PUse");
 const PVersion = require("./PVersion");
 
 /**
@@ -79,12 +82,12 @@ class PEngine extends PObject {
    *
    * @param {string} module The name of the module.
    *
-   * @return {*|null}
+   * @return {*}
    */
   get(module) {
     return this.isValid(this._modules[module]) ?
       this._modules[module] :
-      null;
+      undefined;
   }
 
   /**
@@ -96,8 +99,21 @@ class PEngine extends PObject {
   set(moduleName, moduleInstance) {
     this._modules[moduleName] = moduleInstance;
     Object.defineProperty(this, moduleName, {
-      get: () => this._modules[moduleName]
+      get: () => this.get(moduleName),
+      configurable: true
     });
+  }
+
+  /**
+   * Module unsetter method. Deletes the getter function for the module.
+   *
+   * @param {string} moduleName The name of the module to be added to the engine.
+   */
+  unset(moduleName) {
+    if (!this.isValid(this._modules[moduleName])) {
+      return;
+    }
+    delete this._modules[moduleName];
   }
 
   /**
@@ -123,6 +139,26 @@ class PEngine extends PObject {
    */
   import(moduleName) {
     return require(`../${moduleName}`);
+  }
+
+  /**
+   * Use the given module. Attach some elements to the engine.
+   *
+   * @param {object|function} module The module to be used.
+   */
+  use(module) {
+    if (!this.isValid(module) || Array.isArray(module)) {
+      return;
+    }
+    if (typeof module === "function" && !this.isValid(module.prototype)) {
+      module(this);
+      return;
+    }
+    if (_.isObject(module) &&
+      (module.prototype instanceof PUse || !!(new module()).use)) {
+      const instance = new (module)();
+      instance.use(this);
+    }
   }
 }
 

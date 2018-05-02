@@ -51,6 +51,7 @@ class PState extends PRuntime {
    * The code that executes when the Boot status is achieved.
    */
   boot() {
+    super.boot();
     this._state = PState.STATES.BOOT;
   }
 
@@ -58,6 +59,7 @@ class PState extends PRuntime {
    * The code that executes when the Server Online status is achieved.
    */
   online() {
+    super.online();
     this._state = PState.STATES.ONLINE;
   }
 
@@ -65,6 +67,7 @@ class PState extends PRuntime {
    * The code that executes when the Shutdown status is achieved.
    */
   shutdown() {
+    super.shutdown();
     this._state = PState.STATES.SHUTDOWN;
   }
 
@@ -72,6 +75,7 @@ class PState extends PRuntime {
    * The code that executes after the Shutdown status is achieved.
    */
   afterShutdown() {
+    super.afterShutdown();
     this._state = PState.STATES.HALT;
   }
 }

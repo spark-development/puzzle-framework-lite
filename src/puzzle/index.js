@@ -8,5 +8,15 @@
  */
 
 const Puzzle = require("./Puzzle");
+const puzzleInstance = new Puzzle();
 
-module.exports = new Puzzle();
+if (global.puzzle === null || global.puzzle === undefined) {
+  /**
+   * Global puzzle instance.
+   *
+   * @alias puzzle
+   */
+  global.puzzle = puzzleInstance;
+}
+
+module.exports = puzzleInstance;

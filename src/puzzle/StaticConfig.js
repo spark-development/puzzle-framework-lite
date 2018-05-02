@@ -37,6 +37,15 @@ class StaticConfig extends PConfig {
 
     this.load(configFromFile.config);
   }
+
+  /**
+   * Initializes the configuration module on engine.
+   */
+  use(engine) {
+    engine.set("config", this);
+    engine.config.init();
+    engine.config.readEnv();
+  }
 }
 
 module.exports = StaticConfig;

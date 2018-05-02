@@ -20,14 +20,23 @@ class PVersion extends PObject {
     super();
 
     /**
+     * Major version number
+     *
+     * @property {int}
      * @private
      */
     this._major = 0;
     /**
+     * Minor version number
+     *
+     * @property {int}
      * @private
      */
     this._minor = 0;
     /**
+     * Patch version number
+     *
+     * @property {int}
      * @private
      */
     this._patch = 0;
