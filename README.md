@@ -9,16 +9,16 @@ application that uses the framework.
 ## Build Status
 
 * Master: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=master)](https://travis-ci.org/spark-development/puzzle-framework-lite)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=master)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=master)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=master)
 
 * Develop: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=develop)](https://travis-ci.org/spark-development/puzzle-framework-lite)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=develop)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=develop)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=develop)
 
 * Release: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=release)](https://travis-ci.org/spark-development/puzzle-framework-lite)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=release)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=release)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=release)
 
 * Hotfix: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=hotfix)](https://travis-ci.org/spark-development/puzzle-framework-lite)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=hotfix)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=hotfix)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=hotfix)
 
 ## Sample project
 

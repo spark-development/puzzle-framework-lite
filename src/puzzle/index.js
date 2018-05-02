@@ -8,6 +8,7 @@
  */
 
 const PEngine = require("../core/PEngine");
+
 const puzzleInstance = new PEngine();
 
 if (global.puzzle === null || global.puzzle === undefined) {
