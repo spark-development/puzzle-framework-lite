@@ -40,7 +40,7 @@ class RoutesLoader extends PUse {
     const fullpath = path.join(root, routes);
     fs.readdirSync(fullpath).forEach((file) => {
       if (path.extname(file) === ".js") {
-        require(_.join([fullpath, file], "/"))(this.engine);
+        require(_.join([fullpath, file], "/"))();
       }
     });
   }
@@ -56,7 +56,7 @@ class RoutesLoader extends PUse {
     fs.readdirSync(fullpath).forEach((file) => {
       if (path.extname(file) === ".js") {
         const ClassPath = require(_.join([fullpath, file], "/"));
-        const classRoute = new ClassPath(this.engine);
+        const classRoute = new ClassPath();
         classRoute.build();
       }
     });

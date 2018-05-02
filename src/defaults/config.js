@@ -153,21 +153,7 @@ module.exports = {
      *
      * @var {string}
      */
-    locales: "locales",
-
-    /**
-     * i18n - watch for changes in json files to reload locale on updates - defaults to false
-     *
-     * @var {boolean}
-     */
-    autoReload: true,
-
-    /**
-     * whether to write new locale information to disk - defaults to true
-     *
-     * @var {boolean}
-     */
-    updateFiles: false
+    locales: "locales"
   },
 
   /**

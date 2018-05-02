@@ -3,7 +3,6 @@
 const _ = require("lodash");
 const path = require("path");
 
-const puzzle = require("./index");
 const PState = require("../core/PState");
 
 /**
@@ -62,7 +61,7 @@ class ModuleLoader extends PState {
    * Load the modules defined in the package.json file of the application.
    */
   loadFromPacakge() {
-    puzzle.app.puzzles.forEach((module) => {
+    puzzle.app.modules.forEach((module) => {
       let instance = null;
       try {
         puzzle.log.debug("Loading module: [%s].", module);

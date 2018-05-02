@@ -27,6 +27,7 @@ class UIMain extends PRuntime {
   use(engine) {
     if (puzzle.config.views.enabled) {
       this.init(engine);
+      puzzle.modules.register("views", this);
     }
   }
 

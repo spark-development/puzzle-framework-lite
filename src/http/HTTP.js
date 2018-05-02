@@ -9,8 +9,7 @@ const CookieParser = require("../middleware/CookieParser");
 const CORS = require("../middleware/CORS");
 const ResponseHelper = require("../middleware/ResponseHelper");
 const Session = require("../middleware/Session");
-// TODO: Rethink i18n
-// const i18n = require("../middleware/i18n");
+const i18n = require("../middleware/i18n");
 
 /**
  * Runtime that loads the HTTP server.
@@ -39,6 +38,8 @@ class HTTP extends PRuntime {
      * @alias engine.server
      */
     engine.set("server", http.Server(engine.http));
+
+    puzzle.modules.register("http", this);
   }
 
   boot() {
@@ -46,6 +47,7 @@ class HTTP extends PRuntime {
 
     BodyParser();
     CookieParser();
+    puzzle.use(i18n);
     CORS();
     ResponseHelper();
     Session();

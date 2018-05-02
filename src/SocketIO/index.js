@@ -39,6 +39,10 @@ class SocketIO extends PRuntime {
     engine.set("io", this._enabled ? socketio(engine.server) : () => {
       throw new Error("Sockets aren't enabled");
     });
+
+    if (this._enabled) {
+      puzzle.modules.register("socket.io", this);
+    }
   }
 
   online() {
