@@ -45,6 +45,10 @@ class ModuleLoader extends PState {
    */
   register(moduleName, moduleInstance) {
     if (this.state === "") {
+      if (!this._canBeRunInContext(moduleInstance)) {
+        return;
+      }
+
       if (!this.isValid(this._modules[moduleName])) {
         this._orderedLoad.push({
           name: moduleName,
@@ -88,6 +92,22 @@ class ModuleLoader extends PState {
    */
   use(engine) {
     engine.set("modules", this);
+  }
+
+  /**
+   * Can the given module be ran in current context (HTTP or CLI)
+   *
+   * @protected
+   * @param {PRuntime} module The module we are currently running.
+   */
+  _canBeRunInContext(module) {
+    if (puzzle.http && module.cliOnly === true) {
+      return false;
+    }
+    if (puzzle.cli && module.httpOnly === true) {
+      return false;
+    }
+    return true;
   }
 
   /**

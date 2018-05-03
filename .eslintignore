@@ -1,6 +1,5 @@
 docs
 gen-docs
-src/cli
 test
 sample
 .nyc_output

@@ -2,10 +2,19 @@
 
 const { expect } = require("chai");
 
-const packageJson = require("../../package.json");
 const TestRuntime = require("./TestRuntime");
 
 describe("PRuntime class check", () => {
+  it("cli and http only should be false", () => {
+    const pobj = new TestRuntime();
+    expect(pobj.httpOnly).to.be.false;
+    expect(pobj.cliOnly).to.be.false;
+  });
+  it("cli and http only shouldn't be updateable", () => {
+    const pobj = new TestRuntime();
+    expect(() => (pobj.httpOnly = true)).to.throw();
+    expect(() => (pobj.cliOnly = true)).to.throw();
+  });
   it("beforeBoot method should set the status to beforeBoot", () => {
     const pobj = new TestRuntime();
     pobj.beforeBoot();

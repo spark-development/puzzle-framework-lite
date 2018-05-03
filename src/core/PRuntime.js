@@ -18,6 +18,45 @@ const PObject = require("./PObject");
  */
 class PRuntime extends PObject {
   /**
+   * Constructor for the Runtime class.
+   */
+  constructor() {
+    super();
+    /**
+     * Should this runtime be ran only in HTTP environment?
+     *
+     * @property {boolean}
+     * @protected
+     */
+    this._httpOnly = false;
+    /**
+     * Should this runtime be ran only in CLI environment?
+     *
+     * @property {boolean}
+     * @protected
+     */
+    this._cliOnly = false;
+  }
+
+  /**
+   * Should this runtime be ran only in HTTP environment?
+   *
+   * @return {boolean}
+   */
+  get httpOnly() {
+    return this._httpOnly;
+  }
+
+  /**
+   * Should this runtime be ran only in CLI environment?
+   *
+   * @return {boolean}
+   */
+  get cliOnly() {
+    return this._cliOnly;
+  }
+
+  /**
    * The code that executes before the Boot status is achieved.
    */
   beforeBoot() {

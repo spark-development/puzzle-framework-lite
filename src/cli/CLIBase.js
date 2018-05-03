@@ -1,13 +1,13 @@
 "use strict";
 
-const PObject = require("../base/PObject");
+const PObject = require("../core/PObject");
 
 /**
  * The base of the CLI Commands.
  *
  * Using this Base class you can define commands that can be ran from the command line.
  *
- * @extends base.PObject
+ * @extends core.PObject
  * @memberOf cli
  * @abstract
  */
@@ -15,18 +15,17 @@ class CLIBase extends PObject {
   /**
    * Constructor of the CLI Command.
    *
-   * @param {engine} engine The global reference to the engine.
    * @param {string} name The name of the command.
    */
-  constructor(engine, name) {
-    super(engine);
+  constructor(name) {
+    super();
 
     /**
      * A reference to the CLI object.
      *
      * @member {cli}
      */
-    this.cli = engine.cli;
+    this.cli = puzzle.cli;
 
     /**
      * The name of the command, like: db:migrate, db:seed and so on.
@@ -77,9 +76,7 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       debug: (...msg) => {
-        const render = this.__(...msg);
-        this.log.debug(render);
-        cli.debug(render);
+        cli.debug(puzzle.i18n.__(...msg));
       },
       /**
        * Prints an information message.
@@ -87,9 +84,7 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       info: (...msg) => {
-        const render = this.__(...msg);
-        this.log.info(render);
-        cli.info(render);
+        cli.info(puzzle.i18n.__(...msg));
       },
       /**
        * Prints an error message.
@@ -97,9 +92,7 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       error: (...msg) => {
-        const render = this.__(...msg);
-        this.log.error(render);
-        cli.error(render);
+        cli.error(puzzle.i18n.__(...msg));
       },
       /**
        * Prints a fatal error message.
@@ -107,9 +100,7 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       fatal: (...msg) => {
-        const render = this.__(...msg);
-        this.log.critical(render);
-        cli.fatal(render);
+        cli.fatal(puzzle.i18n.__(...msg));
       },
       /**
        * Prints an ok message.
@@ -117,9 +108,7 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       ok: (...msg) => {
-        const render = this.__(...msg);
-        this.log.info(render);
-        cli.ok(render);
+        cli.ok(puzzle.i18n.__(...msg));
       }
     };
   }
@@ -138,7 +127,6 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       debug: (msg) => {
-        this.log.debug(msg);
         cli.debug(msg);
       },
       /**
@@ -147,7 +135,6 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       info: (msg) => {
-        this.log.info(msg);
         cli.info(msg);
       },
       /**
@@ -156,7 +143,6 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       error: (msg) => {
-        this.log.error(msg);
         cli.error(msg);
       },
       /**
@@ -165,7 +151,6 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       fatal: (msg) => {
-        this.log.critical(msg);
         cli.fatal(msg);
       },
       /**
@@ -174,7 +159,6 @@ class CLIBase extends PObject {
        * @param {string} msg The message to be printed.
        */
       ok: (msg) => {
-        this.log.info(msg);
         cli.ok(msg);
       }
     };
