@@ -49,7 +49,7 @@ class CLIBase extends PObject {
    * @param {string[]} args The command line arguments
    * @param {Object} options The options given to the command.
    */
-  run(args, options) {
+  async run(args, options) {
 
   }
 

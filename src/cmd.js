@@ -9,13 +9,13 @@ puzzle.modules.register("ConsoleBootstrap", new ConsoleBootstrap());
 puzzle.use(Log);
 puzzle.use(CommandLoader);
 puzzle.use((engine) => {
-  engine.set("boot", () => {
+  engine.set("boot", async () => {
     let code = 0;
     try {
       engine.modules.loadFromPacakge();
       engine.modules.boot();
       engine.modules.online();
-      engine.commands.run();
+      await engine.commands.run();
       engine.modules.shutdown();
     } catch (e) {
       code = e.code || 1;

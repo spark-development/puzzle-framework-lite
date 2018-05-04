@@ -38,7 +38,7 @@ class CommandLoader extends PUse {
   /**
    * Enables the ability to run CLI commands.
    */
-  run() {
+  async run() {
     cli.parse();
     const command = cli.args.shift();
 
@@ -50,7 +50,7 @@ class CommandLoader extends PUse {
     const commandInst = new this._commands[command]();
     cli.parse(commandInst.options);
 
-    commandInst.run(cli.args, cli.options);
+    await commandInst.run(cli.args, cli.options);
   }
 }
 
