@@ -5,6 +5,7 @@ const Route = require("./Route");
 /**
  * REST API base class.
  *
+ * @abstract
  * @extends http.Route
  * @memberOf http
  */

@@ -6,9 +6,8 @@
  * @alias URLBuilder
  * @memberOf http
  *
- * @param {engine} engine Reference to engine core.
  * @param {string} path The path to be correctly built.
  *
  * @return {string}
  */
-module.exports = (engine, path) => `${engine.config.http.contextPath}/${path}`.replace("//", "/");
+module.exports = path => `${puzzle.config.http.contextPath}/${path}`.replace(/[/]+/g, "/");

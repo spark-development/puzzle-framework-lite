@@ -259,7 +259,7 @@ class Route extends PObject {
     this.register();
 
     puzzle.http.use(
-      URLBuilder(puzzle, this.path),
+      URLBuilder(this.path),
       this.middlewares.group || [],
       this.router
     );

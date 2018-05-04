@@ -2,8 +2,8 @@
 
 const { expect } = require("chai");
 
-const pullUp = require("../_toolkit/pullUp");
-const pullDown = require("../_toolkit/pullDown");
+const pullUp = require("./pullUp");
+const pullDown = require("./pullDown");
 
 describe("version check", () => {
   let puzzle;
