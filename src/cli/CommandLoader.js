@@ -12,12 +12,20 @@ const PUse = require("../core/PUse");
  * @extends core.PUse
  */
 class CommandLoader extends PUse {
+  /**
+   * Constructor for Command Loader.
+   */
   constructor() {
     super();
 
     this._commands = {};
   }
 
+  /**
+   * Called by engine when .use method is used.
+   *
+   * @param {PEngine} engine The reference to engine class.
+   */
   use(engine) {
     engine.set("cli", cli);
     engine.set("commands", this);

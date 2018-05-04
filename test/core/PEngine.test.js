@@ -57,7 +57,7 @@ describe("PEngine class check", () => {
     expect(() => (pobj.appVersion = "test")).to.throw();
   });
 
-  it("app should be overrideable", () => {
+  it("app should be overrideable with puzzles", () => {
     const pobj = new PEngine();
 
     pobj.app = {
@@ -78,6 +78,46 @@ describe("PEngine class check", () => {
     expect(pobj.appVersion.version).to.equal("0.0.0");
     expect(pobj.appVersion.className).to.equal("PVersion");
     expect(() => (pobj.appVersion = "test")).to.throw();
+  });
+
+  it("app should be overrideable with modules", () => {
+    const pobj = new PEngine();
+
+    pobj.app = {
+      name: "Test Test",
+      version: "0.0.0",
+      modules: [
+        "test",
+        "test.teste"
+      ]
+    };
+    expect(pobj.app.name).to.not.equal("Puzzle Framework | Lite");
+    expect(pobj.app.version).to.not.equal(packageJson.version);
+    expect(pobj.appVersion.version).to.not.equal(packageJson.version);
+    expect(pobj.app.modules).to.not.deep.equal([]);
+    expect(pobj.app.name).to.equal("Test Test");
+    expect(pobj.app.version).to.equal("0.0.0");
+    expect(pobj.app.modules).to.deep.equal(["test", "test.teste"]);
+    expect(pobj.appVersion.version).to.equal("0.0.0");
+    expect(pobj.appVersion.className).to.equal("PVersion");
+    expect(() => (pobj.appVersion = "test")).to.throw();
+  });
+
+  it("app should be overrideable with empty", () => {
+    const pobj = new PEngine();
+
+    pobj.app = {
+      modules: []
+    };
+    expect(pobj.app.name).to.equal("Puzzle Framework | Lite");
+    expect(pobj.app.version).to.equal(packageJson.version);
+    expect(pobj.appVersion.version).to.equal(packageJson.version);
+    expect(pobj.app.modules).to.deep.equal([]);
+    pobj.app = {};
+    expect(pobj.app.name).to.equal("Puzzle Framework | Lite");
+    expect(pobj.app.version).to.equal(packageJson.version);
+    expect(pobj.appVersion.version).to.equal(packageJson.version);
+    expect(pobj.app.modules).to.deep.equal([]);
   });
 
   it("import should fetch the same module as require(PEngine)", () => {

@@ -51,8 +51,8 @@ class PEngine extends PObject {
    */
   set app(packageJson) {
     this._app = {
-      name: packageJson.name,
-      version: packageJson.version,
+      name: packageJson.name || this._app.name,
+      version: packageJson.version || this._app.version,
       modules: packageJson.puzzles || packageJson.modules || []
     };
 

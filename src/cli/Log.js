@@ -12,7 +12,7 @@ const PLog = require("../core/PLog");
 class Log extends PLog {
   constructor() {
     super();
-    this.logLevel = puzzle.config.engine.debug ? "debug" : puzzle.config.engine.log.level;
+    this.logLevel = "";
     this.initLog();
   }
 
@@ -23,14 +23,14 @@ class Log extends PLog {
    */
   initLog(logLevel) {
     this.logger = {
-      emergency: () => {},
-      alert: () => {},
-      critical: () => {},
-      error: () => {},
-      warning: () => {},
-      notice: () => {},
-      info: () => {},
-      debug: () => {}
+      emergency: () => "",
+      alert: () => "",
+      critical: () => "",
+      error: () => "",
+      warning: () => "",
+      notice: () => "",
+      info: () => "",
+      debug: () => ""
     };
   }
 }

@@ -59,6 +59,11 @@ class CLIBase extends PObject {
    * @param {integer} errCode The error code to be returned to cli system.
    */
   done(errCode) {
+    if (puzzle.env === "test") {
+      puzzle.cli.shouldExit = true;
+      puzzle.cli.exitCode = errCode || 0;
+      return;
+    }
     process.exit(errCode || 0);
   }
 
