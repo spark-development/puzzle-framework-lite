@@ -22,6 +22,12 @@ class PEngine extends PObject {
   constructor() {
     super();
 
+    /**
+     * Holds the modules loaded directly on the engine.
+     *
+     * @property {Object}
+     * @protected
+     */
     this._modules = {};
     this._init();
   }

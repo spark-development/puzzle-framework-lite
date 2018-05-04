@@ -28,20 +28,23 @@ class HTTP extends PRuntime {
      * Express instance.
      *
      * @type {express}
-     * @alias engine.http
+     * @alias puzzle.http
      */
     engine.set("http", express());
     /**
      * HTTP Server.
      *
      * @type {http.Server}
-     * @alias engine.server
+     * @alias puzzle.server
      */
     engine.set("server", http.Server(engine.http));
 
     puzzle.modules.register("http", this);
   }
 
+  /**
+   * Middleware loading.
+   */
   boot() {
     super.boot();
 

@@ -11,6 +11,7 @@ const PUse = require("../core/PUse");
  *
  * Loads routes defined by a module into the application.
  *
+ * @alias puzzle.routes
  * @extends core.PUse
  * @memberOf http
  */
@@ -21,12 +22,6 @@ class RoutesLoader extends PUse {
    * @param {PEngine} engine The engine reference.
    */
   use(engine) {
-    /**
-     * Holds a reference to the RoutesLoader object.
-     *
-     * @memberOf engine
-     * @type RoutesLoader
-     */
     engine.set("routes", this);
   }
 

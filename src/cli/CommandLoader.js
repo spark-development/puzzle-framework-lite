@@ -7,7 +7,7 @@ const PUse = require("../core/PUse");
 /**
  * Commands loader - used for CLI
  *
- * @alias engine.commands
+ * @alias puzzle.commands
  * @memberOf cli
  * @extends core.PUse
  */

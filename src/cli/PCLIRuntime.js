@@ -10,6 +10,9 @@ const PRuntime = require("../core/PRuntime");
  * @abstract
  */
 class PCLIRuntime extends PRuntime {
+  /**
+   * Constructor of the CLI Runtime class.
+   */
   constructor() {
     super();
     this._cliOnly = true;

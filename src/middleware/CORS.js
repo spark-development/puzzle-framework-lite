@@ -7,8 +7,6 @@ const cors = require("cors");
  *
  * @alias CORS
  * @memberOf middleware
- *
- * @param {engine} engine Reference to engine core.
  */
 module.exports = () => {
   const { http, config } = puzzle;

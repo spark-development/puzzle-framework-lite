@@ -1,6 +1,6 @@
 "use strict";
 
-const PCLIRuntime = require("../../src/puzzle/PCLIRuntime");
+const PCLIRuntime = require("../../src/cli/PCLIRuntime");
 
 class TestCLIRuntime extends PCLIRuntime {
 }

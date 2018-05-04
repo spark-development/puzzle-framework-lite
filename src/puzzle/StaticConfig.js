@@ -13,7 +13,7 @@ const PConfig = require("../core/PConfig");
  */
 class StaticConfig extends PConfig {
   /**
-   * Constructor of the PConfig class.
+   * Constructor of the Static Config class.
    */
   constructor() {
     super();

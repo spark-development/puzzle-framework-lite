@@ -22,7 +22,17 @@ class Socket extends PObject {
   constructor(socket, broadcast) {
     super();
 
+    /**
+     * A reference to the current socket connection. Communication with a single client.
+     *
+     * @property {Object}
+     */
     this.socket = socket;
+    /**
+     * A reference to the global socket connection. Communication with everyone connected to the application.
+     *
+     * @property {Object}
+     */
     this.broadcast = broadcast;
     this.path = "";
 

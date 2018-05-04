@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * Entry point of the server application.
+ *
+ * @module server
+ */
+
 const puzzle = require("./puzzleInit");
 const HTTP = require("./http/HTTP");
 const RoutesLoader = require("./http/RoutesLoader");

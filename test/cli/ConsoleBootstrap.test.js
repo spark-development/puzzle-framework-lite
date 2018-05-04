@@ -2,7 +2,7 @@
 
 const {expect} = require("chai");
 
-const ConsoleBootstrap = require("../../src/puzzle/ConsoleBootstrap");
+const ConsoleBootstrap = require("../../src/cli/ConsoleBootstrap");
 
 describe("ConsoleBootstrap class check", () => {
   it("className should be ConsoleBootstrap", () => {

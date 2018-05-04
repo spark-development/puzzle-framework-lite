@@ -3,12 +3,15 @@
 const PRuntime = require("../core/PRuntime");
 
 /**
- * Bootstrap elements for server part of the framework.
+ * Bootstrap elements for console part of the framework.
  *
- * @memberOf puzzle
+ * @memberOf cli
  * @extends core.PRuntime
  */
 class ConsoleBootstrap extends PRuntime {
+  /**
+   * Attaches some process listeners.
+   */
   beforeBoot() {
     // do something when app is closing
     process.on("exit", this.close.bind(this, {}));

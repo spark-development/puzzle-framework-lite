@@ -10,6 +10,9 @@ const PRuntime = require("../core/PRuntime");
  * @abstract
  */
 class PServerRuntime extends PRuntime {
+  /**
+   * Constructor of the ServerRuntime class.
+   */
   constructor() {
     super();
     this._httpOnly = true;

@@ -42,6 +42,11 @@ class SocketIO extends PRuntime {
     this._modules = {};
   }
 
+  /**
+   * Attaches the socket.io functionality to the engine.
+   *
+   * @param {PEngine} engine The engine reference.
+   */
   use(engine) {
     const { config } = engine;
     this._enabled = config.socket && config.socket.enabled;
@@ -50,19 +55,22 @@ class SocketIO extends PRuntime {
      * Socket.IO reference.
      *
      * @type {socket.io}
-     * @alias engine.io
+     * @alias puzzle.io
      */
     engine.set("io", this._enabled ? socketio(engine.server) : () => {
       throw new Error("Sockets aren't enabled");
     });
 
-    engine.set("socketio", this);
-
     if (this._enabled) {
-      puzzle.modules.register("socket.io", this);
+      engine.set("socketio", this);
+      puzzle.modules.register("socketio", this);
     }
   }
 
+  /**
+   * When the server is up and running, attach the socket.io functionality. It works only when
+   * socket.io functionality is enabled.
+   */
   online() {
     super.online();
     const { io } = puzzle;

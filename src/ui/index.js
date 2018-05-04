@@ -9,13 +9,13 @@ const PRuntime = require("../core/PRuntime");
 const URLBuilder = require("../http/URLBuilder");
 
 /**
- * ui/View engine module.
+ * UI/View engine module.
  *
- * @namespace UI
+ * @namespace ui
  */
 
 /**
- * ui/View Engine main entry point.
+ * UI/View Engine main entry point.
  *
  * This functionality is disabled by default. To enable it, you must set the
  * puzzle.core.ui attribute in package.json to true.
@@ -24,6 +24,11 @@ const URLBuilder = require("../http/URLBuilder");
  * @memberOf UI
  */
 class UIMain extends PRuntime {
+  /**
+   * Link the View engine to the application engine.
+   *
+   * @param {PEngine} engine The engine reference.
+   */
   use(engine) {
     if (puzzle.config.views.enabled) {
       this.init(engine);
@@ -66,7 +71,7 @@ class UIMain extends PRuntime {
      *
      * Using this object you can add paths to view/partials array.
      *
-     * @alias engine.viewConfig;
+     * @alias puzzle.viewConfig;
      * @type {Object}
      */
     puzzle.set("viewConfig", {

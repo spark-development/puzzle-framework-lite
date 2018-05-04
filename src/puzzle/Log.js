@@ -8,13 +8,16 @@ const { rotator: rotate } = require("logrotator");
 const PLog = require("../core/PLog");
 
 /**
- * Logger class - enables the logging in the entire application.
+ * Logger class - enables the logging in the entire application, for the server part.
  *
  * @memberOf puzzle
  * @extends core.PLog
  * @alias puzzle.log
  */
 class Log extends PLog {
+  /**
+   * Constructor of the Server Kigger class.
+   */
   constructor() {
     super();
     this.logLevel = puzzle.config.engine.debug ? "debug" : puzzle.config.engine.log.level;

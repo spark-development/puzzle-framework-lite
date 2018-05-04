@@ -1,7 +1,13 @@
 "use strict";
 
+/**
+ * Entry point of the Console application.
+ *
+ * @module cmd
+ */
+
 const puzzle = require("./puzzleInit");
-const ConsoleBootstrap = require("./puzzle/ConsoleBootstrap");
+const ConsoleBootstrap = require("./cli/ConsoleBootstrap");
 const CommandLoader = require("./cli/CommandLoader");
 const Log = require("./cli/Log");
 

@@ -9,6 +9,10 @@ const PRuntime = require("../core/PRuntime");
  * @extends core.PRuntime
  */
 class ServerBootstrap extends PRuntime {
+  /**
+   * Register process handlers and display some messages in log before
+   * starting the application.
+   */
   beforeBoot() {
     puzzle.log.info("Application started");
     puzzle.log.info("-".repeat(30));

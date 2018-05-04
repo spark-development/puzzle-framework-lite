@@ -10,6 +10,9 @@ const PLog = require("../core/PLog");
  * @alias cli.Log
  */
 class Log extends PLog {
+  /**
+   * CLI Logger class constructor.
+   */
   constructor() {
     super();
     this.logLevel = "";
