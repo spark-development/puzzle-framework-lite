@@ -52,7 +52,7 @@ class Socket extends PObject {
    * Register a socket route.
    *
    * @param {string} action The listener name/route name.
-   * @param {callback} fn The callback method.
+   * @param {function} fn The callback method.
    */
   register(action, fn) {
     this.socket.on(this.listen(action), (data) => {

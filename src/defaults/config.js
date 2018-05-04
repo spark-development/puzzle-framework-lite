@@ -192,7 +192,7 @@ module.exports = {
   },
 
   /**
-   * View/UI module configuration.
+   * View/ui module configuration.
    *
    * @type {Object}
    */

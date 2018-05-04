@@ -4,8 +4,8 @@ const puzzle = require("./puzzleInit");
 const HTTP = require("./http/HTTP");
 const RoutesLoader = require("./http/RoutesLoader");
 const ServerBootstrap = require("./puzzle/ServerBootstrap");
-const SocketIO = require("./SocketIO");
-const UI = require("./UI");
+const SocketIO = require("./socketio");
+const UI = require("./ui");
 const Log = require("./puzzle/Log");
 
 puzzle.use(Log);

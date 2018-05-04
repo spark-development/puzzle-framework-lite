@@ -29,6 +29,8 @@ describe("PEngine class check", () => {
     pobj.unset('test');
     expect(pobj.get('test')).to.be.undefined;
     expect(pobj.test).to.be.undefined;
+    expect(pobj.unset('test')).to.be.undefined;
+    expect(pobj.unset()).to.be.undefined;
   });
 
   it("version should be equal to the one in package.json", () => {

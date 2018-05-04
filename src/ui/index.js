@@ -9,13 +9,13 @@ const PRuntime = require("../core/PRuntime");
 const URLBuilder = require("../http/URLBuilder");
 
 /**
- * UI/View engine module.
+ * ui/View engine module.
  *
  * @namespace UI
  */
 
 /**
- * UI/View Engine main entry point.
+ * ui/View Engine main entry point.
  *
  * This functionality is disabled by default. To enable it, you must set the
  * puzzle.core.ui attribute in package.json to true.
@@ -32,7 +32,7 @@ class UIMain extends PRuntime {
   }
 
   /**
-   * Initializes the UI system.
+   * Initializes the ui system.
    *
    * @param {PEngine} engine The engine reference.
    */
