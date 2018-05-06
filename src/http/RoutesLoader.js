@@ -4,28 +4,25 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 
-const Runtime = require("../base/Runtime");
+const PUse = require("../core/PUse");
 
 /**
  * Routes loader class.
  *
  * Loads routes defined by a module into the application.
  *
- * @extends base.Runtime
+ * @alias puzzle.routes
+ * @extends core.PUse
  * @memberOf http
  */
-class RoutesLoader extends Runtime {
+class RoutesLoader extends PUse {
   /**
    * Initializes the Routes loader runtime.
+   *
+   * @param {PEngine} engine The engine reference.
    */
-  init() {
-    /**
-     * Holds a reference to the RoutesLoader object.
-     *
-     * @memberOf engine
-     * @type RoutesLoader
-     */
-    this.engine.routes = this;
+  use(engine) {
+    engine.set("routes", this);
   }
 
   /**
@@ -38,7 +35,7 @@ class RoutesLoader extends Runtime {
     const fullpath = path.join(root, routes);
     fs.readdirSync(fullpath).forEach((file) => {
       if (path.extname(file) === ".js") {
-        require(_.join([fullpath, file], "/"))(this.engine);
+        require(_.join([fullpath, file], "/"))();
       }
     });
   }
@@ -54,7 +51,7 @@ class RoutesLoader extends Runtime {
     fs.readdirSync(fullpath).forEach((file) => {
       if (path.extname(file) === ".js") {
         const ClassPath = require(_.join([fullpath, file], "/"));
-        const classRoute = new ClassPath(this.engine);
+        const classRoute = new ClassPath();
         classRoute.build();
       }
     });

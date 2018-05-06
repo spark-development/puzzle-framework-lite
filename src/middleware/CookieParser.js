@@ -7,9 +7,7 @@ const cookieParser = require("cookie-parser");
  *
  * @alias CookieParser
  * @memberOf middleware
- *
- * @param {engine} engine Reference to engine core.
  */
-module.exports = (engine) => {
-  engine.app.use(cookieParser());
+module.exports = () => {
+  puzzle.http.use(cookieParser());
 };

@@ -1,6 +1,6 @@
-# Puzzle Framework
+# Puzzle Framework Lite
 
-Puzzle Framework wants to be a simple to use framework to build webapps using a micro-application architecture.
+Puzzle Framework Lite wants to be a simple to use framework to build webapps using a micro-application architecture.
 
 The purpose of this framework is to be as small and lite as possible. It is composed of core elements and
 some core modules (called puzzles). The core modules can be enable/disabled through feature switches in the
@@ -9,26 +9,26 @@ application that uses the framework.
 ## Build Status
 
 * Master: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework.svg?branch=master)](https://travis-ci.org/spark-development/puzzle-framework)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=master)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=master)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=master)
 
 * Develop: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework.svg?branch=develop)](https://travis-ci.org/spark-development/puzzle-framework)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=develop)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=develop)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=develop)
 
 * Release: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework.svg?branch=release)](https://travis-ci.org/spark-development/puzzle-framework)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=release)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=release)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=release)
 
 * Hotfix: 
-  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework.svg?branch=hotfix)](https://travis-ci.org/spark-development/puzzle-framework)
+  [![Build Status](https://travis-ci.org/spark-development/puzzle-framework-lite.svg?branch=hotfix)](https://travis-ci.org/spark-development/puzzle-framework-lite) [![Coverage Status](https://coveralls.io/repos/github/spark-development/puzzle-framework-lite/badge.svg?branch=hotfix)](https://coveralls.io/github/spark-development/puzzle-framework-lite?branch=hotfix)
 
 ## Sample project
 
-The sample project where different functionalities are shown is available here: https://github.com/spark-development/puzzle-framework-sample
+The sample project where different functionalities are shown is available here: https://github.com/spark-development/puzzle-framework-lite-sample
 
 Anyone can download that project and build upon it.
 
 ## Contributing
 
-To contribute please read the [CONTRIBUTING.md](https://github.com/spark-development/puzzle-framework/blob/master/CONTRIBUTING.md) file.
+To contribute please read the [CONTRIBUTING.md](https://github.com/spark-development/puzzle-framework-lite/blob/master/CONTRIBUTING.md) file.
 
 ## Documentation
 

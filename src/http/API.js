@@ -5,6 +5,7 @@ const Route = require("./Route");
 /**
  * REST API base class.
  *
+ * @abstract
  * @extends http.Route
  * @memberOf http
  */
@@ -12,11 +13,10 @@ class API extends Route {
   /**
    * Creates an instance of an API route.
    *
-   * @param {engine} engine The global reference to the engine.
    * @param {string} path The path to the API route.
    */
-  constructor(engine, path) {
-    super(engine, path);
+  constructor(path) {
+    super(path);
     this.middlewares.api = [];
 
     /**
@@ -24,7 +24,7 @@ class API extends Route {
      *
      * @member {string}
      */
-    this.APIPath = this.engine.config.http.APIPath || "/api/master";
+    this.APIPath = puzzle.config.http.APIPath || "/api/master";
   }
 
   /**

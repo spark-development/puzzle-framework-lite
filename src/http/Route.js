@@ -3,29 +3,24 @@
 const _ = require("lodash");
 const express = require("express");
 
-const AuthenticatedUser = require("../utils/AuthenticatedUser");
-const PObject = require("../base/PObject");
-const RouteAccessException = require("../exceptions/RouteAccessException");
-
+const PObject = require("../core/PObject");
 const URLBuilder = require("./URLBuilder");
 
 /**
  * Web Routes base class.
  *
  * @abstract
- * @extends base.PObject
+ * @extends core.PObject
  * @memberOf http
  */
 class Route extends PObject {
   /**
    * Creates an instance of the route.
    *
-   * @param {engine} engine The global reference to the engine.
    * @param {string} path The path to the route.
    */
-  constructor(engine, path) {
-    super(engine);
-
+  constructor(path) {
+    super();
     /**
      * The URL router of the current route.
      *
@@ -48,18 +43,10 @@ class Route extends PObject {
      * @member {Object.<string,Object[]>}
      */
     this.middlewares = {
-      auth: [],
       group: [],
       before: [],
       after: []
     };
-
-    /**
-     * Where to redirect unauthenticated users.
-     *
-     * @member {string}
-     */
-    this.unauthenticatedRedirectTo = "/";
   }
 
   /**
@@ -87,28 +74,20 @@ class Route extends PObject {
     return [...middlewares, ...extraMiddlewares];
   }
 
-  /**
-   * Pushes a middleware to the auth middleware stack.
-   *
-   * @param {callback} middleware The middlware to be pushed to the stack.
-   */
-  pushAuth(middleware) {
-    this.pushMiddleware("auth", middleware);
-  }
 
   /**
-   * Pushes a middleware to the push middleware stack.
+   * Pushes a middleware to the group middleware stack.
    *
-   * @param {callback} middleware The middlware to be pushed to the stack.
+   * @param {function} middleware The middleware to be pushed to the stack.
    */
   pushGroup(middleware) {
-    this.pushMiddleware("push", middleware);
+    this.pushMiddleware("group", middleware);
   }
 
   /**
-   * Pushes a middleware to the  before middleware stack.
+   * Pushes a middleware to the before middleware stack.
    *
-   * @param {callback} middleware The middlware to be pushed to the stack.
+   * @param {function} middleware The middleware to be pushed to the stack.
    */
   pushBefore(middleware) {
     this.pushMiddleware("before", middleware);
@@ -117,7 +96,7 @@ class Route extends PObject {
   /**
    * Pushes a middleware to the after middleware stack.
    *
-   * @param {callback} middleware The middlware to be pushed to the stack.
+   * @param {function} middleware The middleware to be pushed to the stack.
    */
   pushAfter(middleware) {
     this.pushMiddleware("after", middleware);
@@ -127,7 +106,7 @@ class Route extends PObject {
    * Pushes a middleware to the given middleware stack.
    *
    * @param {string} middlewareName The name of the middleware stack.
-   * @param {callback} middleware The middleware to be pushed onto the stack.
+   * @param {function} middleware The middleware to be pushed onto the stack.
    */
   pushMiddleware(middlewareName, middleware) {
     if (!this.isValid(this.middlewares[middlewareName])) {
@@ -142,7 +121,7 @@ class Route extends PObject {
    *
    * @param {string} type The type of request (GET, POST, PUT, DELETE).
    * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   routeRegister(type, path, callback) {
     this.routeRegisterMiddleware(type, path, null, callback);
@@ -153,8 +132,8 @@ class Route extends PObject {
    *
    * @param {string} type The type of request (GET, POST, PUT, DELETE).
    * @param {string} path The path of the route.
-   * @param {string} middleware The name of the middleware list.
-   * @param {callback} callback The callback method.
+   * @param {string|null} middleware The name of the middleware list.
+   * @param {function} callback The callback method.
    */
   routeRegisterMiddleware(type, path, middleware, callback) {
     if (!this.isValid(middleware) || middleware === "before" || middleware === "after") {
@@ -172,7 +151,7 @@ class Route extends PObject {
    * Registers a GET route.
    *
    * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   get(path, callback) {
     this.routeRegister("get", path, callback);
@@ -182,7 +161,7 @@ class Route extends PObject {
    * Registers a POST route.
    *
    * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   post(path, callback) {
     this.routeRegister("post", path, callback);
@@ -192,7 +171,7 @@ class Route extends PObject {
    * Registers a PUT route.
    *
    * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   put(path, callback) {
     this.routeRegister("put", path, callback);
@@ -202,7 +181,7 @@ class Route extends PObject {
    * Registers a PATCH route.
    *
    * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   patch(path, callback) {
     this.routeRegister("patch", path, callback);
@@ -212,60 +191,10 @@ class Route extends PObject {
    * Registers a DELETE route.
    *
    * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   delete(path, callback) {
     this.routeRegister("delete", path, callback);
-  }
-
-  /**
-   * Registers an authenticated GET route.
-   *
-   * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
-   */
-  getAuth(path, callback) {
-    this.routeRegisterMiddleware("get", path, "auth", callback);
-  }
-
-  /**
-   * Registers an authenticated POST route.
-   *
-   * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
-   */
-  postAuth(path, callback) {
-    this.routeRegisterMiddleware("post", path, "auth", callback);
-  }
-
-  /**
-   * Registers an authenticated PUT route.
-   *
-   * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
-   */
-  putAuth(path, callback) {
-    this.routeRegisterMiddleware("put", path, "auth", callback);
-  }
-
-  /**
-   * Registers an authenticated PATCH route.
-   *
-   * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
-   */
-  patchAuth(path, callback) {
-    this.routeRegisterMiddleware("patch", path, "auth", callback);
-  }
-
-  /**
-   * Registers an authenticated DELETE route.
-   *
-   * @param {string} path The path of the route.
-   * @param {callback} callback The callback method.
-   */
-  deleteAuth(path, callback) {
-    this.routeRegisterMiddleware("delete", path, "auth", callback);
   }
 
   /**
@@ -273,7 +202,7 @@ class Route extends PObject {
    *
    * @param {string} path The path of the route.
    * @param {string} middleware The middleware list used for various things.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   getMiddleware(path, middleware, callback) {
     this.routeRegisterMiddleware("get", path, middleware, callback);
@@ -284,7 +213,7 @@ class Route extends PObject {
    *
    * @param {string} path The path of the route.
    * @param {string} middleware The middleware list used for various things.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   postMiddleware(path, middleware, callback) {
     this.routeRegisterMiddleware("post", path, middleware, callback);
@@ -295,7 +224,7 @@ class Route extends PObject {
    *
    * @param {string} path The path of the route.
    * @param {string} middleware The middleware list used for various things.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   putMiddleware(path, middleware, callback) {
     this.routeRegisterMiddleware("put", path, middleware, callback);
@@ -306,7 +235,7 @@ class Route extends PObject {
    *
    * @param {string} path The path of the route.
    * @param {string} middleware The middleware list used for various things.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   patchMiddleware(path, middleware, callback) {
     this.routeRegisterMiddleware("patch", path, middleware, callback);
@@ -317,7 +246,7 @@ class Route extends PObject {
    *
    * @param {string} path The path of the route.
    * @param {string} middleware The middleware list used for various things.
-   * @param {callback} callback The callback method.
+   * @param {function} callback The callback method.
    */
   deleteMiddleware(path, middleware, callback) {
     this.routeRegisterMiddleware("delete", path, middleware, callback);
@@ -329,37 +258,11 @@ class Route extends PObject {
   build() {
     this.register();
 
-    this.engine.app.use(
-      URLBuilder(this.engine, this.path),
+    puzzle.http.use(
+      URLBuilder(this.path),
       this.middlewares.group || [],
       this.router
     );
-  }
-
-  /**
-   * Redirects an unauthenticated user to the root page.
-   *
-   * @param {Object} user The user object.
-   * @param {Object} res The response object.
-   */
-  redirectUnauthenticated(user, res) {
-    if (!AuthenticatedUser(user)) {
-      res.redirect(this.unauthenticatedRedirectTo);
-    }
-  }
-
-  /**
-   * Tests to see if the user is allowed to perform an action or not.
-   *
-   * @param {Object} user The user object.
-   * @param {string} page The name of the page/method.
-   * @param {string} permission The name of the permission.
-   * @throws RouteAccessException
-   */
-  allowed(user, page, permission) {
-    if (!AuthenticatedUser(user) || (!user.isAdmin() && !user.allowed(permission))) {
-      throw new RouteAccessException(page);
-    }
   }
 }
 

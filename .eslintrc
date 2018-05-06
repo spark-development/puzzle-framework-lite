@@ -1,5 +1,8 @@
 {
   "extends": "airbnb-base",
+  "plugins": [
+    "chai-expect"
+  ],
   "rules": {
     "comma-dangle": 0,
     "max-len": ["error", 120, 2, {"ignoreComments": true}],
@@ -16,7 +19,14 @@
     "no-underscore-dangle": 0,
     "class-methods-use-this": 0,
     "import/no-dynamic-require": 0,
-    "strict": [0, "global"]
+    "strict": [0, "global"],
+    "chai-expect/missing-assertion": 2,
+    "chai-expect/terminating-properties": 1
+  },
+  "globals": {
+    "engine": true,
+    "pUtils": true,
+    "puzzle": true
   },
   "env": {
     "node": true,

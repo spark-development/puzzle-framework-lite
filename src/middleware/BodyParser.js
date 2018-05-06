@@ -7,12 +7,10 @@ const bodyParser = require("body-parser");
  *
  * @alias BodyParser
  * @memberOf middleware
- *
- * @param {engine} engine Reference to engine core.
  */
-module.exports = (engine) => {
-  engine.app.use(bodyParser.json());
-  engine.app.use(bodyParser.urlencoded({
+module.exports = () => {
+  puzzle.http.use(bodyParser.json());
+  puzzle.http.use(bodyParser.urlencoded({
     extended: true
   }));
 };

@@ -1,4 +1,5 @@
 docs
 gen-docs
-tests
+test
 sample
+.nyc_output
