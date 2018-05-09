@@ -108,7 +108,7 @@ class UIMain extends PRuntime {
     }));
     http.set("view engine", "hbs");
     http.set("views", this._paths.views);
-    http.use(URLBuilder(puzzle, "/"), express.static(this._pathResolve(config.views.publicContent)));
+    http.use(URLBuilder("/"), express.static(this._pathResolve(config.views.publicContent)));
   }
 
   /**
