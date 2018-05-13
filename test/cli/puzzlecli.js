@@ -1,11 +1,33 @@
 "use strict";
 
-module.exports = {
+const puzzleCli = {
+  app: {
+    name: "CLI Test App",
+    version: "0.0.0"
+  },
+  _modules: {},
+  set(module, instance) {
+    this._modules[module] = instance;
+  },
   env: "test",
   i18n: {
     __: (...msg) => `TRANSLATED: ${msg.join(' ')}`
   },
+  log: {
+    error(msg) {
+      puzzleCli.cli.error(msg);
+    }
+  },
   cli: {
+    args: [],
+    options: {},
+    parse(options) {
+      this.args = this.returnArgs();
+      this.options = options || {};
+    },
+    returnArgs() {
+      return this.command ? [this.command, 123] : ['test', 123];
+    },
     messages: [],
     shouldExit: false,
     exitCode: 0,
@@ -27,5 +49,7 @@ module.exports = {
     ok(msg) {
       return this._push("ok", msg)
     }
-  }
+  },
 };
+
+module.exports = puzzleCli;

@@ -3,6 +3,8 @@
 const cli = require("cli");
 
 const PUse = require("../core/PUse");
+const CLIBase = require("./CLIBase");
+const InvalidInstanceType = require("../exceptions/InvalidInstanceType");
 
 /**
  * Commands loader - used for CLI
@@ -18,6 +20,12 @@ class CommandLoader extends PUse {
   constructor() {
     super();
 
+    /**
+     * A map with all available commands.
+     *
+     * @property {object<string,CLIBase>}
+     * @protected
+     */
     this._commands = {};
   }
 
@@ -40,6 +48,9 @@ class CommandLoader extends PUse {
    * @param {*} commandInstance The object that performs the actions for the given command.
    */
   register(commandName, commandInstance) {
+    if (!(commandInstance.prototype instanceof CLIBase)) {
+      throw new InvalidInstanceType("CLIBase");
+    }
     this._commands[commandName] = commandInstance;
   }
 
@@ -47,18 +58,18 @@ class CommandLoader extends PUse {
    * Enables the ability to run CLI commands.
    */
   async run() {
-    cli.parse();
-    const command = cli.args.shift();
+    puzzle.cli.parse();
+    const command = puzzle.cli.args.shift();
 
     if (!this.isValid(this._commands) || Object.keys(this._commands).indexOf(command) < 0) {
-      cli.fatal("Unable to find the given command!");
+      puzzle.cli.fatal("Unable to find the given command!");
       return;
     }
 
     const commandInst = new this._commands[command]();
-    cli.parse(commandInst.options);
+    puzzle.cli.parse(commandInst.options);
 
-    await commandInst.run(cli.args, cli.options);
+    await commandInst.run(puzzle.cli.args, puzzle.cli.options);
   }
 }
 
