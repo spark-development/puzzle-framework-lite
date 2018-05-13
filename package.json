@@ -1,10 +1,10 @@
 {
   "name": "puzzle-framework-lite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lite modular framework for micro applications/services.",
   "main": "src/server.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/mocha --exit test/**/*.test.js --reporter spec",
+    "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/mocha test/**/*.test.js --exit --reporter spec",
     "lint": "./node_modules/.bin/eslint ./src ./test",
     "lint-fix": "./node_modules/.bin/eslint --fix ./src ./test",
     "bamboo-lint": "./node_modules/.bin/eslint ./src ./test -f node_modules/eslint-bamboo-formatter/reporter.js",

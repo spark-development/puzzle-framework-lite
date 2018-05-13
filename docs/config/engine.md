@@ -69,7 +69,7 @@ into consideration.
 
 **Other accepted values**: false
 
-## engine.log.file
+## engine.log.size
 
 Maximum log file size before rotation. Modifiers are: k(ilo), m(ega), g(iga)
 
@@ -78,6 +78,16 @@ Maximum log file size before rotation. Modifiers are: k(ilo), m(ega), g(iga)
 **Default value**: 50k
 
 **Other accepted values**: any value that uses the correct modifier k(ilo), m(ega) or g(iga)
+
+## engine.log.schedule
+
+How often to check for file rotation conditions. possible values are '1s', '1m', '1h'. default is 5m.
+
+**Type**: string
+
+**Default value**: 5m
+
+**Other accepted values**: any value that uses the correct modifier s(econd), m(inute), h(our). 
   
 ## engine.log.compress
 

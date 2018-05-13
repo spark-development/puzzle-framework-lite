@@ -10,6 +10,7 @@ describe("puzzle global loading check", () => {
   it("index should register puzzle globally", () => {
     expect(puzzle).to.be.null;
     expect(global.puzzle).to.be.null;
+    delete require.cache[require.resolve("../../src/puzzle")];
     const localPuzzle = require("../../src/puzzle");
     expect(puzzle).to.not.be.null;
     expect(global.puzzle).to.not.be.null;
