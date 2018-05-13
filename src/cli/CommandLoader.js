@@ -46,6 +46,8 @@ class CommandLoader extends PUse {
    *
    * @param {string} commandName The name of the command.
    * @param {*} commandInstance The object that performs the actions for the given command.
+   *
+   * @throws InvalidInstanceType
    */
   register(commandName, commandInstance) {
     if (!(commandInstance.prototype instanceof CLIBase)) {

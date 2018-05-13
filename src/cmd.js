@@ -18,7 +18,7 @@ puzzle.use((engine) => {
   engine.set("boot", async () => {
     let code = 0;
     try {
-      engine.modules.loadFromPacakge();
+      engine.modules.loadFromPackage();
       engine.modules.boot();
       engine.modules.online();
       await engine.commands.run();

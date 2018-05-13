@@ -1,8 +1,6 @@
 "use strict";
 
 const { expect } = require("chai");
-const fs = require("fs");
-const path = require("path");
 
 const Log = require("../../src/puzzle/Log");
 
@@ -21,7 +19,7 @@ describe("Log class check", () => {
 
   after(() => {
     puzzle.log = {
-      info() {
+      debug() {
       }
     };
     puzzle.modules.shutdown();
@@ -65,6 +63,13 @@ describe("Log class check", () => {
     expect(pobj.logLevel).to.be.equal("debug");
     pobj.initLog("test");
     expect(pobj.logLevel).to.be.equal("info");
+  });
+  it("initLog with console logger", () => {
+      const initialConfig = Object.assign({}, puzzle.config.engine.log);
+      puzzle.config.engine.log.file = "";
+      const pobj = new Log();
+      expect(pobj.logger.stream).to.deep.equal(process.stdout);
+      puzzle.config.engine.log = Object.assign({}, initialConfig);
   });
 
   // TODO: Fix this part
