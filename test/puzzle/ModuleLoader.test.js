@@ -1,6 +1,6 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 const ModuleLoader = require("../../src/puzzle/ModuleLoader");
 const PState = require("../../src/core/PState");

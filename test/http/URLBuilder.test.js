@@ -1,6 +1,6 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 const URLBuilder = require("../../src/http/URLBuilder");
 

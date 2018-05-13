@@ -11,7 +11,7 @@ const puzzleCli = {
   },
   env: "test",
   i18n: {
-    __: (...msg) => `TRANSLATED: ${msg.join(' ')}`
+    __: (...msg) => `TRANSLATED: ${msg.join(" ")}`
   },
   log: {
     error(msg) {
@@ -26,28 +26,28 @@ const puzzleCli = {
       this.options = options || {};
     },
     returnArgs() {
-      return this.command ? [this.command, 123] : ['test', 123];
+      return this.command ? [this.command, 123] : ["test", 123];
     },
     messages: [],
     shouldExit: false,
     exitCode: 0,
     _push(type, msg) {
-      this.messages.push(`[${type.toLowerCase()}] ${msg}`)
+      this.messages.push(`[${type.toLowerCase()}] ${msg}`);
     },
     debug(msg) {
-      return this._push("debug", msg)
+      return this._push("debug", msg);
     },
     info(msg) {
-      return this._push("info", msg)
+      return this._push("info", msg);
     },
     error(msg) {
-      return this._push("error", msg)
+      return this._push("error", msg);
     },
     fatal(msg) {
-      return this._push("fatal", msg)
+      return this._push("fatal", msg);
     },
     ok(msg) {
-      return this._push("ok", msg)
+      return this._push("ok", msg);
     }
   },
 };

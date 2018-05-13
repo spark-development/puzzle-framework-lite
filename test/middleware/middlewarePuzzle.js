@@ -9,9 +9,9 @@ module.exports = {
   config: {
     http: {
       session: {
-        store: 'memory',
-        key: 'test',
-        secret: 'secret.discret'
+        store: "memory",
+        key: "test",
+        secret: "secret.discret"
       }
     }
   }

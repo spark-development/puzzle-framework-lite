@@ -1,13 +1,13 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 const path = require("path");
 
 const StaticConfig = require("../../src/puzzle/StaticConfig");
 const Engine = require("../../src/core/PEngine");
 
 describe("StaticConfig class check", () => {
-  let cwd = '';
+  let cwd = "";
   before(() => {
     cwd = process.cwd();
     process.chdir(`${__dirname}/../_toolkit/starter`);

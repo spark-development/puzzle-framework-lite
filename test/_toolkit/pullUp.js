@@ -20,12 +20,12 @@ module.exports = (configChange) => {
     process.chdir(`${process.cwd()}/starter`);
   }
 
-  delete require.cache[require.resolve('../../src/index')];
-  delete require.cache[require.resolve('./starter/test.json')];
+  delete require.cache[require.resolve("../../src/index")];
+  delete require.cache[require.resolve("./starter/test.json")];
 
   const Puzzle = require("../../src/index");
   const PuzzleConfig = require("./starter/test.json");
-  if(configChange !== undefined && configChange !== null) {
+  if (configChange !== undefined && configChange !== null) {
     _.merge(PuzzleConfig.puzzle, configChange);
   }
   const puzzleInstance = Puzzle(PuzzleConfig);

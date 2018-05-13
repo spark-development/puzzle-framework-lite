@@ -45,7 +45,7 @@ module.exports = {
      *
      * @type {string}
      */
-    size: '50k',
+    size: "50k",
 
     /**
      * Should the rotated log be compressed?

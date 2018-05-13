@@ -1,6 +1,6 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 const cli = require("cli");
 
 const CommandLoader = require("../../src/cli/CommandLoader");
@@ -85,5 +85,4 @@ describe("CommandLoader class check", () => {
       expect(() => pobj.register("test", Engine)).to.throw(InvalidInstanceType);
     });
   });
-
 });

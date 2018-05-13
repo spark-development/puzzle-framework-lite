@@ -1,8 +1,9 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 const CLITest = require("./CLITest");
+
 let originalPuzzle = null;
 
 describe("CLITest class check", () => {
@@ -36,7 +37,7 @@ describe("CLITest class check", () => {
     expect(pobj.options).to.be.a("object");
     expect(pobj.options).to.deep.equal({
       test: [
-        'test'
+        "test"
       ]
     });
   });
@@ -49,11 +50,11 @@ describe("CLITest class check", () => {
     pobj.run();
     expect(pobj.runArgs).to.be.undefined;
     expect(pobj.runOptions).to.be.undefined;
-    pobj.run(['test'], {test: true, test2: 123});
+    pobj.run(["test"], { test: true, test2: 123 });
     expect(pobj.runArgs).to.not.be.undefined;
     expect(pobj.runOptions).to.not.be.undefined;
-    expect(pobj.runArgs).to.deep.equal(['test']);
-    expect(pobj.runOptions).to.deep.equal({test: true, test2: 123});
+    expect(pobj.runArgs).to.deep.equal(["test"]);
+    expect(pobj.runOptions).to.deep.equal({ test: true, test2: 123 });
   });
   it("CLITest should be able to log some translated messages to CLI", () => {
     const pobj = new CLITest();

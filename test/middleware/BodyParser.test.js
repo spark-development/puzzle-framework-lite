@@ -1,6 +1,6 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 const BodyParser = require("../../src/middleware/BodyParser");
 

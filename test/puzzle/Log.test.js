@@ -1,11 +1,11 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 const Log = require("../../src/puzzle/Log");
 
 describe("Log class check", () => {
-  let cwd = '';
+  let cwd = "";
   let originalPuzzle = null;
 
   before(() => {
