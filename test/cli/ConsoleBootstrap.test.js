@@ -10,6 +10,7 @@ describe("ConsoleBootstrap class check", () => {
   before(() => {
     originalPuzzle = global.puzzle;
     global.puzzle = require("./puzzlecli");
+    puzzle.cli.messages = [];
   });
 
   after(() => {
@@ -24,13 +25,13 @@ describe("ConsoleBootstrap class check", () => {
   it("beforeBoot should register listeners for various events", () => {
     const pobj = new ConsoleBootstrap();
 
-    expect(process.listenerCount("exit")).to.equal(0);
-    expect(process.listenerCount("SIGINT")).to.equal(1);
-    expect(process.listenerCount("uncaughtException")).to.equal(1);
+    const exitListeners = process.listenerCount("exit");
+    const sigIntListeners = process.listenerCount("SIGINT");
+    const exceptionListeners = process.listenerCount("uncaughtException");
     pobj.beforeBoot();
-    expect(process.listenerCount("exit")).to.equal(1);
-    expect(process.listenerCount("SIGINT")).to.equal(2);
-    expect(process.listenerCount("uncaughtException")).to.equal(2);
+    expect(process.listenerCount("exit")).to.equal(exitListeners + 1);
+    expect(process.listenerCount("SIGINT")).to.equal(sigIntListeners + 1);
+    expect(process.listenerCount("uncaughtException")).to.equal(exceptionListeners + 1);
   });
   it("close without parameters shouldn't do anything", () => {
     const pobj = new ConsoleBootstrap();
