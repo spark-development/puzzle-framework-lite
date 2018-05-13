@@ -97,6 +97,18 @@ describe("ModuleLoader class check", () => {
     expect(() => pobj.register("cli", new TestCLIRuntime())).to.not.throw(InvalidInstanceType);
     expect(pobj._orderedLoad.length).to.equal(3);
   });
+  it("register should override existing modules", () => {
+    const pobj = new ModuleLoader();
+    expect(() => pobj.register("server", new TestRuntime())).to.not.throw(InvalidInstanceType);
+    expect(pobj._orderedLoad[0].name).to.equal("server");
+    expect(pobj._orderedLoad[0].instance.className).to.equal("TestRuntime");
+    expect(pobj._orderedLoad[0].instance.className).to.not.equal("TestServerRuntime");
+    expect(() => pobj.register("server", new TestServerRuntime())).to.not.throw(InvalidInstanceType);
+    expect(pobj._orderedLoad[0].name).to.equal("server");
+    expect(pobj._orderedLoad[0].instance.className).to.not.equal("TestRuntime");
+    expect(pobj._orderedLoad[0].instance.className).to.equal("TestServerRuntime");
+    expect(pobj._orderedLoad.length).to.equal(1);
+  });
   it("register should register only cli and general modules if puzzle.cli is available", () => {
     const pobj = new ModuleLoader();
     puzzle.cli = true;
