@@ -39,6 +39,19 @@ class i18n extends PUse {
   }
 
   /**
+   * Translation method. Takes the message label key and a bunch of parameters and
+   * builds the final message with them.
+   *
+   * @param {string} labelKey The Label Key.
+   * @param {...*} ...params The Parameters to be passed to the message.
+   *
+   * @return {string}
+   */
+  __n(labelKey, ...params) {
+    return this.__(labelKey, ...params);
+  }
+
+  /**
    * Performs some initializations.
    */
   init() {

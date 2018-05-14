@@ -93,16 +93,12 @@ class UIMain extends PRuntime {
     }
     const { http, config } = puzzle;
 
-    http.locals.engine = puzzle;
-    http.locals.version = puzzle.version.version;
-    http.locals.config = puzzle.config;
-
     http.engine("hbs", hbs.express4({
       partialsDir: this._paths.partials,
       defaultLayout: this._pathResolve(config.views.defaultLayout),
       extname: ".hbs",
       handlebars,
-      // i18n: puzzle.i18n,
+      i18n: puzzle.i18n,
       layoutsDir: this._pathResolve(config.views.layouts),
       beautify: true,
     }));
