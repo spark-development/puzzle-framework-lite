@@ -28,6 +28,9 @@ puzzle.use((engine) => {
     }
     process.exit(code);
   });
+  engine.set("shutdown", () => {
+    engine.modules.shutdown();
+  });
 });
 
 module.exports = puzzle;

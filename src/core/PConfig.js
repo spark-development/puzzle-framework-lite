@@ -1,5 +1,6 @@
 "use strict";
 
+const _ = require("lodash");
 const fs = require("fs");
 const path = require("path");
 
@@ -78,7 +79,7 @@ class PConfig extends PObject {
    * @param {object} configElements The configuration elements that need to be loaded.
    */
   load(configElements) {
-    this._config = Object.assign(this._config, configElements);
+    this._config = _.merge(this._config, configElements);
     this._reloadProperties();
   }
 

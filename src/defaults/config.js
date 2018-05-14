@@ -209,7 +209,7 @@ module.exports = {
      *
      * @type {boolean}
      */
-    enabled: false,
+    enabled: true,
     /**
      * Folder where all views are stored.
      *

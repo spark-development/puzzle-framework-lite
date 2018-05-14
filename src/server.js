@@ -26,6 +26,9 @@ puzzle.use((engine) => {
     engine.modules.boot();
     engine.modules.online();
   });
+  engine.set("shutdown", () => {
+    engine.modules.shutdown();
+  });
 });
 
 module.exports = puzzle;

@@ -74,7 +74,7 @@ class UIMain extends PRuntime {
      * @alias puzzle.viewConfig;
      * @type {Object}
      */
-    puzzle.set("viewConfig", {
+    engine.set("viewConfig", {
       view: (viewPath) => {
         this._paths.views.push(this._pathResolve(viewPath));
       },
