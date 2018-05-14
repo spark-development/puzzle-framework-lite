@@ -18,14 +18,14 @@ module.exports = {
    *
    * @type {string}
    */
-  listen: '127.0.0.1',
+  listen: "127.0.0.1",
 
   /**
    * The context path to build URLs in the application.
    *
    * @type {string}
    */
-  contextPath: '',
+  contextPath: "",
 
   /**
    * Cross-Origin resource sharing variable. A list with the sites that are allowed to
@@ -33,12 +33,12 @@ module.exports = {
    *
    * @type {string}
    */
-  cors: '*',
+  cors: "*",
 
   /**
    * The base path of the API routes.
    *
    * @type {string}
    */
-  APIPath: '/api/v1'
+  APIPath: "/api/v1"
 };

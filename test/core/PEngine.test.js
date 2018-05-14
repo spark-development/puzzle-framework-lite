@@ -1,6 +1,6 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 const packageJson = require("../../package.json");
 const PEngine = require("../../src/core/PEngine");
@@ -17,19 +17,19 @@ describe("PEngine class check", () => {
   it("property setter/getter should work", () => {
     const pobj = new PEngine();
     let x;
-    expect(pobj.get('test')).to.be.undefined;
+    expect(pobj.get("test")).to.be.undefined;
     expect(pobj.test).to.be.undefined;
-    pobj.set('test', 'ana are mere');
+    pobj.set("test", "ana are mere");
     expect(pobj.test).to.not.be.null;
     expect(pobj.test).to.not.be.undefined;
-    expect(pobj.test).to.equal('ana are mere');
-    expect(pobj.get('test')).to.not.be.null;
-    expect(pobj.get('test')).to.not.be.undefined;
-    expect(pobj.get('test')).to.equal('ana are mere');
-    pobj.unset('test');
-    expect(pobj.get('test')).to.be.undefined;
+    expect(pobj.test).to.equal("ana are mere");
+    expect(pobj.get("test")).to.not.be.null;
+    expect(pobj.get("test")).to.not.be.undefined;
+    expect(pobj.get("test")).to.equal("ana are mere");
+    pobj.unset("test");
+    expect(pobj.get("test")).to.be.undefined;
     expect(pobj.test).to.be.undefined;
-    expect(pobj.unset('test')).to.be.undefined;
+    expect(pobj.unset("test")).to.be.undefined;
     expect(pobj.unset()).to.be.undefined;
   });
 

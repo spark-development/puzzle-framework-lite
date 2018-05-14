@@ -56,6 +56,13 @@ module.exports = {
       size: "50k",
 
       /**
+       * How often to check for file rotation conditions. possible values are '1s', '1m', '1h'. default is 5m.
+       *
+       * @type {string}
+       */
+      schedule: "5m",
+
+      /**
        * Should the rotated log be compressed?
        *
        * @type {boolean}
@@ -202,7 +209,7 @@ module.exports = {
      *
      * @type {boolean}
      */
-    enabled: false,
+    enabled: true,
     /**
      * Folder where all views are stored.
      *

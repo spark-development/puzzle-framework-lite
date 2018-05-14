@@ -53,8 +53,8 @@ class ServerBootstrap extends PRuntime {
    * @param {Object} err The errors sent by the closing event.
    */
   close(options, err) {
-    if (err) puzzle.log.error(err.stack);
-    if (options.exit) process.exit();
+    if (err && puzzle && puzzle.log) puzzle.log.error(err);
+    if (options && options.exit) process.exit();
 
     puzzle.modules.shutdown();
     puzzle.log.info("Application closed");

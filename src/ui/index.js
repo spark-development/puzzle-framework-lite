@@ -74,7 +74,7 @@ class UIMain extends PRuntime {
      * @alias puzzle.viewConfig;
      * @type {Object}
      */
-    puzzle.set("viewConfig", {
+    engine.set("viewConfig", {
       view: (viewPath) => {
         this._paths.views.push(this._pathResolve(viewPath));
       },
@@ -93,22 +93,18 @@ class UIMain extends PRuntime {
     }
     const { http, config } = puzzle;
 
-    http.locals.engine = puzzle;
-    http.locals.version = puzzle.version.version;
-    http.locals.config = puzzle.config;
-
     http.engine("hbs", hbs.express4({
       partialsDir: this._paths.partials,
       defaultLayout: this._pathResolve(config.views.defaultLayout),
       extname: ".hbs",
       handlebars,
-      // i18n: puzzle.i18n,
+      i18n: puzzle.i18n,
       layoutsDir: this._pathResolve(config.views.layouts),
       beautify: true,
     }));
     http.set("view engine", "hbs");
     http.set("views", this._paths.views);
-    http.use(URLBuilder(puzzle, "/"), express.static(this._pathResolve(config.views.publicContent)));
+    http.use(URLBuilder("/"), express.static(this._pathResolve(config.views.publicContent)));
   }
 
   /**

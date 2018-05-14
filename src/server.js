@@ -22,9 +22,12 @@ puzzle.use(SocketIO);
 puzzle.use(UI);
 puzzle.use((engine) => {
   engine.set("boot", () => {
-    engine.modules.loadFromPacakge();
+    engine.modules.loadFromPackage();
     engine.modules.boot();
     engine.modules.online();
+  });
+  engine.set("shutdown", () => {
+    engine.modules.shutdown();
   });
 });
 

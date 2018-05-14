@@ -151,6 +151,7 @@ crashlytics-build.properties
 # Logs
 test/starter/logs/!.gitkeep
 *.log
+*.log.*
 npm-debug.log*
 
 # Runtime data

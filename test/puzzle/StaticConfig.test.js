@@ -1,19 +1,26 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 const path = require("path");
 
 const StaticConfig = require("../../src/puzzle/StaticConfig");
 const Engine = require("../../src/core/PEngine");
 
 describe("StaticConfig class check", () => {
-  let cwd = '';
+  let cwd = "";
   before(() => {
     cwd = process.cwd();
     process.chdir(`${__dirname}/../_toolkit/starter`);
   });
   after(() => {
     process.chdir(cwd);
+  });
+
+  beforeEach(() => {
+    const configResolve = require.resolve("../../src/defaults/config.js");
+    if (require.cache[configResolve]) {
+      delete require.cache[configResolve];
+    }
   });
 
   it("initially the datastore should have some default data", () => {

@@ -1,8 +1,8 @@
 "use strict";
 
 const fs = require("fs");
-const log = require("log");
 const path = require("path");
+const logger = require("log");
 const { rotator: rotate } = require("logrotator");
 
 const PLog = require("../core/PLog");
@@ -31,27 +31,46 @@ class Log extends PLog {
    */
   initLog(logLevel) {
     const { log: logConfig } = puzzle.config.engine;
-    if (this.isValid(logLevel) && logLevel !== "") {
+    const validLogLevel = [
+      "emergency",
+      "alert",
+      "critical",
+      "error",
+      "warning",
+      "notice",
+      "info",
+      "debug"
+    ];
+
+    if (this.isValid(logLevel) && logLevel !== "" && typeof logLevel === "string") {
       this.logLevel = logLevel;
+    }
+    if (validLogLevel.indexOf(this.logLevel) < 0) {
+      this.logLevel = "info";
     }
 
     if (this.isValid(logConfig.file) && logConfig.file !== "") {
       if (logConfig.rotate === true) {
         rotate.register(logConfig.file, {
+          schedule: logConfig.schedule || "5m",
           count: logConfig.count,
           size: logConfig.size,
           compress: logConfig.compress
         });
       }
-      this.logger = new log(
+
+      this.logger = new logger(
         this.logLevel,
         fs.createWriteStream(path.resolve(logConfig.file), {
           flags: "a"
         })
       );
+
+
+      return;
     }
 
-    this.logger = new log(this.logLevel);
+    this.logger = new logger(this.logLevel);
   }
 }
 

@@ -1,11 +1,11 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 
 let puzzle = null;
 
 describe("puzzle class check", () => {
-  let cwd = '';
+  let cwd = "";
   before(() => {
     cwd = process.cwd();
     process.chdir(`${__dirname}/../_toolkit/starter`);

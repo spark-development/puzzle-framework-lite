@@ -25,15 +25,15 @@ class InMemoryLog extends PLog {
   }
 
   debug(message) {
-    this._formatter('debug', message);
+    this._formatter("debug", message);
   }
 
   info(message) {
-    this._formatter('info', message);
+    this._formatter("info", message);
   }
 
   error(message) {
-    this._formatter('error', message);
+    this._formatter("error", message);
   }
 }
 

@@ -1,6 +1,6 @@
 "use strict";
 
-const {expect} = require("chai");
+const { expect } = require("chai");
 const path = require("path");
 
 const PConfig = require("../../src/core/PConfig");
@@ -134,7 +134,7 @@ describe("PConfig class check", () => {
   });
   describe("empty init, config loaded from env", () => {
     const pconfig = new PConfig();
-    let cwd = '';
+    let cwd = "";
     before(() => {
       cwd = process.cwd();
       process.chdir(`${__dirname}/../_toolkit`);

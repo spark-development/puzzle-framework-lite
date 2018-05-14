@@ -4,6 +4,8 @@ const _ = require("lodash");
 const path = require("path");
 
 const PState = require("../core/PState");
+const PRuntime = require("../core/PRuntime");
+const InvalidInstanceType = require("../exceptions/InvalidInstanceType");
 
 /**
  * The module loader of the application. It loads all the modules
@@ -41,12 +43,17 @@ class ModuleLoader extends PState {
    * when the application is in preboot state.
    *
    * @param {string} moduleName The name of the module.
-   * @param {Object} moduleInstance The instance of the module.
+   * @param {PRuntime} moduleInstance The instance of the module.
+   *
+   * @throws InvalidInstanceType
    */
   register(moduleName, moduleInstance) {
     if (this.state === "") {
       if (!this._canBeRunInContext(moduleInstance)) {
         return;
+      }
+      if (!(moduleInstance instanceof PRuntime)) {
+        throw new InvalidInstanceType("PRuntime");
       }
 
       if (!this.isValid(this._modules[moduleName])) {
@@ -64,7 +71,7 @@ class ModuleLoader extends PState {
   /**
    * Load the modules defined in the package.json file of the application.
    */
-  loadFromPacakge() {
+  loadFromPackage() {
     puzzle.app.modules.forEach((module) => {
       let instance = null;
       try {
@@ -104,10 +111,7 @@ class ModuleLoader extends PState {
     if (puzzle.http && module.cliOnly === true) {
       return false;
     }
-    if (puzzle.cli && module.httpOnly === true) {
-      return false;
-    }
-    return true;
+    return !(puzzle.cli && module.httpOnly === true);
   }
 
   /**
@@ -117,14 +121,14 @@ class ModuleLoader extends PState {
    * @param {string} stage The stage we are currently running.
    */
   _runStage(stage) {
-    puzzle.log.info(`Run stage: ${stage}`);
+    puzzle.log.debug(`Run stage: ${stage}`);
     const loop = stage.toLowerCase().indexOf("shutdown") >= 0 ? _.forEachRight : _.forEach;
 
     loop(this._orderedLoad, (module) => {
       puzzle.log.debug(`Run stage: [${stage}] for module: [${module.name}]`);
       module.instance[stage]();
     });
-    puzzle.log.info(`Finalized stage: ${stage}`);
+    puzzle.log.debug(`Finalized stage: ${stage}`);
   }
 
   /**

@@ -18,7 +18,7 @@ puzzle.use((engine) => {
   engine.set("boot", async () => {
     let code = 0;
     try {
-      engine.modules.loadFromPacakge();
+      engine.modules.loadFromPackage();
       engine.modules.boot();
       engine.modules.online();
       await engine.commands.run();
@@ -27,6 +27,9 @@ puzzle.use((engine) => {
       code = e.code || 1;
     }
     process.exit(code);
+  });
+  engine.set("shutdown", () => {
+    engine.modules.shutdown();
   });
 });
 

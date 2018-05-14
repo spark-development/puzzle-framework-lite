@@ -70,12 +70,6 @@ class HTTP extends PRuntime {
     puzzle.log.info("Listening on: %s:%d", config.http.listen, config.http.port);
     puzzle.log.info("-".repeat(30));
 
-    app.use("*", (req, res, next) => {
-      const err = new Error("Not Found");
-      err.status = 404;
-      next(err);
-    });
-
     app.use((err, req, res, next) => {
       puzzle.log.error(req.path);
       puzzle.log.error(err.stack);
@@ -95,6 +89,17 @@ class HTTP extends PRuntime {
     });
 
     puzzle.log.info("HTTP Module is UP and Running!");
+  }
+
+  /**
+   * After HTTP server has started.
+   */
+  afterOnline() {
+    puzzle.http.use("*", (req, res, next) => {
+      const err = new Error("Not Found");
+      err.status = 404;
+      next(err);
+    });
   }
 }
 

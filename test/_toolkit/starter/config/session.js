@@ -11,12 +11,12 @@ module.exports = {
    *
    * @type {string}
    */
-  secret: 'qwertyuiop',
+  secret: "qwertyuiop",
 
   /**
    * The secret used to encrypt the session cookie.
    *
    * @type {string}
    */
-  store: 'memory'
+  store: "memory"
 };

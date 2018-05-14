@@ -35,6 +35,7 @@ class PState extends PRuntime {
       ONLINE: "online",
       SHUTDOWN: "shutdown",
       HALT: "halt",
+      INVALID: ""
     };
   }
 
@@ -59,6 +60,10 @@ class PState extends PRuntime {
    * The code that executes when the Server Online status is achieved.
    */
   online() {
+    if (this._state !== PState.STATES.BOOT) {
+      this._state = PState.STATES.INVALID;
+      return;
+    }
     super.online();
     this._state = PState.STATES.ONLINE;
   }
@@ -67,6 +72,10 @@ class PState extends PRuntime {
    * The code that executes when the Shutdown status is achieved.
    */
   shutdown() {
+    if (this._state !== PState.STATES.BOOT && this._state !== PState.STATES.ONLINE) {
+      this._state = PState.STATES.INVALID;
+      return;
+    }
     super.shutdown();
     this._state = PState.STATES.SHUTDOWN;
   }
@@ -75,6 +84,10 @@ class PState extends PRuntime {
    * The code that executes after the Shutdown status is achieved.
    */
   afterShutdown() {
+    if (this._state !== PState.STATES.SHUTDOWN) {
+      this._state = PState.STATES.INVALID;
+      return;
+    }
     super.afterShutdown();
     this._state = PState.STATES.HALT;
   }

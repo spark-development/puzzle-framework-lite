@@ -11,14 +11,14 @@ module.exports = {
    *
    * @type {string[]}
    */
-  languages: ['en', 'ro'],
+  languages: ["en", "ro"],
 
   /**
    * The name of the cookie used to translate the application.
    *
    * @type {string}
    */
-  cookie: 'puzzle.i18n',
+  cookie: "puzzle.i18n",
 
   /**
    * The default locale to be used by the application.
