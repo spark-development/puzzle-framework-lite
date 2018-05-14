@@ -16,6 +16,13 @@ describe("StaticConfig class check", () => {
     process.chdir(cwd);
   });
 
+  beforeEach(() => {
+    const configResolve = require.resolve("../../src/defaults/config.js");
+    if (require.cache[configResolve]) {
+      delete require.cache[configResolve];
+    }
+  });
+
   it("initially the datastore should have some default data", () => {
     const pconfig = new StaticConfig();
     expect(pconfig.isEmpty).to.be.false;

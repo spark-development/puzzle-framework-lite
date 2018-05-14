@@ -54,6 +54,9 @@ describe("ServerBootstrap class check", () => {
     expect(process.listenerCount("exit")).to.equal(exitListeners + 1);
     expect(process.listenerCount("SIGINT")).to.equal(sigIntListeners + 1);
     expect(process.listenerCount("uncaughtException")).to.equal(exceptionListeners + 1);
+    process.removeAllListeners("exit");
+    process.removeAllListeners("SIGINT");
+    process.removeAllListeners("uncaughtException");
   });
   it("close without parameters shouldn't do anything", () => {
     const pobj = new ServerBootstrap();
