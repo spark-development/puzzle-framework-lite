@@ -46,6 +46,7 @@ describe("ServerBootstrap class check", () => {
       "[INFO] Application started",
       `[INFO] ${"-".repeat(30)}`,
       `[INFO] Puzzle Framework Version: ${puzzle.app.version}`,
+      `[INFO] Framework type: Lite`,
       `[INFO] Environment: ${puzzle.env}`,
       "[INFO] Logging level: test",
       `[INFO] ${"-".repeat(30)}`
