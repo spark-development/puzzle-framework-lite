@@ -24,8 +24,6 @@
     "chai-expect/terminating-properties": 1
   },
   "globals": {
-    "engine": true,
-    "pUtils": true,
     "puzzle": true
   },
   "env": {

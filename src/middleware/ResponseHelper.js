@@ -57,8 +57,8 @@ module.exports = () => {
       const { message: errorMessage } = error;
       const code = error.httpCode || 500;
 
-      engine.log.error(errorMessage);
-      engine.log.error(error.stack);
+      puzzle.log.error(errorMessage);
+      puzzle.log.error(error.stack);
 
       return res.error(errorType, errorMessage, code);
     };

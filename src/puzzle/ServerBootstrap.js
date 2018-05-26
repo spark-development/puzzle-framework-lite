@@ -17,6 +17,7 @@ class ServerBootstrap extends PRuntime {
     puzzle.log.info("Application started");
     puzzle.log.info("-".repeat(30));
     puzzle.log.info(`Puzzle Framework Version: ${puzzle.version.version}`);
+    puzzle.log.info(`Framework type: ${puzzle.lite ? "Lite" : "Full"}`);
     puzzle.log.info(`Environment: ${puzzle.env}`);
     puzzle.log.info(`Logging level: ${puzzle.logLevel}`);
     puzzle.log.info("-".repeat(30));

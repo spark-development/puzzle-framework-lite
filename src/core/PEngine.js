@@ -33,12 +33,29 @@ class PEngine extends PObject {
   }
 
   /**
+   * Is the lite version of the framework used?
+   *
+   * @return {boolean}
+   */
+  get lite() {
+    return global.puzzleLight;
+  }
+
+  /**
    * Getter for engine version.
    *
    * @return {PVersion}
    */
   get version() {
     return this._version;
+  }
+  /**
+   * Setter for engine version.
+   *
+   * @param {*} packageJson The frameworks package.json file
+   */
+  set version(packageJson) {
+    this._version = new PVersion(packageJson.version);
   }
 
   /**
@@ -95,6 +112,15 @@ class PEngine extends PObject {
   }
 
   /**
+   * Sets the logger instance.
+   *
+   * @param {object} logger The logger object.
+   */
+  set log(logger) {
+    this._logger = logger;
+  }
+
+  /**
    * Returns the log level used by the logger.
    *
    * @return {string}
@@ -103,15 +129,6 @@ class PEngine extends PObject {
     return this.isValid(this._logger) ?
       this._logger.logLevel || "" :
       "";
-  }
-
-  /**
-   * Sets the logger instance.
-   *
-   * @param {object} logger The logger object.
-   */
-  set log(logger) {
-    this._logger = logger;
   }
 
   /**
@@ -169,14 +186,15 @@ class PEngine extends PObject {
   }
 
   /**
-   * Returns the module you need to use.
+   * Returns the module you need to use. Can be extended to use files relative
+   * to current project/framework.
    *
    * @param {string} moduleName The module name.
    *
    * @return {*}
    */
   import(moduleName) {
-    return require(`../${moduleName}`);
+    return require(`${__dirname}/../${moduleName}`);
   }
 
   /**
