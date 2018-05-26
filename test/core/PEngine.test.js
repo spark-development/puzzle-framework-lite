@@ -38,10 +38,10 @@ describe("PEngine class check", () => {
     expect(pobj.version.version).to.equal(packageJson.version);
   });
 
-  it("version should not be overrideable", () => {
+  it("version should be overrideable", () => {
     const pobj = new PEngine();
 
-    expect(() => (pobj.version = "test")).to.throw();
+    expect(() => (pobj.version = "test")).to.not.throw();
     expect(pobj.version.className).to.equal("PVersion");
     expect(pobj.version.version).to.equal(packageJson.version);
   });

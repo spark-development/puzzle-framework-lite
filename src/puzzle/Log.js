@@ -49,28 +49,32 @@ class Log extends PLog {
       this.logLevel = "info";
     }
 
-    if (this.isValid(logConfig.file) && logConfig.file !== "") {
-      if (logConfig.rotate === true) {
-        rotate.register(logConfig.file, {
-          schedule: logConfig.schedule || "5m",
-          count: logConfig.count,
-          size: logConfig.size,
-          compress: logConfig.compress
-        });
-      }
-
-      this.logger = new logger(
-        this.logLevel,
-        fs.createWriteStream(path.resolve(logConfig.file), {
-          flags: "a"
-        })
-      );
-
-
+    if (!this.isValid(logConfig.file) || logConfig.file === "") {
+      this.logger = new logger(this.logLevel);
       return;
     }
 
-    this.logger = new logger(this.logLevel);
+    if (logConfig.rotate === true) {
+      rotate.register(logConfig.file, {
+        schedule: logConfig.schedule || "5m",
+        count: logConfig.count,
+        size: logConfig.size,
+        compress: logConfig.compress
+      });
+    }
+
+    /**
+     * File Stream used for logger.
+     *
+     * @property {WriteStream}
+     */
+    this.stream = fs.createWriteStream(path.resolve(logConfig.file), {
+      flags: "a"
+    });
+    this.logger = new logger(
+      this.logLevel,
+      this.stream
+    );
   }
 }
 
