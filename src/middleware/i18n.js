@@ -35,7 +35,7 @@ class i18n extends PUse {
    * @return {string}
    */
   __(labelKey, ...params) {
-    return format(this._data[this._locale][labelKey], ...params);
+    return format(this._data[this._locale][labelKey] || labelKey, ...params);
   }
 
   /**

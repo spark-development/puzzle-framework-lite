@@ -2,7 +2,6 @@
 
 const fs = require("fs");
 const path = require("path");
-const _ = require("lodash");
 
 const PUse = require("../core/PUse");
 
@@ -32,10 +31,10 @@ class RoutesLoader extends PUse {
    * @param {string} [routes=routes] The name of the routes folder.
    */
   register(root, routes = "routes") {
-    const fullpath = path.join(root, routes);
-    fs.readdirSync(fullpath).forEach((file) => {
+    const fullPath = path.join(root, routes);
+    fs.readdirSync(fullPath).forEach((file) => {
       if (path.extname(file) === ".js") {
-        require(_.join([fullpath, file], "/"))();
+        require(path.resolve(fullPath, file))();
       }
     });
   }
@@ -47,12 +46,14 @@ class RoutesLoader extends PUse {
    * @param {string} [routes=routes] The name of the routes folder.
    */
   build(root, routes = "routes") {
-    const fullpath = path.join(root, routes);
-    fs.readdirSync(fullpath).forEach((file) => {
+    const fullPath = path.join(root, routes);
+    fs.readdirSync(fullPath).forEach((file) => {
       if (path.extname(file) === ".js") {
-        const ClassPath = require(_.join([fullpath, file], "/"));
+        const ClassPath = require(path.resolve(fullPath, file));
         const classRoute = new ClassPath();
-        classRoute.build();
+        if (!classRoute.noImport) {
+          classRoute.build();
+        }
       }
     });
   }
