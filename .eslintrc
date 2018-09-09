@@ -21,7 +21,10 @@
     "import/no-dynamic-require": 0,
     "strict": [0, "global"],
     "chai-expect/missing-assertion": 2,
-    "chai-expect/terminating-properties": 1
+    "chai-expect/terminating-properties": 1,
+    "no-restricted-syntax": [2, "LabeledStatement", "WithStatement"],
+    "no-continue": 0,
+    "no-await-in-loop": 0
   },
   "globals": {
     "puzzle": true

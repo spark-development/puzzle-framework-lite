@@ -10,9 +10,11 @@ const puzzle = require("./puzzleInit");
 const ConsoleBootstrap = require("./cli/ConsoleBootstrap");
 const CommandLoader = require("./cli/CommandLoader");
 const Log = require("./cli/Log");
+const i18n = require("./middleware/i18n");
 
 puzzle.modules.register("ConsoleBootstrap", new ConsoleBootstrap());
 puzzle.use(Log);
+puzzle.use(i18n);
 puzzle.use(CommandLoader);
 puzzle.use((engine) => {
   engine.set("boot", async () => {
