@@ -35,7 +35,7 @@ class i18n extends PUse {
    * @return {string}
    */
   __(labelKey, ...params) {
-    return format(this._data[this._locale][labelKey], ...params);
+    return format(this._data[this._locale][labelKey] || labelKey, ...params);
   }
 
   /**
@@ -74,9 +74,9 @@ class i18n extends PUse {
    */
   httpI18N() {
     puzzle.http.use((req, res, next) => {
-      const locale = this.isValid(req.cookies) ?
-        req.cookies[this.config.cookie] :
-        this.config.defaultLocale;
+      const locale = this.isValid(req.cookies)
+        ? req.cookies[this.config.cookie]
+        : this.config.defaultLocale;
 
       this._locale = this._supportedLanguages.indexOf(locale) >= 0 ? locale : this.config.defaultLocale;
       res.__ = (labelKey, ...params) => this.__(labelKey, ...params);

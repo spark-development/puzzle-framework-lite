@@ -74,6 +74,7 @@ class CLIBase extends PObject {
    */
   get put() {
     const { cli } = this;
+
     return {
       /**
        * Prints a debug message.

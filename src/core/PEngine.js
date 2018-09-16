@@ -49,6 +49,7 @@ class PEngine extends PObject {
   get version() {
     return this._version;
   }
+
   /**
    * Setter for engine version.
    *
@@ -106,9 +107,9 @@ class PEngine extends PObject {
    * @return {object|null}
    */
   get log() {
-    return this.isValid(this._logger) ?
-      this._logger.logger || this._logger :
-      null;
+    return this.isValid(this._logger)
+      ? this._logger.logger || this._logger
+      : null;
   }
 
   /**
@@ -126,9 +127,9 @@ class PEngine extends PObject {
    * @return {string}
    */
   get logLevel() {
-    return this.isValid(this._logger) ?
-      this._logger.logLevel || "" :
-      "";
+    return this.isValid(this._logger)
+      ? this._logger.logLevel || ""
+      : "";
   }
 
   /**
@@ -139,9 +140,9 @@ class PEngine extends PObject {
    * @return {*}
    */
   get(module) {
-    return this.isValid(this._modules[module]) ?
-      this._modules[module] :
-      undefined;
+    return this.isValid(this._modules[module])
+      ? this._modules[module]
+      : undefined;
   }
 
   /**
@@ -210,8 +211,8 @@ class PEngine extends PObject {
       module(this);
       return;
     }
-    if (_.isObject(module) &&
-      (module.prototype instanceof PUse || !!(new module()).use)) {
+    if (_.isObject(module)
+      && (module.prototype instanceof PUse || !!(new module()).use)) {
       const instance = new (module)();
       instance.use(this);
     }

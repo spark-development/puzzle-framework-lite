@@ -150,7 +150,7 @@ class PConfig extends PObject {
     }
 
     const envConfig = fs.readFileSync(envConfigFile, "utf-8");
-    this._config = Object.assign(this._config, JSON.parse(envConfig));
+    this._config = _.merge(this._config, JSON.parse(envConfig));
     this._reloadProperties();
   }
 

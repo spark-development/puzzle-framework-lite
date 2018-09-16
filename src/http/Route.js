@@ -24,7 +24,7 @@ class Route extends PObject {
     /**
      * The URL router of the current route.
      *
-     * @member {Router}
+     * @property {Router}
      */
     this.router = express.Router({
       mergeParams: true
@@ -33,14 +33,21 @@ class Route extends PObject {
     /**
      * The path served by this route.
      *
-     * @member {string}
+     * @property {string}
      */
     this.path = path;
 
     /**
+     * Should this class be imported?
+     *
+     * @property {boolean}
+     */
+    this.noImport = false;
+
+    /**
      * A list with middlewares that apply to some routes exposed by this class.
      *
-     * @member {Object.<string,Object[]>}
+     * @property {Object.<string,Object[]>}
      */
     this.middlewares = {
       group: [],

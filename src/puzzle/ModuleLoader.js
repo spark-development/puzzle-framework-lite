@@ -74,20 +74,23 @@ class ModuleLoader extends PState {
   loadFromPackage() {
     puzzle.app.modules.forEach((module) => {
       let instance = null;
-      try {
-        puzzle.log.debug("Loading module: [%s].", module);
-        instance = require(module);
-        this.register(module, new instance());
-        puzzle.log.debug("Module [%s] was loaded successfully.", module);
-      } catch (e1) {
+      const instancePaths = this._getModulePath(module);
+
+      puzzle.log.debug("Loading module: [%s].", module);
+      for (const instancePath of instancePaths) {
         try {
-          instance = require(path.join(process.cwd(), "puzzles", module));
+          instance = require(instancePath);
           this.register(module, new instance());
-          puzzle.log.debug("Module [%s] was loaded successfully.", module);
-        } catch (e2) {
-          puzzle.log.error(e2);
-          puzzle.log.error("Unable to load module [%s].", module);
+          return;
+        } catch (e) {
+          // NOP
         }
+      }
+
+      if (!this.isValid(instance)) {
+        puzzle.log.error("Unable to load module [%s].", module);
+        puzzle.log.error("Unable to find the module in the following paths: %s.",
+          instancePaths.join(";"));
       }
     });
   }
@@ -99,6 +102,23 @@ class ModuleLoader extends PState {
    */
   use(engine) {
     engine.set("modules", this);
+  }
+
+  /**
+   * Returns a list with paths where to look for a module.
+   *
+   * @param {string} module Module name.
+   *
+   * @return {Object}
+   */
+  _getModulePath(module) {
+    const pathList = [];
+
+    pathList.push(module);
+    pathList.push(path.join(process.cwd(), "puzzles", module));
+    pathList.push(path.join(process.cwd(), "puzzles", module.replace(".", "/")));
+
+    return pathList;
   }
 
   /**
