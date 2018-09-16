@@ -1,5 +1,6 @@
 "use strict";
 
+const _ = require("lodash");
 const fs = require("fs");
 const path = require("path");
 
@@ -48,12 +49,14 @@ class RoutesLoader extends PUse {
   build(root, routes = "routes") {
     const fullPath = path.join(root, routes);
     fs.readdirSync(fullPath).forEach((file) => {
-      if (path.extname(file) === ".js") {
-        const ClassPath = require(path.resolve(fullPath, file));
-        const classRoute = new ClassPath();
-        if (!classRoute.noImport) {
-          classRoute.build();
-        }
+      if (path.extname(file) !== ".js") return;
+
+      const ClassPath = require(path.resolve(fullPath, file));
+      if (!this.isValid(ClassPath) || !_.isFunction(ClassPath)) return;
+
+      const classRoute = new ClassPath();
+      if (!classRoute.noImport) {
+        classRoute.build();
       }
     });
   }
