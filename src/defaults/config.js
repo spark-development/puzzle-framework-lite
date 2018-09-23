@@ -106,6 +106,13 @@ module.exports = {
     listen: "127.0.0.1",
 
     /**
+     * The URL of the server, without the context path.
+     *
+     * @type {string}
+     */
+    serverURL: "http://localhost:3000",
+
+    /**
      * The context path to build URLs in the application.
      *
      * @type {string}
@@ -139,7 +146,7 @@ module.exports = {
      *
      * @type {string[]}
      */
-    languages: ["en", "ro"],
+    languages: ["en"],
 
     /**
      * The name of the cookie used to translate the application.
@@ -257,19 +264,19 @@ module.exports = {
        *
        * @type {string}
        */
-      403: "errors.403",
+      403: "errors/403",
       /**
        * Route not found error page.
        *
        * @type {string}
        */
-      404: "errors.404",
+      404: "errors/404",
       /**
        * Problems error page.
        *
        * @type {string}
        */
-      500: "errors.500"
+      500: "errors/500"
     }
   }
 };
