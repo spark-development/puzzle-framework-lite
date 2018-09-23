@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const _ = require("lodash");
 const path = require("path");
 

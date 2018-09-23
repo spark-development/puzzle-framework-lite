@@ -210,6 +210,7 @@ module.exports = {
      * @type {boolean}
      */
     enabled: true,
+
     /**
      * Folder where all views are stored.
      *
@@ -243,6 +244,17 @@ module.exports = {
      *
      * @type {string}
      */
-    publicContent: "public"
+    publicContent: "public",
+
+    /**
+     * Error pages used to display various messages.
+     *
+     * @type {Object}
+     */
+    errorPages: {
+      403: "errors.403",
+      404: "errors.404",
+      500: "errors.500",
+    }
   }
 };

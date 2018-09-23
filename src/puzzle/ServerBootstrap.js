@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const PRuntime = require("../core/PRuntime");
 
 /**
@@ -54,11 +56,16 @@ class ServerBootstrap extends PRuntime {
    * @param {Object} err The errors sent by the closing event.
    */
   close(options, err) {
-    if (err && puzzle && puzzle.log) puzzle.log.error(err);
-    if (options && options.exit) process.exit();
-
-    puzzle.modules.shutdown();
-    puzzle.log.info("Application closed");
+    if (err && this.isValid(puzzle) && this.isValid(puzzle.log)) {
+      puzzle.log.error(err);
+      puzzle.log.info("Application closed");
+    }
+    if (this.isValid(puzzle)) {
+      puzzle.modules.shutdown();
+    }
+    if (options && options.exit) {
+      process.exit();
+    }
   }
 }
 

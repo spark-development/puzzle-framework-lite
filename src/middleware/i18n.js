@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const path = require("path");
 const format = require("string-format");
 

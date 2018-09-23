@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const Route = require("./Route");
 
 /**
