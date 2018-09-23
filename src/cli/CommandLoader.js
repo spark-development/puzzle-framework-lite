@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const cli = require("cli");
 
 const PUse = require("../core/PUse");

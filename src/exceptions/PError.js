@@ -7,6 +7,11 @@
  * @memberOf exceptions
  */
 class PError extends Error {
+  /**
+   * Constructor of the exception.
+   *
+   * @param {string} message The message of the error.
+   */
   constructor(message) {
     super(message);
 

@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 /**
  * Response helper function wrapper.
  *

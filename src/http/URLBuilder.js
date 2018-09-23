@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 /**
  * URL Builder using the configured context path.
  *

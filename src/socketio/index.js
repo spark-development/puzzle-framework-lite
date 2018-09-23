@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const _ = require("lodash");
 const socketio = require("socket.io");
 
@@ -83,13 +85,13 @@ class SocketIO extends PRuntime {
       puzzle.log.debug("New Connection");
       socket.modules = {};
 
-      _.each(this._modules, (instance, name) => {
-        if (!this.isValid(instance)) {
+      _.each(this._modules, (Instance, name) => {
+        if (!this.isValid(Instance)) {
           return;
         }
 
         puzzle.log.debug(`Registered [${name}] element for connection`);
-        socket.modules[name] = new instance(socket, io.sockets);
+        socket.modules[name] = new Instance(socket, io.sockets);
       });
 
       socket.on("disconnect", () => {

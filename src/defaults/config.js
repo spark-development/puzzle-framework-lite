@@ -210,6 +210,7 @@ module.exports = {
      * @type {boolean}
      */
     enabled: true,
+
     /**
      * Folder where all views are stored.
      *
@@ -243,6 +244,32 @@ module.exports = {
      *
      * @type {string}
      */
-    publicContent: "public"
+    publicContent: "public",
+
+    /**
+     * Error pages used to display various messages.
+     *
+     * @type {Object}
+     */
+    errorPages: {
+      /**
+       * Route not authorized error page.
+       *
+       * @type {string}
+       */
+      403: "errors.403",
+      /**
+       * Route not found error page.
+       *
+       * @type {string}
+       */
+      404: "errors.404",
+      /**
+       * Problems error page.
+       *
+       * @type {string}
+       */
+      500: "errors.500"
+    }
   }
 };

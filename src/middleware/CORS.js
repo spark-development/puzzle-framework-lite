@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const cors = require("cors");
 
 /**

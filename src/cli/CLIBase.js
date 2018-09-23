@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const PObject = require("../core/PObject");
 
 /**
@@ -40,31 +42,6 @@ class CLIBase extends PObject {
      * @member {Object<string, Array>}
      */
     this.options = {};
-  }
-
-  /**
-   * Runs the command.
-   *
-   * @abstract
-   * @param {string[]} args The command line arguments
-   * @param {Object} options The options given to the command.
-   */
-  run(args, options) {
-
-  }
-
-  /**
-   * Exit the command with the given code.
-   *
-   * @param {integer} errCode The error code to be returned to cli system.
-   */
-  done(errCode) {
-    if (puzzle.env === "test") {
-      puzzle.cli.shouldExit = true;
-      puzzle.cli.exitCode = errCode || 0;
-      return;
-    }
-    process.exit(errCode || 0);
   }
 
   /**
@@ -168,6 +145,33 @@ class CLIBase extends PObject {
         cli.ok(msg);
       }
     };
+  }
+
+  /**
+   * Runs the command.
+   *
+   * @abstract
+   * @param {string[]} args The command line arguments
+   * @param {Object} options The options given to the command.
+   */
+  run(args = [], options = {}) {
+    this.put.info("We've got:");
+    this.put.info(args);
+    this.put.info(options);
+  }
+
+  /**
+   * Exit the command with the given code.
+   *
+   * @param {number} errCode The error code to be returned to cli system.
+   */
+  done(errCode) {
+    if (puzzle.env === "test") {
+      puzzle.cli.shouldExit = true;
+      puzzle.cli.exitCode = errCode || 0;
+      return;
+    }
+    process.exit(errCode || 0);
   }
 }
 

@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const PRuntime = require("../core/PRuntime");
 
 /**

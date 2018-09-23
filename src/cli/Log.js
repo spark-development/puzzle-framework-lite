@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const PLog = require("../core/PLog");
 
 /**

@@ -49,10 +49,14 @@ class RoutesLoader extends PUse {
   build(root, routes = "routes") {
     const fullPath = path.join(root, routes);
     fs.readdirSync(fullPath).forEach((file) => {
-      if (path.extname(file) !== ".js") return;
+      if (path.extname(file) !== ".js") {
+        return;
+      }
 
       const ClassPath = require(path.resolve(fullPath, file));
-      if (!this.isValid(ClassPath) || !_.isFunction(ClassPath)) return;
+      if (!this.isValid(ClassPath) || !_.isFunction(ClassPath)) {
+        return;
+      }
 
       const classRoute = new ClassPath();
       if (!classRoute.noImport) {

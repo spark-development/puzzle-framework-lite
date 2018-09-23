@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const express = require("express");
 const handlebars = require("handlebars");
 const hbs = require("express-hbs");

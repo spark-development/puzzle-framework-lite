@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 

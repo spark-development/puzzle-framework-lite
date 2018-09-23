@@ -1,5 +1,7 @@
 "use strict";
 
+/** global: puzzle */
+
 const bodyParser = require("body-parser");
 
 /**
