@@ -252,9 +252,24 @@ module.exports = {
      * @type {Object}
      */
     errorPages: {
+      /**
+       * Route not authorized error page.
+       *
+       * @type {string}
+       */
       403: "errors.403",
+      /**
+       * Route not found error page.
+       *
+       * @type {string}
+       */
       404: "errors.404",
-      500: "errors.500",
+      /**
+       * Problems error page.
+       *
+       * @type {string}
+       */
+      500: "errors.500"
     }
   }
 };
