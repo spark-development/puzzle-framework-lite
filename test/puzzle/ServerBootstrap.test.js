@@ -71,13 +71,13 @@ describe("ServerBootstrap class check", () => {
     pobj.close({}, new Error("Something happened"));
     expect(true).to.be.true;
     const result = [
-      "[ERROR] Error: Something happened",
       "[DEBUG] Run stage: beforeShutdown",
       "[DEBUG] Finalized stage: beforeShutdown",
       "[DEBUG] Run stage: shutdown",
       "[DEBUG] Finalized stage: shutdown",
       "[DEBUG] Run stage: afterShutdown",
       "[DEBUG] Finalized stage: afterShutdown",
+      "[ERROR] Error: Something happened",
       "[INFO] Application closed",
     ];
     expect(logger._messages).to.deep.equal(result);
