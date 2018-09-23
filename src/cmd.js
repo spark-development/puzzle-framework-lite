@@ -26,6 +26,7 @@ puzzle.use((engine) => {
       await engine.commands.run();
       engine.modules.shutdown();
     } catch (e) {
+      console.error(e);
       code = e.code || 1;
     }
     process.exit(code);
