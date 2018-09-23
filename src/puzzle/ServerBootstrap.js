@@ -56,12 +56,12 @@ class ServerBootstrap extends PRuntime {
    * @param {Object} err The errors sent by the closing event.
    */
   close(options, err) {
+    if (this.isValid(puzzle)) {
+      puzzle.modules.shutdown();
+    }
     if (err && this.isValid(puzzle) && this.isValid(puzzle.log)) {
       puzzle.log.error(err);
       puzzle.log.info("Application closed");
-    }
-    if (this.isValid(puzzle)) {
-      puzzle.modules.shutdown();
     }
     if (options && options.exit) {
       process.exit();
