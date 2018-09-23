@@ -64,9 +64,10 @@ class HTTP extends PRuntime {
   online() {
     super.online();
     const {
-      http: app, config, server, views
+      http: app, config, server
     } = puzzle;
     const version = puzzle.appVersion || puzzle.version;
+    const { views } = config;
 
     server.listen(config.http.port, config.http.listen);
     puzzle.log.info("%s [v%s]", config.engine.name || "Spark Puzzle Framework Lite", version.version);
@@ -74,7 +75,7 @@ class HTTP extends PRuntime {
     puzzle.log.info("Listening on: %s:%d", config.http.listen, config.http.port);
     puzzle.log.info("-".repeat(30));
 
-    app.use((err, req, res) => {
+    app.use((err, req, res, next) => {
       puzzle.log.error(req.path);
       puzzle.log.error(err.stack);
 
@@ -85,7 +86,6 @@ class HTTP extends PRuntime {
           break;
       }
 
-      res.status(statusCode);
       let errorCode = 500;
       switch (statusCode) {
         case 403:
@@ -96,19 +96,20 @@ class HTTP extends PRuntime {
           break;
       }
 
-      if (req.is("application/json") || this.isValid(views.errorPages[errorCode])) {
-        res.json({
-          status: "error",
-          type: err.name,
-          message: err.message
-        });
+      const error = {
+        status: "error",
+        type: err.name,
+        message: err.message
+      };
+
+      res.statusCode = statusCode;
+      if (req.get("Content-Type") === "application/json"
+        || !this.isValid(views.errorPages[errorCode])) {
+        res.json(error);
         return;
       }
 
-      res.render(views.errorPages[errorCode], {
-        type: err.name,
-        message: err.message
-      });
+      res.render(views.errorPages[errorCode], error);
     });
 
     puzzle.log.info("HTTP Module is UP and Running!");
@@ -119,19 +120,8 @@ class HTTP extends PRuntime {
    */
   afterOnline() {
     puzzle.http.use("*", (req, res, next) => {
-      const { views } = puzzle.config;
       const err = new Error("Not Found");
       err.status = 404;
-
-      if (req.is("application/json")) {
-        res.throw(err);
-        return;
-      }
-
-      if (this.isValid(views.errorPages) && this.isValid(views.errorPages[404])) {
-        res.render(views.errorPages[404]);
-        return;
-      }
       next(err);
     });
   }
