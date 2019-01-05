@@ -32,11 +32,16 @@ class i18n extends PUse {
    * builds the final message with them.
    *
    * @param {string} labelKey The Label Key.
-   * @param {...*} ...params The Parameters to be passed to the message.
+   * @param {...*} params The Parameters to be passed to the message.
    *
    * @return {string}
    */
   __(labelKey, ...params) {
+    if (labelKey instanceof Error) {
+      labelKey = labelKey.message;
+    } else if (typeof labelKey === "object" && typeof labelKey !== "string") {
+      labelKey = labelKey.constructor.name;
+    }
     return format(this._data[this._locale][labelKey] || labelKey, ...params);
   }
 
@@ -45,7 +50,7 @@ class i18n extends PUse {
    * builds the final message with them.
    *
    * @param {string} labelKey The Label Key.
-   * @param {...*} ...params The Parameters to be passed to the message.
+   * @param {...*} params The Parameters to be passed to the message.
    *
    * @return {string}
    */

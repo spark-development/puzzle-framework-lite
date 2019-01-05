@@ -161,6 +161,16 @@ class CLIBase extends PObject {
   }
 
   /**
+   * Command usage information.
+   *
+   * @param {string[]} args The command line arguments
+   * @param {Object} options The options given to the command.
+   */
+  usage(args = [], options = {}) {
+    this.put.info("We currently have no usage for this command!");
+  }
+
+  /**
    * Exit the command with the given code.
    *
    * @param {number} errCode The error code to be returned to cli system.

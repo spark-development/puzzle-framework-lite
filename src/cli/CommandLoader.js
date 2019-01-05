@@ -62,18 +62,36 @@ class CommandLoader extends PUse {
    * Enables the ability to run CLI commands.
    */
   async run() {
-    puzzle.cli.parse();
-    const command = puzzle.cli.args.shift();
+    puzzle.cli.setApp(puzzle.app.name, puzzle.app.version);
 
-    if (!this.isValid(this._commands) || Object.keys(this._commands).indexOf(command) < 0) {
-      puzzle.cli.fatal("Unable to find the given command!");
+    puzzle.cli.parse(
+      {
+        usage: [false, "Display help and usage information"]
+      },
+      this.isValid(this._commands) ? Object.keys(this._commands) : []
+    );
+    const { command } = puzzle.cli;
+    const isUsage = !!puzzle.cli.options.usage;
+
+    if (!this.isValid(this._commands)
+      || Object.keys(this._commands)
+        .indexOf(command) < 0) {
+      puzzle.cli.getUsage(0);
+      if (!isUsage) {
+        puzzle.cli.fatal("Unable to find the given command!");
+      }
       return;
     }
 
     const commandInst = new this._commands[command]();
     puzzle.cli.parse(commandInst.options);
+    const { options, args } = puzzle.cli;
 
-    await commandInst.run(puzzle.cli.args, puzzle.cli.options);
+    if (isUsage) {
+      await commandInst.usage(args, options);
+    } else {
+      await commandInst.run(args, options);
+    }
   }
 }
 
