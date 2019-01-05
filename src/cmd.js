@@ -1,5 +1,6 @@
 "use strict";
 
+/* eslint-disable no-console */
 /**
  * Entry point of the Console application.
  *
