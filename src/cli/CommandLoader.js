@@ -55,7 +55,7 @@ class CommandLoader extends PUse {
    * @throws InvalidInstanceType
    */
   register(commandName, commandInstance = null) {
-    if (_.isObject(commandName)) {
+    if (_.isObject(commandName) && typeof commandName !== "string") {
       commandInstance = commandName;
       commandName = "";
     }
@@ -106,8 +106,10 @@ class CommandLoader extends PUse {
     const { command } = puzzle.cli;
     const isUsage = !!puzzle.cli.options.usage;
 
-    if (!this.isValid(this._commands)) {
+    if (!this.isValid(this._commands)
+      || Object.keys(this._commands).indexOf(command) < 0) {
       puzzle.cli.fatal("Unable to find the given command!");
+      return;
     }
 
     const commandInst = new this._commands[command]();

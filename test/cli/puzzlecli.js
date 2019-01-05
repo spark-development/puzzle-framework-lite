@@ -21,9 +21,11 @@ const puzzleCli = {
   cli: {
     args: [],
     options: {},
+    setApp(appName, appVersion) {},
     parse(options) {
       this.args = this.returnArgs();
       this.options = options || {};
+      this.command = this.args.shift();
     },
     returnArgs() {
       return this.command ? [this.command, 123] : ["test", 123];
