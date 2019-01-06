@@ -70,7 +70,7 @@ class PEnum extends PObject {
    */
   _checkObject(enumElements) {
     if (typeof enumElements === "string" || enumElements instanceof Array) {
-      this._checkStrings([enumElements]);
+      this._checkStrings(enumElements);
       return;
     }
 

@@ -53,6 +53,22 @@ describe("PEnum class check", () => {
       .equal(2);
     expect(pobj.keys).to.deep.equal(["MONDAY", "TUESDAY"]);
   });
+  it("PEnum should register strings from array", () => {
+    const pobj = new PEnum(["test", "enum", "with values"]);
+    expect(pobj.TEST)
+      .to
+      .equal("TEST");
+    expect(pobj.ENUM)
+      .to
+      .equal("ENUM");
+    expect(pobj.WITH_VALUES)
+      .to
+      .equal("WITH VALUES");
+    expect(pobj.length)
+      .to
+      .equal(3);
+    expect(pobj.keys).to.deep.equal(["TEST", "ENUM", "WITH_VALUES"]);
+  });
   it("PEnum shouldn't register any other types", () => {
     let pobj = null;
     expect(() => {

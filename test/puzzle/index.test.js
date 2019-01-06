@@ -29,4 +29,13 @@ describe("puzzle global loading check", () => {
   it("puzzle should be instance of PEngine", () => {
     expect(puzzle).to.be.instanceOf(PEngine);
   });
+  it("index shouldn't register puzzle globally after puzzle was registered", () => {
+    expect(global.puzzle).to.not.be.null;
+    expect(global.puzzle).to.not.be.undefined;
+    delete require.cache[require.resolve("../../src/puzzle")];
+    const localPuzzle = require("../../src/puzzle");
+    expect(global.puzzle).to.not.be.null;
+    expect(global.puzzle).to.not.be.undefined;
+    expect(global.puzzle).to.deep.equal(localPuzzle);
+  });
 });
