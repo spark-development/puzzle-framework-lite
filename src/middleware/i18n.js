@@ -28,6 +28,43 @@ class i18n extends PUse {
   }
 
   /**
+   * Method used to extract the correct label, in order to
+   * translate a message on the screen.
+   *
+   * @param {*} labelKey The key to be converted.
+   *
+   * @return {string}
+   */
+  _extractLabelKey(labelKey) {
+    if (labelKey instanceof Error) {
+      return labelKey.message;
+    }
+
+    if (typeof labelKey !== "string") {
+      return labelKey.constructor.name;
+    }
+
+    let locale = this._data[this._locale];
+    if (labelKey.indexOf(".") < 0) {
+      return locale[labelKey] || labelKey;
+    }
+
+    if (this.isValid(locale[labelKey])) {
+      return locale[labelKey];
+    }
+
+    const labelTree = labelKey.split(".");
+    for (const treeElement of labelTree) {
+      if (!this.isValid(locale[treeElement])) {
+        return labelKey;
+      }
+
+      locale = locale[treeElement];
+    }
+    return locale || labelKey;
+  }
+
+  /**
    * Translation method. Takes the message label key and a bunch of parameters and
    * builds the final message with them.
    *
@@ -37,12 +74,7 @@ class i18n extends PUse {
    * @return {string}
    */
   __(labelKey, ...params) {
-    if (labelKey instanceof Error) {
-      labelKey = labelKey.message;
-    } else if (typeof labelKey === "object" && typeof labelKey !== "string") {
-      labelKey = labelKey.constructor.name;
-    }
-    return format(this._data[this._locale][labelKey] || labelKey, ...params);
+    return format(this._extractLabelKey(labelKey), ...params);
   }
 
   /**
@@ -55,7 +87,7 @@ class i18n extends PUse {
    * @return {string}
    */
   __n(labelKey, ...params) {
-    return this.__(labelKey, ...params);
+    return this.__(this._extractLabelKey(labelKey), ...params);
   }
 
   /**
