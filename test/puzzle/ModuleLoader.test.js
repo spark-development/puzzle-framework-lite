@@ -13,12 +13,16 @@ const TestRuntime = require("../core/TestRuntime");
 let originalPuzzle = null;
 
 describe("ModuleLoader class check", () => {
+  let cwd = "";
   before(() => {
     originalPuzzle = global.puzzle;
     global.puzzle = require("./puzzlesrv");
+    cwd = process.cwd();
+    process.chdir(`${__dirname}/../_toolkit/starter`);
   });
   after(() => {
     global.puzzle = originalPuzzle;
+    process.chdir(cwd);
   });
   it("className should be ModuleLoader", () => {
     const pobj = new ModuleLoader();
@@ -195,5 +199,39 @@ describe("ModuleLoader class check", () => {
     expect(puzzle.log.messages).to.include("[debug] Run stage: [online] for module: [both]");
     expect(puzzle.log.messages).to.not.include("[debug] Run stage: [online] for module: [test]");
     expect(puzzle.log.messages).to.include("[debug] Run stage: afterOnline");
+  });
+
+  it("load the modules defined in package.json", () => {
+    puzzle.app.modules = [
+      "recursive.module.in.folder",
+      "sample.test"
+    ];
+    puzzle.log.messages = [];
+    const pobj = new ModuleLoader();
+    pobj.loadFromPackage();
+
+    expect(puzzle.log.messages).to.include("[debug] Loading module: [recursive.module.in.folder].");
+    expect(puzzle.log.messages).to.include("[debug] Loading module: [sample.test].");
+    expect(puzzle.log.messages).to.not.include("[error] Unable to load module [sample.test].");
+    expect(puzzle.log.messages).to.not.include("[error] Unable to load module [recursive.in.folder].");
+
+    puzzle.app.modules = [];
+  });
+
+  it("load the existing and inexisting modules from package.json", () => {
+    puzzle.app.modules = [
+      "recursive.in.folder",
+      "sample.test"
+    ];
+    puzzle.log.messages = [];
+    const pobj = new ModuleLoader();
+    pobj.loadFromPackage();
+
+    expect(puzzle.log.messages).to.include("[debug] Loading module: [recursive.in.folder].");
+    expect(puzzle.log.messages).to.include("[debug] Loading module: [sample.test].");
+    expect(puzzle.log.messages).to.not.include("[error] Unable to load module [sample.test].");
+    expect(puzzle.log.messages).to.include("[error] Unable to load module [recursive.in.folder].");
+
+    puzzle.app.modules = [];
   });
 });

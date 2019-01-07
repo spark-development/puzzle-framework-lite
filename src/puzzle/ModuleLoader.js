@@ -85,14 +85,14 @@ class ModuleLoader extends PState {
           this.register(module, new instance());
           return;
         } catch (e) {
-          // NOP
+          // NOP;
         }
       }
 
       if (!this.isValid(instance)) {
         puzzle.log.error("Unable to load module [%s].", module);
-        puzzle.log.error("Unable to find the module in the following paths: %s.",
-          instancePaths.join(";"));
+        puzzle.log.error("Unable to find the module in the following paths: [%s].",
+          instancePaths.join("; "));
       }
     });
   }
@@ -118,7 +118,7 @@ class ModuleLoader extends PState {
 
     pathList.push(module);
     pathList.push(path.join(process.cwd(), "puzzles", module));
-    pathList.push(path.join(process.cwd(), "puzzles", module.replace(".", "/")));
+    pathList.push(path.join(process.cwd(), "puzzles", module.replace(new RegExp(/\./, "gi"), "/")));
 
     return pathList;
   }

@@ -1,0 +1,11 @@
+{
+  "name": "recursive.module.in.folder",
+  "version": "0.1.0",
+  "description": "Recursive module in folder test",
+  "private": true,
+  "main": "index.js",
+  "peerDependencies": {
+    "puzzle-framework": "^1.0.0"
+  },
+  "author": "Valentin Duricu <valentin.duricu@wayfare.ro>"
+}
