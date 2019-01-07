@@ -21,10 +21,11 @@ const puzzleCli = {
   cli: {
     args: [],
     options: {},
+    usage: false,
     setApp(appName, appVersion) {},
     parse(options) {
       this.args = this.returnArgs();
-      this.options = options || {};
+      this.options = !this.usage ? options || {} : {usage: true};
       this.command = this.args.shift();
     },
     returnArgs() {
