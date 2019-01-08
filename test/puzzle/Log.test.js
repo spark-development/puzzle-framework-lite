@@ -126,7 +126,7 @@ describe("Log class check", () => {
       fs.unlinkSync(rotationLog);
       expect(fs.existsSync(rotationLog)).to.be.false;
       done();
-    }, 1050);
+    }, 1150);
 
     waiter();
   });
@@ -150,7 +150,7 @@ describe("Log class check", () => {
       fs.unlinkSync(rotationLog);
       expect(fs.existsSync(rotationLog)).to.be.false;
       done();
-    }, 1050);
+    }, 1150);
 
     waiter();
   });

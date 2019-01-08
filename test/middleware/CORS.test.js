@@ -2,9 +2,9 @@
 
 const { expect } = require("chai");
 
-const BodyParser = require("../../src/middleware/BodyParser");
+const cors = require("../../src/middleware/CORS");
 
-describe("BodyParser class check", () => {
+describe("cors class check", () => {
   let originalPuzzle = null;
 
   before(() => {
@@ -16,7 +16,14 @@ describe("BodyParser class check", () => {
     global.puzzle = originalPuzzle;
   });
 
-  it("BodyParser should load express middlewares", () => {
-    expect(BodyParser).to.be.instanceOf(Object);
+  beforeEach(() => {
+    puzzle.http.middleware = false;
+  });
+
+  it("cors should load express middlewares", () => {
+    expect(cors).to.be.instanceOf(Object);
+
+    cors();
+    expect(puzzle.http.middleware).to.be.true;
   });
 });

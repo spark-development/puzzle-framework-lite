@@ -16,7 +16,14 @@ describe("BodyParser class check", () => {
     global.puzzle = originalPuzzle;
   });
 
+  beforeEach(() => {
+    puzzle.http.middleware = false;
+  });
+
   it("BodyParser should load express middlewares", () => {
     expect(BodyParser).to.be.instanceOf(Object);
+
+    BodyParser();
+    expect(puzzle.http.middleware).to.be.true;
   });
 });

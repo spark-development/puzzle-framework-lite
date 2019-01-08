@@ -87,7 +87,7 @@ class i18n extends PUse {
    * @return {string}
    */
   __n(labelKey, ...params) {
-    return this.__(this._extractLabelKey(labelKey), ...params);
+    return this.__(labelKey, ...params);
   }
 
   /**
