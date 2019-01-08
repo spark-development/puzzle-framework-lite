@@ -3,7 +3,7 @@
 const PObject = require("./PObject");
 
 /**
- * This is the base class of the Puzzle Framework.
+ * Class that can be used to extend the framework with functionality
  *
  * @memberOf core
  * @extends core.PObject

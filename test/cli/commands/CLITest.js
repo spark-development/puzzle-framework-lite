@@ -1,6 +1,6 @@
 "use strict";
 
-const CLIBase = require("../../src/cli/CLIBase");
+const CLIBase = require("../../../src/cli/CLIBase");
 
 class CLITest extends CLIBase {
   constructor() {
@@ -17,6 +17,10 @@ class CLITest extends CLIBase {
   run(args, options) {
     this.runArgs = args;
     this.runOptions = options;
+  }
+
+  usage() {
+    this.put.ok("Usage entry");
   }
 }
 

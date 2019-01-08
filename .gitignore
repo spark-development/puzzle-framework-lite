@@ -198,3 +198,5 @@ gen-docs/
 !gen-docs/.gitkeep
 .nyc_output
 !test/_toolkit/.env
+
+package-lock.json

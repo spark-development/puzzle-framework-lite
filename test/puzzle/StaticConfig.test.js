@@ -35,8 +35,8 @@ describe("StaticConfig class check", () => {
     expect(pconfig.engine.debug).to.be.false;
     pconfig.init();
     expect(pconfig.engine.debug).to.be.true;
-    expect(pconfig.keys.length).to.equal(6);
-    expect(pconfig.keys).to.deep.equal(["engine", "http", "i18n", "session", "socket", "views"]);
+    expect(pconfig.keys.length).to.equal(5);
+    expect(pconfig.keys).to.deep.equal(["engine", "http", "i18n", "session", "views"]);
   });
   it("use should change the engine object", () => {
     const pconfig = new StaticConfig();
@@ -45,7 +45,7 @@ describe("StaticConfig class check", () => {
     pconfig.use(engine);
     expect(engine.config.isEmpty).to.be.false;
     expect(engine.config.engine.debug).to.be.true;
-    expect(engine.config.keys.length).to.equal(6);
-    expect(engine.config.keys).to.deep.equal(["engine", "http", "i18n", "session", "socket", "views"]);
+    expect(engine.config.keys.length).to.equal(5);
+    expect(engine.config.keys).to.deep.equal(["engine", "http", "i18n", "session", "views"]);
   });
 });

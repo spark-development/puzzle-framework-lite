@@ -1,5 +1,7 @@
 "use strict";
 
+const format = require("string-format");
+
 const puzzleSRV = {
   app: {
     name: "SRV Test App",
@@ -14,14 +16,14 @@ const puzzleSRV = {
     _push(type, msg) {
       this.messages.push(`[${type.toLowerCase()}] ${msg}`);
     },
-    debug(msg) {
-      return this._push("debug", msg);
+    debug(msg, ...parameters) {
+      return this._push("debug", format(msg.replace(new RegExp("%s", "gi"), "{}"), ...parameters));
     },
-    info(msg) {
-      return this._push("info", msg);
+    info(msg, ...parameters) {
+      return this._push("info", format(msg.replace(new RegExp("%s", "gi"), "{}"), ...parameters));
     },
-    error(msg) {
-      return this._push("error", msg);
+    error(msg, ...parameters) {
+      return this._push("error", format(msg.replace(new RegExp("%s", "gi"), "{}"), ...parameters));
     },
   },
 };

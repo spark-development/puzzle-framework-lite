@@ -192,27 +192,13 @@ module.exports = {
   },
 
   /**
-   * Socket module configuration.
-   *
-   * @type {Object}
-   */
-  socket: {
-    /**
-     * Enables or disables the socket.io functionality.
-     *
-     * @type {boolean}
-     */
-    enabled: false
-  },
-
-  /**
    * View/ui module configuration.
    *
    * @type {Object}
    */
   views: {
     /**
-     * Enables or disables the socket.io functionality.
+     * Enables or disables the views functionality.
      *
      * @type {boolean}
      */

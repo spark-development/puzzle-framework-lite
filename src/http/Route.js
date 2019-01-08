@@ -37,7 +37,7 @@ class Route extends PObject {
      *
      * @property {string}
      */
-    this.path = path;
+    this.path = path || "";
 
     /**
      * Should this class be imported?

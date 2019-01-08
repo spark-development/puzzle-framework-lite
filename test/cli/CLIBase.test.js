@@ -2,7 +2,8 @@
 
 const { expect } = require("chai");
 
-const CLITest = require("./CLITest");
+const CLITest = require("./commands/CLITest");
+const CLITestNoOverride = require("./commands/CLITestNoOverride");
 
 let originalPuzzle = null;
 
@@ -55,6 +56,46 @@ describe("CLITest class check", () => {
     expect(pobj.runOptions).to.not.be.undefined;
     expect(pobj.runArgs).to.deep.equal(["test"]);
     expect(pobj.runOptions).to.deep.equal({ test: true, test2: 123 });
+    expect(puzzle.cli.messages).to.deep.equal([]);
+  });
+  it("CLITest should be able to run usage code", () => {
+    const pobj = new CLITest();
+    pobj.usage();
+    expect(puzzle.cli.messages).to.deep.equal([
+      "[ok] TRANSLATED: Usage entry",
+    ]);
+  });
+  it("CLITestNoOverride should be able to run some existing code", () => {
+    const pobj = new CLITestNoOverride();
+    expect(pobj.runArgs).to.not.be.undefined;
+    expect(pobj.runOptions).to.not.be.undefined;
+    expect(pobj.runArgs).to.deep.equal([]);
+    expect(pobj.runOptions).to.deep.equal({});
+    pobj.run();
+    expect(pobj.runArgs).to.not.be.undefined;
+    expect(pobj.runOptions).to.not.be.undefined;
+    expect(pobj.runArgs).to.deep.equal([]);
+    expect(pobj.runOptions).to.deep.equal({});
+    pobj.run(["test"], { test: true, test2: 123 });
+    expect(pobj.runArgs).to.not.be.undefined;
+    expect(pobj.runOptions).to.not.be.undefined;
+    expect(pobj.runArgs).to.deep.equal([]);
+    expect(pobj.runOptions).to.deep.equal({});
+    expect(puzzle.cli.messages).to.deep.equal([
+      "[info] TRANSLATED: We've got:",
+      "[info] TRANSLATED: ",
+      "[info] TRANSLATED: [object Object]",
+      "[info] TRANSLATED: We've got:",
+      "[info] TRANSLATED: test",
+      "[info] TRANSLATED: [object Object]"
+    ]);
+  });
+  it("CLITestNoOverride should be able to run existing usage code", () => {
+    const pobj = new CLITestNoOverride();
+    pobj.usage();
+    expect(puzzle.cli.messages).to.deep.equal([
+      "[info] TRANSLATED: We currently have no usage for this command!",
+    ]);
   });
   it("CLITest should be able to log some translated messages to CLI", () => {
     const pobj = new CLITest();

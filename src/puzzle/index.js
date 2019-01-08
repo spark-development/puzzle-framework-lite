@@ -13,7 +13,7 @@ const PEngine = require("../core/PEngine");
 
 const puzzleInstance = new PEngine();
 
-if (global.puzzle === null || global.puzzle === undefined) {
+if (!global.puzzle) {
   /**
    * The global instance of the framework engine.
    *
@@ -23,7 +23,7 @@ if (global.puzzle === null || global.puzzle === undefined) {
    */
   global.puzzle = puzzleInstance;
 }
-if (global.puzzleLight === null || global.puzzleLight === undefined) {
+if (!global.puzzleLight) {
   /**
    * The global instance of the framework engine.
    *

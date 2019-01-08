@@ -2,11 +2,8 @@
   "name": "puzzle-framework-testing",
   "version": "0.0.1",
   "private": true,
-  "puzzle": {
-    "core": {
-      "ui": true
-    },
-    "modules": [
-    ]
-  }
+  "puzzle": [
+    "sample.test",
+    "recursive.module.in.folder"
+  ]
 }

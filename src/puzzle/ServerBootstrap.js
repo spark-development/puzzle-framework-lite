@@ -56,7 +56,9 @@ class ServerBootstrap extends PRuntime {
    * @param {Object} err The errors sent by the closing event.
    */
   close(options, err) {
-    if (this.isValid(puzzle)) {
+    const { puzzle } = global;
+
+    if (this.isValid(puzzle) && this.isValid(puzzle.modules)) {
       puzzle.modules.shutdown();
     }
     if (err && this.isValid(puzzle) && this.isValid(puzzle.log)) {

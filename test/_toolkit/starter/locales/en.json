@@ -1,1 +1,8 @@
-{}
+{
+  "sample.key": "sample value",
+  "test_with_params": "test with params [{0}]",
+  "drop": {
+    "down": "key",
+    "null": null
+  }
+}

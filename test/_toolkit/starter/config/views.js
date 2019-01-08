@@ -7,7 +7,7 @@
  */
 module.exports = {
   /**
-   * Enables or disables the socket.io functionality.
+   * Enables or disables the views functionality.
    *
    * @type {boolean}
    */

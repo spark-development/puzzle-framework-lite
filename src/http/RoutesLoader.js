@@ -35,7 +35,12 @@ class RoutesLoader extends PUse {
     const fullPath = path.join(root, routes);
     fs.readdirSync(fullPath).forEach((file) => {
       if (path.extname(file) === ".js") {
-        require(path.resolve(fullPath, file))();
+        try {
+          require(path.resolve(fullPath, file))();
+        } catch (err) {
+          /* Since we might register folders that have API class defined in them
+             and since they are ES6+ Classes, we cannot call them directly. */
+        }
       }
     });
   }
@@ -58,9 +63,14 @@ class RoutesLoader extends PUse {
         return;
       }
 
-      const classRoute = new ClassPath();
-      if (!classRoute.noImport) {
-        classRoute.build();
+      try {
+        const classRoute = new ClassPath();
+        if (!classRoute.noImport) {
+          classRoute.build();
+        }
+      } catch (e) {
+        /* Since we might register folders that have routes defined as functions
+           and not classes, we cannot call them with new. */
       }
     });
   }

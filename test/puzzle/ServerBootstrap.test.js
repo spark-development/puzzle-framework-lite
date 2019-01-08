@@ -59,6 +59,24 @@ describe("ServerBootstrap class check", () => {
     process.removeAllListeners("SIGINT");
     process.removeAllListeners("uncaughtException");
   });
+  it("Changing the framework type should be reflected in logs", () => {
+    const pobj = new ServerBootstrap();
+    const originalValue = global.puzzleLight;
+    global.puzzleLight = false;
+
+    pobj.beforeBoot();
+    const result = [
+      "[INFO] Application started",
+      `[INFO] ${"-".repeat(30)}`,
+      `[INFO] Puzzle Framework Version: ${puzzle.app.version}`,
+      `[INFO] Framework type: Full`,
+      `[INFO] Environment: ${puzzle.env}`,
+      "[INFO] Logging level: test",
+      `[INFO] ${"-".repeat(30)}`
+    ];
+    expect(logger._messages).to.deep.equal(result);
+    global.puzzleLight = originalValue;
+  });
   it("close without parameters shouldn't do anything", () => {
     const pobj = new ServerBootstrap();
 
@@ -81,6 +99,14 @@ describe("ServerBootstrap class check", () => {
       "[INFO] Application closed",
     ];
     expect(logger._messages).to.deep.equal(result);
+  });
+  it("close with out puzzle defined should do notthing", () => {
+    const pobj = new ServerBootstrap();
+    const originalValue = global.puzzle;
+    delete global.puzzle;
+    pobj.close();
+    expect(true).to.be.true;
+    global.puzzle = originalValue;
   });
   it("shutdown without server shouldn't log anything", () => {
     const pobj = new ServerBootstrap();
