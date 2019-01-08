@@ -100,7 +100,7 @@ describe("Log class check", () => {
       expect(fs.existsSync(rotationLog)).to.be.false;
       expect(fs.existsSync(rotationLog2)).to.be.false;
       done();
-    }, 1050);
+    }, 2000);
 
     waiter();
   });
@@ -122,11 +122,11 @@ describe("Log class check", () => {
       pobj.logger.info(".".repeat(4500));
       expect(fs.existsSync(rotationLog)).to.be.true;
       expect(fs.existsSync(rotationLog2)).to.be.false;
-      expect(fs.statSync(rotationLog).size).to.be.above(10000);
+      expect(fs.statSync(rotationLog).size).to.be.above(6001);
       fs.unlinkSync(rotationLog);
       expect(fs.existsSync(rotationLog)).to.be.false;
       done();
-    }, 1150);
+    }, 2000);
 
     waiter();
   });
@@ -146,11 +146,11 @@ describe("Log class check", () => {
       pobj.logger.info(".".repeat(4500));
       expect(fs.existsSync(rotationLog)).to.be.true;
       expect(fs.existsSync(rotationLog2)).to.be.false;
-      expect(fs.statSync(rotationLog).size).to.be.above(10000);
+      expect(fs.statSync(rotationLog).size).to.be.above(6001);
       fs.unlinkSync(rotationLog);
       expect(fs.existsSync(rotationLog)).to.be.false;
       done();
-    }, 1150);
+    }, 2000);
 
     waiter();
   });
