@@ -38,7 +38,8 @@ class RoutesLoader extends PUse {
         try {
           require(path.resolve(fullPath, file))();
         } catch (err) {
-          // NOP
+          /* Since we might register folders that have API class defined in them
+             and since they are ES6+ Classes, we cannot call them directly. */
         }
       }
     });
@@ -68,7 +69,8 @@ class RoutesLoader extends PUse {
           classRoute.build();
         }
       } catch (e) {
-        // NOP;
+        /* Since we might register folders that have routes defined as functions
+           and not classes, we cannot call them with new. */
       }
     });
   }

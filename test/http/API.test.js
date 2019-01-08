@@ -1,6 +1,6 @@
 "use strict";
 
-const { expect } = require("chai");
+const {expect} = require("chai");
 
 const API = require("../../src/http/API");
 
@@ -16,7 +16,7 @@ describe("API class check", () => {
         }
       },
       http: {
-        use(...params) {
+        use() {
 
         }
       }
