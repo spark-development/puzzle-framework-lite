@@ -3,7 +3,7 @@
 const PEnum = require("../core/PEnum");
 
 /**
- * To be used when you want a sealed and frozen an enum.
+ * To be used when you want a sealed and frozen enum.
  *
  * @memberOf {utils}
  * @alias {PSealEnum}
