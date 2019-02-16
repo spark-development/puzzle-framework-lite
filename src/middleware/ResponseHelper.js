@@ -13,11 +13,11 @@ module.exports = () => {
     /**
      * Returns an OK message to the API.
      *
-     * @memberOf http.ServerResponse
+     * @memberOf {http.ServerResponse}
      *
      * @param {string} message The message to be sent.
      *
-     * @return http.ServerResponse
+     * @return {http.ServerResponse}
      */
     res.ok = function ok(message) {
       return res.json({
@@ -29,13 +29,13 @@ module.exports = () => {
     /**
      * Returns an error to the API.
      *
-     * @memberOf http.ServerResponse
+     * @memberOf {http.ServerResponse}
      *
      * @param {string} type The type of the message.
      * @param {string} message The message to be sent.
      * @param {int} code The HTTP status code.
      *
-     * @return http.ServerResponse
+     * @return {http.ServerResponse}
      */
     res.error = function error(type, message, code) {
       return res.status(code || 500).json({
@@ -48,11 +48,11 @@ module.exports = () => {
     /**
      * Throws an error to the API.
      *
-     * @memberOf http.ServerResponse
+     * @memberOf {http.ServerResponse}
      *
      * @param {Object} error The error thrown by the application.
      *
-     * @return http.ServerResponse
+     * @return {http.ServerResponse}
      */
     res.throw = function throws(error) {
       const { name: errorType } = error.constructor;
