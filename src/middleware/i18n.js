@@ -69,6 +69,15 @@ class i18n extends PUse {
   }
 
   /**
+   * Return the current locale.
+   *
+   * @return {string}
+   */
+  get locale() {
+    return this._locale;
+  }
+
+  /**
    * Method that handles the http i18n.
    */
   httpI18N() {

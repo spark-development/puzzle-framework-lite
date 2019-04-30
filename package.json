@@ -1,6 +1,6 @@
 {
   "name": "@puzzleframework/lite",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A lite modular framework for micro applications/services.",
   "main": "src/server.js",
   "scripts": {
@@ -30,15 +30,15 @@
   "license": "MIT",
   "homepage": "https://puzzle.spark-dev.ro/lite",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "cli": "^1.0.1",
     "consign": "^0.1.6",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "express-hbs": "^2.0.2",
-    "express-session": "^1.15.6",
-    "handlebars": "^4.1.0",
+    "express-hbs": "^2.1.2",
+    "express-session": "^1.16.1",
+    "handlebars": "^4.1.2",
     "lodash": "^4.17.11",
     "log": "^1.4.0",
     "logrotator": "^1.1.0",
@@ -47,20 +47,20 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.3",
     "debug": "^4.1.1",
-    "eslint": "^5.14.0",
+    "eslint": "^5.16.0",
     "eslint-bamboo-formatter": "0.1.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-chai-expect": "^1.2.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-import": "^2.17.2",
     "husky": "^1.3.1",
     "ink-docstrap": "^1.3.2",
     "jsdoc": "^3.5.5",
     "mocha": "^5.2.0",
     "mocha-bamboo-reporter": "^1.1.2",
-    "nyc": "^13.3.0",
-    "sinon": "^7.2.3"
+    "nyc": "^14.1.0",
+    "sinon": "^7.3.2"
   },
   "files": [
     "src",
