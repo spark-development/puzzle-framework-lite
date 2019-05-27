@@ -79,13 +79,14 @@ class ModuleLoader extends PState {
       const instancePaths = this._getModulePath(module);
 
       puzzle.log.debug("Loading module: [%s].", module);
+      let error = "";
       for (const instancePath of instancePaths) {
         try {
           instance = require(instancePath);
           this.register(module, new instance());
           return;
         } catch (e) {
-          // NOP;
+          error = e.message;
         }
       }
 
@@ -93,6 +94,7 @@ class ModuleLoader extends PState {
         puzzle.log.error("Unable to load module [%s].", module);
         puzzle.log.error("Unable to find the module in the following paths: [%s].",
           instancePaths.join("; "));
+        puzzle.log.debug(error);
       }
     });
   }
@@ -150,6 +152,7 @@ class ModuleLoader extends PState {
       puzzle.log.debug(`Run stage: [${stage}] for module: [${module.name}]`);
       module.instance[stage]();
     });
+
     puzzle.log.debug(`Finalized stage: ${stage}`);
   }
 
