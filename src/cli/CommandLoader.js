@@ -122,7 +122,6 @@ class CommandLoader extends PUse {
       )
     );
     const { options, args } = puzzle.cli;
-
     if (isUsage) {
       await commandInst.usage(args, options);
     } else {

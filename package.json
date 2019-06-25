@@ -1,6 +1,6 @@
 {
   "name": "@puzzleframework/lite",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A lite modular framework for micro applications/services.",
   "main": "src/server.js",
   "scripts": {
@@ -37,17 +37,18 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-hbs": "^2.1.2",
-    "express-session": "^1.16.1",
+    "express-session": "^1.16.2",
     "handlebars": "^4.1.2",
     "lodash": "^4.17.11",
     "log": "^1.4.0",
     "logrotator": "^1.1.0",
+    "moment": "^2.24.0",
     "string-format": "^2.0.0",
     "verbal-expressions": "^0.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "coveralls": "^3.0.3",
+    "coveralls": "^3.0.4",
     "debug": "^4.1.1",
     "eslint": "^5.16.0",
     "eslint-bamboo-formatter": "0.1.1",

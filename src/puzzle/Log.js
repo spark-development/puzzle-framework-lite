@@ -18,7 +18,7 @@ const PLog = require("../core/PLog");
  */
 class Log extends PLog {
   /**
-   * Constructor of the Server Kigger class.
+   * Constructor of the Server Logger class.
    */
   constructor() {
     super();
@@ -29,9 +29,9 @@ class Log extends PLog {
   /**
    * Creates the logger object that is going to be used by the application.
    *
-   * @param [{string}] logLevel The level of logging.
+   * @param {string} [logLevel=null] The level of logging.
    */
-  initLog(logLevel) {
+  initLog(logLevel = "") {
     const { log } = puzzle.config.engine;
     const logConfig = log;
     const validLogLevel = [

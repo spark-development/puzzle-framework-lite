@@ -78,6 +78,27 @@ module.exports = {
     },
 
     /**
+     * Configuration of the task runner.
+     *
+     * @type {Object}
+     */
+    runner: {
+      /**
+       * The location of the task runner logging folder.
+       *
+       * @type {string}
+       */
+      logs: "logs",
+
+      /**
+       * Timestamp used to identify the runner log file.
+       *
+       * @type {string}
+       */
+      timestamp: "YYYYMMDD",
+    },
+
+    /**
      * Name of the application.
      *
      * @type {string}
