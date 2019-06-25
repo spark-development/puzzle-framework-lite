@@ -44,6 +44,15 @@ class PRunner extends PObject {
     this._fileLogger = new RunnerLog(this.logFile);
 
     /**
+     * Should the file logging be disabled?
+     *
+     * @protected
+     *
+     * @property {boolean}
+     */
+    this._disableFileLogging = false;
+
+    /**
      * Was the runner executed successfully?
      *
      * @protected
@@ -71,9 +80,41 @@ class PRunner extends PObject {
     const { runner } = puzzle.config.engine;
 
     const logsLocation = path.resolve(runner.logs);
-    const timestamp = moment()
-      .format(runner.timestamp);
+    const timestamp = moment().format(runner.timestamp);
     return `${logsLocation}/runner.${this.className}.${timestamp}.log`;
+  }
+
+  /**
+   * Enable the file logging system.
+   */
+  enableFileLogging() {
+    this._disableFileLogging = false;
+  }
+
+  /**
+   * Disable the file logging system.
+   */
+  disableFileLogging() {
+    this._disableFileLogging = true;
+  }
+
+  /**
+   * Logs a message in the logger.
+   *
+   * @protected
+   *
+   * @param {string} type The type of message.
+   * @param {...*} [args] The messages to be logged.
+   */
+  _log(type, ...args) {
+    type = type.toLowerCase();
+    if (!this._disableFileLogging) {
+      this._fileLogger.logger[type](...args);
+    }
+
+    if (this.isValid(this._logger)) {
+      this._logger[type](...args);
+    }
   }
 
   /**
@@ -89,10 +130,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       emergency: (...args) => {
-        this._fileLogger.emergency(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.emergency(...args);
-        }
+        this._log("emergency", ...args);
       },
       /**
        * Alert log message.
@@ -100,10 +138,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       alert: (...args) => {
-        this._fileLogger.alert(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.alert(...args);
-        }
+        this._log("alert", ...args);
       },
       /**
        * Critical log message.
@@ -111,10 +146,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       critical: (...args) => {
-        this._fileLogger.critical(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.critical(...args);
-        }
+        this._log("critical", ...args);
       },
       /**
        * Error log message.
@@ -122,10 +154,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       error: (...args) => {
-        this._fileLogger.error(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.error(...args);
-        }
+        this._log("error", ...args);
       },
       /**
        * Warning log message.
@@ -133,10 +162,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       warning: (...args) => {
-        this._fileLogger.warning(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.warning(...args);
-        }
+        this._log("warning", ...args);
       },
       /**
        * Notice log message.
@@ -144,10 +170,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       notice: (...args) => {
-        this._fileLogger.notice(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.notice(...args);
-        }
+        this._log("notice", ...args);
       },
       /**
        * Info log message.
@@ -155,10 +178,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       info: (...args) => {
-        this._fileLogger.info(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.info(...args);
-        }
+        this._log("info", ...args);
       },
       /**
        * Debug log message.
@@ -166,10 +186,7 @@ class PRunner extends PObject {
        * @param {...*} [args] The messages to be logged.
        */
       debug: (...args) => {
-        this._fileLogger.debug(...args);
-        if (this.isValid(this._logger)) {
-          this._logger.debug(...args);
-        }
+        this._log("debug", ...args);
       },
     };
   }

@@ -17,6 +17,8 @@ const PLog = require("../core/PLog");
 class RunnerLog extends PLog {
   /**
    * Constructor of the Task Runner Logger class.
+   *
+   * @param {string} fileName The file used for logging.
    */
   constructor(fileName) {
     super();
@@ -29,6 +31,11 @@ class RunnerLog extends PLog {
    * @param {string} [fileName=""] The logging file.
    */
   initLog(fileName) {
+    if (!this.isValid(fileName) || fileName === "") {
+      this.logger = new Logger(Logger.DEBUG);
+      return;
+    }
+
     /**
      * File Stream used for logger.
      *
