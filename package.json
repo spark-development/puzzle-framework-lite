@@ -1,13 +1,13 @@
 {
   "name": "@puzzleframework/lite",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A lite modular framework for micro applications/services.",
   "main": "src/server.js",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/nyc ./node_modules/.bin/mocha test/**/*.test.js --exit --reporter spec --timeout 5000",
     "lint": "./node_modules/.bin/eslint ./src",
-    "lint-fix": "./node_modules/.bin/eslint --fix ./src",
-    "bamboo-lint": "./node_modules/.bin/eslint ./src ./test -f node_modules/eslint-bamboo-formatter/reporter.js",
+    "lint:fix": "./node_modules/.bin/eslint --fix ./src",
+    "lint:bamboo": "./node_modules/.bin/eslint ./src ./test -f node_modules/eslint-bamboo-formatter/reporter.js",
     "jsdoc": "./node_modules/.bin/jsdoc -p -c ./jsdoc.json ./src",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
   },
