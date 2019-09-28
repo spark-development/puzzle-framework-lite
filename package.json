@@ -1,6 +1,6 @@
 {
   "name": "@puzzleframework/lite",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "A lite modular framework for micro applications/services.",
   "main": "src/server.js",
   "scripts": {
@@ -40,7 +40,7 @@
     "express-session": "^1.16.2",
     "handlebars": "^4.3.4",
     "lodash": "^4.17.15",
-    "log": "^6.0.0",
+    "log": "^1.2.0",
     "logrotator": "^1.1.0",
     "moment": "^2.24.0",
     "string-format": "^2.0.0",
