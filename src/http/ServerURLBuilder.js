@@ -14,4 +14,4 @@ const URLBuilder = require("./URLBuilder");
  *
  * @return {string}
  */
-module.exports = path => `${puzzle.config.http.serverURL}${URLBuilder(path)}`;
+module.exports = (path) => `${puzzle.config.http.serverURL}${URLBuilder(path)}`;

@@ -12,4 +12,4 @@
  *
  * @return {string}
  */
-module.exports = path => `${puzzle.config.http.contextPath}/${path}`.replace(/[/]+/g, "/");
+module.exports = (path) => `${puzzle.config.http.contextPath}/${path}`.replace(/[/]+/g, "/");

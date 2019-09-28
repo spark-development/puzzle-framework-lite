@@ -117,7 +117,7 @@ class PConfig extends PObject {
     this._config[key] = value;
     Object.defineProperty(this, key, {
       get: () => this.get(key),
-      set: newValue => this.set(key, newValue),
+      set: (newValue) => this.set(key, newValue),
       configurable: true
     });
   }
@@ -163,7 +163,7 @@ class PConfig extends PObject {
     Object.keys(this._config).forEach((key) => {
       Object.defineProperty(this, key, {
         get: () => this.get(key),
-        set: newValue => this.set(key, newValue),
+        set: (newValue) => this.set(key, newValue),
         configurable: true
       });
     });

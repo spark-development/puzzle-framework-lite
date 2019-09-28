@@ -114,12 +114,10 @@ class CommandLoader extends PUse {
 
     const commandInst = new this._commands[command]();
     puzzle.cli.parse(
-      Object.assign(
-        {
-          usage: [false, "Display help and usage information"]
-        },
-        commandInst.options
-      )
+      {
+        usage: [false, "Display help and usage information"],
+        ...commandInst.options
+      }
     );
     const { options, args } = puzzle.cli;
     if (isUsage) {

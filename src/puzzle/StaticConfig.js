@@ -18,7 +18,7 @@ class StaticConfig extends PConfig {
   constructor() {
     super();
     this.clear();
-    this._config = Object.assign({}, require("../defaults/config.js"));
+    this._config = { ...require("../defaults/config.js") };
     this._reloadProperties();
   }
 
